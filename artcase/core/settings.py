@@ -38,6 +38,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'artcase',
+    #'ckeditor',
+    #'dbbackup',
+    #'widget_tweaks',
+    #'django_date_extensions',
+    'django.contrib.humanize',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
