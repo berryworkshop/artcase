@@ -1,5 +1,4 @@
 from django.db import models
-from ckeditor.fields import RichTextField
 from .constants import LANGUAGES, PUBLIC_CHOICES
 
 
@@ -18,7 +17,7 @@ class Artifact(models.Model):
     '''
 
     class Meta:
-        ordering = ["title_english", "code_number"]
+        ordering = ["title_roman", "code_number"]
 
     objects = ArtifactManager()
 
@@ -34,37 +33,34 @@ class Artifact(models.Model):
     #printer   = models.ForeignKey('Organization',
     #    related_name='artifacts_printed',   blank = True, null = True)
 
-    def edition(self):
-        # quck way to print edition of artifact
-        return "{0} / {1}".format(self.edition_state, str(self.edition_size))
-    edition_state = models.CharField(max_length = 100,
-        default='1', blank = True, null = True)
-    edition_size  = models.IntegerField(blank = True, null = True,
-        default=1)
+    code_number = models.SlugField(
+        'Code Number', unique=True, blank=False)
+    title_roman = models.CharField(
+        max_length = 255, default='Untitled', blank=False)
+    title_cyrillic = models.CharField(
+        max_length = 255, default='Без названия')
+    description = models.TextField(max_length=100000)
 
-    code_number = models.CharField('Code Number',
-        max_length = 10, unique = True)
-    public = models.BooleanField('Public or Private', choices=PUBLIC_CHOICES,
-        default = True)
-    title_english = models.CharField(max_length = 100,
-        default = 'Untitled', blank=False, null=False)
-    title_russian = models.CharField(max_length = 100,
-        default = 'Без названия', blank=True, null=True)
-    description = RichTextField(max_length = 10000, blank = True,
-        config_name="basic_ckeditor")
+    edition_state = models.CharField(max_length=255, default='1')
+    edition_size  = models.CharField(max_length=255, default='1')
+
+    public = models.BooleanField(
+        'Public or Private', choices=PUBLIC_CHOICES, default = False)
 
     SUPPORTS = (
         ('paper', 'paper'),
         ('panel', 'panel'),
         ('canvas', 'canvas'),
     )
-    support   = models.CharField(max_length = 100,
-        choices=SUPPORTS, blank=True, default="paper")
+    support   = models.CharField(
+        max_length = 100, choices=SUPPORTS, blank=True, default="paper")
 
     def __unicode__(self):
-        return self.code_number + ": " + self.title_english
+        return self.code_number + ": " + self.title_roman
     def natural_key(self):
         return (self.code_number,)  # must return a tuple
     def get_absolute_url(self):
-        #return "/collection/artifacts/{}/".format(self.code_number)
-        pass
+        return "/collection/artifacts/{}/".format(self.code_number)
+
+    def edition(self):
+        return "{0} / {1}".format(self.edition_state, str(self.edition_size))
