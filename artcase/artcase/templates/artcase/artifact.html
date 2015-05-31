@@ -2,9 +2,8 @@
 {% load humanize %}
 
 {% block main %}
-<h2>{{ object.title_roman }}</h2>
+<h2>{{ object.title_english }}</h2>
 <dl>
-    <dt>Title (Cyrillic)</dt><dd>{{ object.title_cyrillic }}</dd>
-    <dt>Code Number</dt><dd>{{ object.code_number }}</dd>
+    <dt>Title (original language)</dt><dd>{{ object.title_original }}</dd>
 </dl>
 {% endblock main %}
