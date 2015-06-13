@@ -38,14 +38,26 @@ class Artifact(models.Model):
     title_english = models.CharField(
         max_length = 255, default='Untitled', blank=False)
     title_original = models.CharField(
-        max_length = 255, default='Без названия', blank=True)
+        max_length = 255, blank=True)
     description = models.TextField(max_length=100000, blank=True)
 
-    edition_state = models.CharField(max_length=255, default='1', blank=True)
-    edition_size  = models.CharField(max_length=255, default='1', blank=True)
+    edition_state = models.CharField(max_length=255, blank=True)
+    edition_size  = models.IntegerField(blank=True, null=True)
 
     public = models.BooleanField(
         'Public or Private', choices=PUBLIC_CHOICES, default=False, blank=False)
+
+    CONDITIONS = (
+        ('poor', 'poor'),
+        ('fair', 'fair'),
+        ('good', 'good'),
+        ('very_good', 'very good'),
+        ('excellent', 'excellent'),
+        ('near_mint', 'near mint'),
+        ('mint', 'mint'),
+    )
+    condition = models.CharField(
+        max_length = 10, choices=CONDITIONS, blank=True)
 
     SUPPORTS = (
         ('paper', 'paper'),

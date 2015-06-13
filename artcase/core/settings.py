@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+# 2015_artcase_project/artcase/
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 2015_artcase_project
+PROJ_DIR = os.path.dirname(BASE_DIR)
 
 
 # Quick-start development settings - unsuitable for production

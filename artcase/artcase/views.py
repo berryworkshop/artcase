@@ -14,7 +14,8 @@ class ArtifactView(DetailView):
     template_name = "artcase/artifact.html"
 
     def get_object(self):
-        return get_object_or_404(Artifact, code_number=self.kwargs['code_number'])
+        return get_object_or_404(
+            Artifact, code_number=self.kwargs['code_number'])
 
 
 class ArtifactListView(ListView):
