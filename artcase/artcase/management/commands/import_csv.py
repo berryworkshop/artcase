@@ -1,7 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
-from artcase.models import Artifact, Creator, Medium
+from artcase.models import Artifact, Creator, Medium, Size
 from artcase.import_mappings import mappings
-from django.db.models.fields import CharField, IntegerField
+from django.db.models.fields import TextField, CharField, IntegerField
+from django.db.models.fields.related import ManyToManyField
 import csv
 import os
 from os.path import split
@@ -70,7 +71,8 @@ class Importer(object):
             # cherry-pick aggregate columns (those which don't replace values)
             for col_name in mapping['aggregate_fields']:
                 col_value = row.pop(col_name, None)
-                set_field(instance, col_name, col_value, mapping, aggregate=True)
+                set_field(instance, col_name, col_value, mapping,
+                    aggregate=True)
 
             # march through remaining columns
             for col_name, col_value in row.items():
@@ -81,26 +83,58 @@ class Importer(object):
 def set_field(instance, col_name, col_value, mapping, aggregate=False):
     target_field = mapping['fields'].get(col_name, None)
     if col_value and target_field:
-        target_type = type(
-            instance._meta.get_field_by_name(target_field)[0])
-        col_value = cleanup_convert(col_value, target_type)
-
         # columns which should not be overwritten
         if aggregate:
             existing_val = getattr(instance, target_field, None)
             if existing_val:
                 col_value = existing_val + "\n" + col_value
 
-        setattr(instance, target_field, col_value)
+        # get type of field this will populate
+        target_type = type(
+            instance._meta.get_field_by_name(target_field)[0])
 
+        if target_type in [TextField, CharField]:
+            col_value = col_value.strip()
 
-def cleanup_convert(val, target_type=CharField):
-    # initial cleanup
-    val = val.strip()
+        if target_type == IntegerField:
+            col_value = col_value.replace(',', '')
+            col_value = col_value.replace('$', '')
+            col_value = int(col_value)
 
-    if target_type == IntegerField:
-        val = val.replace(',', '')
-        val = val.replace('$', '')
-        val = int(val)
+        if target_type in [TextField, CharField, IntegerField]:
+            setattr(instance, target_field, col_value)
+        elif target_type in [ManyToManyField]:
+            set_related_record(instance, target_field, col_value)
+        else:
+            raise ValueError(
+                "target import field type '{}' does not exist.".format(target_type))
 
-    return val
+def set_related_record(instance, target_field, col_value):
+    '''
+    These are mostly one-off miscellaneous filters.  They have to live somewhere; might as well be here, until I figure out a better system.
+    '''
+    # needs to happen first
+    instance.save()
+
+    if target_field == 'media':
+        media_equivalents = {
+            'Lithograph': 'lithograph',
+            'Offset': 'offset',
+            'Litho/Off': 'lithograph_offset',
+        }
+        if col_value in media_equivalents:
+            col_value = media_equivalents[col_value]
+        medium, created = Medium.objects.get_or_create(name=col_value)
+        medium.save()
+        instance.media.add(medium)
+
+    if target_field == 'sizes':
+        dimensions = col_value.split('x')
+        assert(len(dimensions) == 2)
+        for d in dimensions:
+            d = float(d)
+        size, created = Size.objects.get_or_create(
+            height=dimensions[0], width=dimensions[1]
+        )
+        size.save()
+        instance.sizes.add(size)

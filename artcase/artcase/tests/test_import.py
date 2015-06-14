@@ -1,7 +1,7 @@
 import os
 from django.test import TestCase
 from django.conf import settings
-from artcase.models import Artifact, Creator, Medium
+from artcase.models import Artifact, Creator, Medium, Size
 from artcase.import_mappings import mappings
 from artcase.management.commands.import_csv import Importer
 
@@ -18,9 +18,12 @@ class ImportTestCase(TestCase):
         self.bad_file = os.path.join(settings.BASE_DIR,
                 'artcase/tests/test_data/bad_file.csv')
 
-        artifacts_import = Importer(self.import_files_ok[0])
         artifacts = Artifact.objects.all()
         self.assertEqual(artifacts.count(), 0)
+        media = Medium.objects.all()
+        self.assertEqual(media.count(), 0)
+
+        artifacts_import = Importer(self.import_files_ok[0])
         artifacts_import.do_import()
         self.assertEqual(artifacts.count(), 51)
 
@@ -58,3 +61,18 @@ class ImportTestCase(TestCase):
         self.assertEqual(self.artifact_PP003.description, 'Test Todo')
         self.assertEqual(self.artifact_PP001.description, 'Test Notes\nTest Todo')
 
+    def test_import_related(self):
+        """
+        When imports have related fields, they should import correctly.
+        """
+        media = Medium.objects.all()
+        self.assertEqual(media.count(), 3)
+
+        lithographs = Medium.objects.filter(name='lithograph')
+        self.assertEqual(lithographs.count(), 1)
+
+        bad_lithographs = Medium.objects.filter(name='Litho/Off')
+        self.assertFalse(bad_lithographs.exists())
+
+        sizes = Size.objects.all()
+        self.assertEqual(sizes.count(), 48)

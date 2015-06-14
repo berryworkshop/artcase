@@ -24,6 +24,7 @@ class Artifact(models.Model):
     creators   = models.ManyToManyField('Creator', blank = True)
     #cultures  = models.ManyToManyField('Culture', blank = True)
     media     = models.ManyToManyField('Medium', blank = True)
+    sizes     = models.ManyToManyField('Size', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
 
     #category  = models.ForeignKey('Category', blank = False,
@@ -172,3 +173,42 @@ class Medium(models.Model):
     )
     name = models.CharField(max_length = 10,
         choices=MEDIA, blank=True, default="lithograph")
+
+class Size(models.Model):
+    def __unicode__(self):
+        output = self.size_type + ': '
+        if self.height:
+            output += str(self.height)
+            if self.width or self.depth:
+                output += ' x '
+        if self.width:
+            output += str(self.width)
+            if self.depth:
+                output += ' x '
+        if self.depth:
+            output += str(self.depth)
+        output += ' ' + self.unit
+        return output
+    TYPES = (
+        ('object', 'object'),
+        ('frame', 'frame'),
+        ('mat', 'mat'),
+        ('sheet', 'sheet'),
+    )
+    UNITS = (
+        ('in', 'inches'),
+        ('ft', 'feet'),
+        ('mm', 'millimeters'),
+        ('cm', 'centimeters'),
+        ('m',  'meters'),
+    )
+    height = models.DecimalField(blank = True, null=True,
+        max_digits=6, decimal_places=3)
+    width = models.DecimalField(blank = True, null=True,
+        max_digits=6, decimal_places=3)
+    depth = models.DecimalField(blank = True, null=True,
+        max_digits=6, decimal_places=3)
+    size_type = models.CharField(max_length = 6, choices=TYPES,
+        default = 'object', blank=False, null=False)
+    unit = models.CharField(max_length = 2, choices=UNITS,
+        default = 'in', blank=False, null=False)

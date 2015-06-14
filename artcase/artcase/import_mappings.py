@@ -1,4 +1,4 @@
-from .models import Artifact, Creator, Medium
+from .models import Artifact, Creator, Medium, Size
 from collections import OrderedDict
 
 mappings = {
@@ -19,8 +19,8 @@ mappings = {
             'Condition': 'condition',
             'Notes': 'description',
             'Todo': 'description',
-            #'Media': 'Medium.name',
-            #'Media size': '',
+            'Media': 'media',
+            'Media size': 'sizes',
             #'Print date': '',
             #'Publish date': '',
             #'Value': '',
