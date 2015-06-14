@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from artcase.models import Artifact, Creator
 from artcase.import_mappings import mappings
-import django.db.models.fields as django_fields
+from django.db.models.fields import CharField, IntegerField
 import csv
 import os
 from os.path import split
@@ -58,43 +58,49 @@ class Importer(object):
 
         # execute
         for row in self.reader:
-            # create artifact, based on code_number if exists
-            code_number = row.pop('Code Number', None)
-            if code_number:
+            # provide an instance to work with
+            if model == Artifact:
+                # create artifact, based on code_number if exists
+                code_number = row.pop('Code Number', None)
                 instance, created = model.objects.get_or_create(
                     code_number=code_number)
             else:
                 instance = model.objects.create()
 
-            # march through mappings
-            for col_name, target_field in mapping['fields'].items():
-                # find equivalent in csv
+            # cherry-pick aggregate columns (those which don't replace values)
+            for col_name in mapping['aggregate_fields']:
                 col_value = row.pop(col_name, None)
+                set_field(instance, col_name, col_value, mapping, aggregate=True)
 
-                if col_value:
-                    # initial cleanup
-                    col_value = col_value.strip()
-
-                    # type-specific cleanup and conversion
-                    target_type = type(
-                        model._meta.get_field_by_name(target_field)[0])
-                    if target_type == django_fields.IntegerField:
-                        col_value = col_value.replace(',', '')
-                        col_value = col_value.replace('$', '')
-                        col_value = int(col_value)
-
-                    # some fields are aggregates, so add to end
-                    if col_name in mapping['aggregate_fields']:
-                        # col_name e.g. "Todo"
-                        # target_field e.g. "description"
-                        # col_value e.g. "Test Todo"
-                        val = getattr(instance, target_field, None)
-                        if val:
-                            col_value = val + "\n" + col_value
-
-                    # put it in
-                    setattr(instance, target_field, col_value)
+            # march through remaining columns
+            for col_name, col_value in row.items():
+                set_field(instance, col_name, col_value, mapping)
 
             instance.save()
 
+def set_field(instance, col_name, col_value, mapping, aggregate=False):
+    target_field = mapping['fields'].get(col_name, None)
+    if col_value and target_field:
+        target_type = type(
+            instance._meta.get_field_by_name(target_field)[0])
+        col_value = cleanup_convert(col_value, target_type)
 
+        # columns which should not be overwritten
+        if aggregate:
+            existing_val = getattr(instance, target_field, None)
+            if existing_val:
+                col_value = existing_val + "\n" + col_value
+
+        setattr(instance, target_field, col_value)
+
+
+def cleanup_convert(val, target_type=CharField):
+    # initial cleanup
+    val = val.strip()
+
+    if target_type == IntegerField:
+        val = val.replace(',', '')
+        val = val.replace('$', '')
+        val = int(val)
+
+    return val
