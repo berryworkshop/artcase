@@ -23,7 +23,7 @@ class Artifact(models.Model):
 
     creators   = models.ManyToManyField('Creator', blank = True)
     #cultures  = models.ManyToManyField('Culture', blank = True)
-    #media     = models.ManyToManyField('Medium', blank = True)
+    media     = models.ManyToManyField('Medium', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
 
     #category  = models.ForeignKey('Category', blank = False,
@@ -143,3 +143,32 @@ class Creator(models.Model):
             return 'died ' + str(self.year_death)
         else:
             return 'dates unknown'
+
+class Medium(models.Model):
+    def __unicode__(self):
+        return self.get_display_name()
+    class Meta:
+        ordering = ["name"]
+        verbose_name_plural = 'media'
+
+    def get_display_name(self):
+        d = dict(self.MEDIA)
+        return d.get(self.name)
+
+    #artifacts = models.ManyToManyField('Artifact',
+    #    through=Artifact.media.through, blank = True)
+
+    MEDIA = (
+        ('acrylic', 'acrylic paint'),
+        ('oil', 'oil paint'),
+        ('ink', 'ink'),
+        ('graphite', 'graphite'),
+        ('mixed_media', 'mixed media'),
+        ('aquatint', 'aquatint'),
+        ('lithograph', 'lithograph'),
+        ('etching', 'etching'),
+        ('offset', 'offset'),
+        ('lithograph_offset', 'lithograph/offset'),
+    )
+    name = models.CharField(max_length = 10,
+        choices=MEDIA, blank=True, default="lithograph")

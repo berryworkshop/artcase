@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from artcase.models import Artifact, Creator
+from artcase.models import Artifact, Creator, Medium
 from artcase.import_mappings import mappings
 from django.db.models.fields import CharField, IntegerField
 import csv
