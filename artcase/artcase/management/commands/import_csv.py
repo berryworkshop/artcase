@@ -104,19 +104,19 @@ def set_field(instance, col_name, col_value, mapping, aggregate=False):
         if target_type in [TextField, CharField, IntegerField]:
             setattr(instance, target_field, col_value)
         elif target_type in [ManyToManyField]:
-            set_related_record(instance, target_field, col_value)
+            set_related_record(instance, target_field, col_value, col_name)
         else:
             raise ValueError(
                 "target import field type '{}' does not exist.".format(target_type))
 
-def set_related_record(instance, target_field, col_value):
+def set_related_record(instance, target_field, col_value, col_name):
     '''
     These are mostly one-off miscellaneous filters.  They have to live somewhere; might as well be here, until I figure out a better system.
     '''
     # needs to happen first
     instance.save()
 
-    if target_field == 'media':
+    if col_name == 'Media':
         media_equivalents = {
             'Lithograph': 'lithograph',
             'Offset': 'offset',
@@ -128,7 +128,18 @@ def set_related_record(instance, target_field, col_value):
         medium.save()
         instance.media.add(medium)
 
-    if target_field == 'sizes':
+    if col_name == 'Media size':
+        dimensions = col_value.split('x')
+        assert(len(dimensions) == 2)
+        for d in dimensions:
+            d = float(d)
+        size, created = Size.objects.get_or_create(
+            height=dimensions[0], width=dimensions[1]
+        )
+        size.save()
+        instance.sizes.add(size)
+
+    if col_name == 'Media size':
         dimensions = col_value.split('x')
         assert(len(dimensions) == 2)
         for d in dimensions:

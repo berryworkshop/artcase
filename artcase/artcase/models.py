@@ -21,10 +21,12 @@ class Artifact(models.Model):
 
     objects = ArtifactManager()
 
-    creators   = models.ManyToManyField('Creator', blank = True)
-    #cultures  = models.ManyToManyField('Culture', blank = True)
-    media     = models.ManyToManyField('Medium', blank = True)
-    sizes     = models.ManyToManyField('Size', blank = True)
+    creators = models.ManyToManyField('Creator', blank = True)
+    media = models.ManyToManyField('Medium', blank = True)
+    sizes = models.ManyToManyField('Size', blank = True)
+    dates = models.ManyToManyField('Date', blank = True)
+
+    #cultures = models.ManyToManyField('Culture', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
 
     #category  = models.ForeignKey('Category', blank = False,
@@ -212,3 +214,31 @@ class Size(models.Model):
         default = 'object', blank=False, null=False)
     unit = models.CharField(max_length = 2, choices=UNITS,
         default = 'in', blank=False, null=False)
+
+class Date(models.Model):
+    def __unicode__(self):
+        loc = ''
+        if self.circa:
+            output = 'circa %s' % self.date
+        else:
+            output = self.date
+        if self.location:
+            loc += ": " + self.location
+        return "{0}: {1}{2}".format(self.qualifier.capitalize(), output, loc)
+    class Meta:
+        ordering = ["date"]
+
+    QUALIFIERS = (
+        ('created', 'created'),
+        ('started', 'started'),
+        ('completed', 'completed'),
+        ('printed', 'printed'),
+        ('published', 'published'),
+        ('restored', 'restored'),
+    )
+
+    date = ApproximateDateField()
+    qualifier = models.CharField(max_length=11, default='created',
+        choices=QUALIFIERS, blank=True, null=True)
+    circa     = models.BooleanField(default=False, blank=False, null=False)
+    location  = models.CharField(max_length=100, blank=True, null=True)

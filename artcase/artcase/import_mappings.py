@@ -21,8 +21,8 @@ mappings = {
             'Todo': 'description',
             'Media': 'media',
             'Media size': 'sizes',
-            #'Print date': '',
-            #'Publish date': '',
+            'Print date': 'dates',
+            #'Publish date': 'dates',
             #'Value': '',
         }
     }
