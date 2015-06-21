@@ -282,7 +282,7 @@ class Value(models.Model):
         )
     value_type = models.CharField(max_length = 3, blank=False, null=False,
         default="fmv", choices=VALUE_TYPES)
-    date = models.DateField()
+    date = models.DateField(blank=True, null=True)
     value = models.DecimalField(blank = False, null=False,
         max_digits=10, decimal_places=2)
-    agent = models.CharField(max_length = 100)
+    agent = models.CharField(max_length = 100, default="Bill Cellini")

@@ -137,7 +137,7 @@ def set_related_record(instance, target_field, col_value, col_name):
         assert(len(dimensions) == 2)
         for d in dimensions:
             d = float(d)
-        size, created = Size.objects.get_or_create(
+        size = Size.objects.create(
             height=dimensions[0], width=dimensions[1]
         )
         size.save()
@@ -195,11 +195,19 @@ def set_related_record(instance, target_field, col_value, col_name):
             date.approx_month = True
         if 'year' in approximates:
             date.approx_year = True
+
+        if col_name == 'Print date':
+            date.qualifier='printed'
+        if col_name == 'Publish date':
+            date.qualifier='published'
+
         date.save()
         instance.dates.add(date)
 
     if col_name == 'Value':
         locale.setlocale(locale.LC_ALL, 'en_US')
-        value = Decimal(locale.atof(col_value.strip("$")))
+        v = Decimal(locale.atof(col_value.strip("$")))
+        value = Value.objects.create(value=v)
+        value.save()
         instance.values.add(value)
 

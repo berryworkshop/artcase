@@ -75,10 +75,9 @@ class ImportTestCase(TestCase):
         self.assertFalse(bad_lithographs.exists())
 
         sizes = Size.objects.all()
-        self.assertEqual(sizes.count(), 48)
+        self.assertEqual(sizes.count(), 51)
 
         dates = Date.objects.all()
-
         self.assertEqual(dates.count(), 66)
 
         dates_1939 = Date.objects.filter(date__year=1939)
@@ -87,6 +86,9 @@ class ImportTestCase(TestCase):
         date_1 = Date.objects.get(date__year=1932, date__month=8)
         date_2 = Date.objects.get(date__year=1956, date__month=7)
         date_3 = Date.objects.get(date__year=1944)
-        self.assertEqual(date_1.__str__(), 'created: August 1932')
-        self.assertEqual(date_2.__str__(), 'created: 18 July 1956')
-        self.assertEqual(date_3.__str__(), 'created: c.1944')
+        self.assertEqual(date_1.__str__(), 'printed: August 1932')
+        self.assertEqual(date_2.__str__(), 'printed: 18 July 1956')
+        self.assertEqual(date_3.__str__(), 'published: c.1944')
+
+        values = Value.objects.all()
+        self.assertEqual(values.count(), 51)
