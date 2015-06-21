@@ -1,11 +1,12 @@
 from django.core.management.base import BaseCommand, CommandError
-from artcase.models import Artifact, Creator, Medium, Size
+from artcase.models import Artifact, Creator, Medium, Size, Date
 from artcase.import_mappings import mappings
 from django.db.models.fields import TextField, CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField
 import csv
 import os
 from os.path import split
+from django_date_extensions.fields import ApproximateDate
 
 class Command(BaseCommand):
     help = 'Imports data from a specially structured CSV file.'
@@ -139,13 +140,44 @@ def set_related_record(instance, target_field, col_value, col_name):
         size.save()
         instance.sizes.add(size)
 
-    if col_name == 'Media size':
-        dimensions = col_value.split('x')
-        assert(len(dimensions) == 2)
-        for d in dimensions:
-            d = float(d)
-        size, created = Size.objects.get_or_create(
-            height=dimensions[0], width=dimensions[1]
-        )
-        size.save()
-        instance.sizes.add(size)
+    if col_name == 'Print date':
+        abbreviations = {
+            'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4,  'may': 5,  'jun': 6,
+            'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
+        }
+        if 'c.' in col_value:
+            circa = True
+            col_value = col_value.replace('c.', '')
+            col_value = col_value.strip()
+        day, month, year = [False,False,False]
+        date_split = col_value.split('-')
+        try:
+            day, month, year = date_split
+        except ValueError:
+            try:
+                month, year = date_split
+            except ValueError:
+                year = str(date_split)
+        if day:
+            day = int(day)
+        if month:
+            month = month.lower()
+            month = abbreviations[month]
+        if year:
+            year = int(year)
+
+        try:
+            if day:
+                assert type(day) == int
+            if month:
+                assert type(month) == int
+            if year:
+                assert type(year) == int
+        except AssertionError:
+            raise AssertionError('year, month and day must each be ints.  This one: year:"{}" ({}) - month:"{}" ({}) - day:"{}" ({})'.format(year, type(year), month, type(month), day, type(day)))
+
+        new_date = ApproximateDate(year=year, month=month, day=day)
+        date, created = Date.objects.get_or_create(date=new_date)
+
+        date.save()
+        instance.dates.add(date)

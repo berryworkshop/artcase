@@ -1,5 +1,6 @@
 from django.db import models
 from .constants import LANGUAGES, PUBLIC_CHOICES
+from django_date_extensions.fields import ApproximateDateField
 
 
 class ArtifactManager(models.Manager):
