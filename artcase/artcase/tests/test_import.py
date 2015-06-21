@@ -83,3 +83,7 @@ class ImportTestCase(TestCase):
         dates_1939 = Date.objects.filter(date__year=1939)
         self.assertEqual(dates_1939.count(), 2)
 
+        date_1 = Date.objects.get(date__year=1932, date__month=8)
+        date_2 = Date.objects.get(date__year=1956, date__month=7)
+        self.assertEqual(date_1.__str__(), 'created: August 1932')
+        self.assertEqual(date_2.__str__(), 'created: 18 July 1956')
