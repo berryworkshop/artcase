@@ -5,6 +5,7 @@ from django.db.models.fields import TextField, CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField
 import csv
 import os
+import datetime
 from os.path import split
 from django_date_extensions.fields import ApproximateDate
 
@@ -141,43 +142,52 @@ def set_related_record(instance, target_field, col_value, col_name):
         instance.sizes.add(size)
 
     if col_name == 'Print date':
+        #setup
+        day, month, year = [False,False,False]
+        approximates = {}
         abbreviations = {
             'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4,  'may': 5,  'jun': 6,
             'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
         }
-        if 'c.' in col_value:
-            circa = True
-            col_value = col_value.replace('c.', '')
-            col_value = col_value.strip()
-        day, month, year = [False,False,False]
+
+        # split into tuple
         date_split = col_value.split('-')
         try:
+            # ideally, we get three values
             day, month, year = date_split
         except ValueError:
+            # no day value
             try:
                 month, year = date_split
+                approximates['day'] = True
+                day = 1
             except ValueError:
+                # no month value either
                 year = str(date_split)
-        if day:
-            day = int(day)
-        if month:
-            month = month.lower()
-            month = abbreviations[month]
-        if year:
-            year = int(year)
+                approximates['month'] = True
+                approximates['day'] = True
+                month = 1
+                day = 1
 
-        try:
-            if day:
-                assert type(day) == int
-            if month:
-                assert type(month) == int
-            if year:
-                assert type(year) == int
-        except AssertionError:
-            raise AssertionError('year, month and day must each be ints.  This one: year:"{}" ({}) - month:"{}" ({}) - day:"{}" ({})'.format(year, type(year), month, type(month), day, type(day)))
+        # convert into integers
+        day = int(day)
+        month = abbreviations[month.lower()]
+        month = int(month)
+        year = int(year)
 
-        new_date = ApproximateDate(year=year, month=month, day=day)
-        date, created = Date.objects.get_or_create(date=new_date)
+        # deal with two digit dates
+        if len(str(abs(year))) <= 2:
+            year = year+1900
 
+        tmp_date = datetime.datetime(year, month, day)
+        date = Date(date=tmp_date)
+        if 'day' in approximates:
+            date.approx_day = True
+        if 'month' in approximates:
+            date.approx_month = True
+        if 'year' in approximates:
+            date.approx_month = True
         date.save()
-        instance.dates.add(date)
+
+
+

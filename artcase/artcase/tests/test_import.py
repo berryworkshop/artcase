@@ -79,3 +79,7 @@ class ImportTestCase(TestCase):
 
         dates = Date.objects.all()
         self.assertEqual(dates.count(), 15)
+
+        dates_1939 = Date.objects.filter(date__year=1939)
+        self.assertEqual(dates_1939.count(), 2)
+

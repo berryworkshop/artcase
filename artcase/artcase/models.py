@@ -1,6 +1,7 @@
 from django.db import models
 from .constants import LANGUAGES, PUBLIC_CHOICES
-from django_date_extensions.fields import ApproximateDateField
+import datetime
+#from django_date_extensions.fields import ApproximateDateField
 
 
 class ArtifactManager(models.Manager):
@@ -217,17 +218,35 @@ class Size(models.Model):
         default = 'in', blank=False, null=False)
 
 class Date(models.Model):
-    def __unicode__(self):
-        loc = ''
-        if self.circa:
-            output = 'circa %s' % self.date
+    def __str__(self):
+        if self.approx_year:
+            return "{}: c.{}".format(self.qualifier, self.day)
+        if self.approx_month:
+            return "{}: {}".format(self.qualifier, self.year)
+        if self.approx_day:
+            return "{}: {} {}".format(self.qualifier, self.month_str, self.year)
         else:
-            output = self.date
-        if self.location:
-            loc += ": " + self.location
-        return "{0}: {1}{2}".format(self.qualifier.capitalize(), output, loc)
+            return "{}: {} {} {}".format(self.qualifier, self.day, self.month_str, self.year)
+
     class Meta:
         ordering = ["date"]
+
+    @property
+    def day(self):
+        return(self.date.day)
+
+    @property
+    def month(self):
+        return(self.date.month)
+
+    @property
+    def month_str(self):
+        names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        return(names[self.month - 1])
+
+    @property
+    def year(self):
+        return(self.date.year)
 
     QUALIFIERS = (
         ('created', 'created'),
@@ -238,8 +257,16 @@ class Date(models.Model):
         ('restored', 'restored'),
     )
 
-    date = ApproximateDateField()
+    date = models.DateField()
+    # date can be approximate, e.g.:
+        # date is unknown: Aug. 1945
+        # just the year is known: 1945
+        # even the year is approximate: c.1945
+    # all parts of date (year, month, day) are required, however, by Django date fields; therefore, I'm marking which of this tuple is approximate, and deal with it after the fact.
+    approx_day = models.BooleanField(default=False)
+    approx_month = models.BooleanField(default=False)
+    approx_year = models.BooleanField(default=False)
+
     qualifier = models.CharField(max_length=11, default='created',
         choices=QUALIFIERS, blank=True, null=True)
-    circa     = models.BooleanField(default=False, blank=False, null=False)
     location  = models.CharField(max_length=100, blank=True, null=True)
