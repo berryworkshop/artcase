@@ -1,7 +1,7 @@
 import os
 from django.test import TestCase
 from django.conf import settings
-from artcase.models import Artifact, Creator, Medium, Size, Date
+from artcase.models import Artifact, Creator, Medium, Size, Date, Value
 from artcase.import_mappings import mappings
 from artcase.management.commands.import_csv import Importer
 
@@ -78,12 +78,15 @@ class ImportTestCase(TestCase):
         self.assertEqual(sizes.count(), 48)
 
         dates = Date.objects.all()
-        self.assertEqual(dates.count(), 15)
+
+        self.assertEqual(dates.count(), 66)
 
         dates_1939 = Date.objects.filter(date__year=1939)
-        self.assertEqual(dates_1939.count(), 2)
+        self.assertEqual(dates_1939.count(), 4)
 
         date_1 = Date.objects.get(date__year=1932, date__month=8)
         date_2 = Date.objects.get(date__year=1956, date__month=7)
+        date_3 = Date.objects.get(date__year=1944)
         self.assertEqual(date_1.__str__(), 'created: August 1932')
         self.assertEqual(date_2.__str__(), 'created: 18 July 1956')
+        self.assertEqual(date_3.__str__(), 'created: c.1944')

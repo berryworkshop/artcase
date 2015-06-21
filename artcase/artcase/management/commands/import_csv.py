@@ -1,11 +1,13 @@
 from django.core.management.base import BaseCommand, CommandError
-from artcase.models import Artifact, Creator, Medium, Size, Date
+from artcase.models import Artifact, Creator, Medium, Size, Date, Value
 from artcase.import_mappings import mappings
 from django.db.models.fields import TextField, CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField
 import csv
 import os
 import datetime
+import locale
+from decimal import Decimal
 from os.path import split
 from django_date_extensions.fields import ApproximateDate
 
@@ -141,7 +143,7 @@ def set_related_record(instance, target_field, col_value, col_name):
         size.save()
         instance.sizes.add(size)
 
-    if col_name == 'Print date':
+    if col_name == 'Print date' or col_name == 'Publish date':
         #setup
         day, month, year = [False,False,False]
         approximates = {}
@@ -150,20 +152,25 @@ def set_related_record(instance, target_field, col_value, col_name):
             'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,
         }
 
+        #circa
+        if 'c.' in col_value:
+            col_value = col_value.replace('c.', '')
+            approximates['year'] = True
+
         # split into tuple
         date_split = col_value.split('-')
         try:
             # ideally, we get three values
             day, month, year = date_split
         except ValueError:
-            # no day value
+            # just two values (no day value)
             try:
                 month, year = date_split
                 approximates['day'] = True
                 day = 1
             except ValueError:
-                # no month value either
-                year = str(date_split)
+                # just one value (no month value either)
+                year = str(date_split[0])
                 approximates['month'] = True
                 approximates['day'] = True
                 month = 1
@@ -171,7 +178,8 @@ def set_related_record(instance, target_field, col_value, col_name):
 
         # convert into integers
         day = int(day)
-        month = abbreviations[month.lower()]
+        if type(month) == str:
+            month = abbreviations[month.lower()]
         month = int(month)
         year = int(year)
 
@@ -186,8 +194,12 @@ def set_related_record(instance, target_field, col_value, col_name):
         if 'month' in approximates:
             date.approx_month = True
         if 'year' in approximates:
-            date.approx_month = True
+            date.approx_year = True
         date.save()
+        instance.dates.add(date)
 
-
+    if col_name == 'Value':
+        locale.setlocale(locale.LC_ALL, 'en_US')
+        value = Decimal(locale.atof(col_value.strip("$")))
+        instance.values.add(value)
 

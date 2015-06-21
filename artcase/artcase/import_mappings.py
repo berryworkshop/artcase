@@ -22,8 +22,8 @@ mappings = {
             'Media': 'media',
             'Media size': 'sizes',
             'Print date': 'dates',
-            #'Publish date': 'dates',
-            #'Value': '',
+            'Publish date': 'dates',
+            'Value': 'values',
         }
     }
 }

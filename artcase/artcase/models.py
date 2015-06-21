@@ -27,6 +27,7 @@ class Artifact(models.Model):
     media = models.ManyToManyField('Medium', blank = True)
     sizes = models.ManyToManyField('Size', blank = True)
     dates = models.ManyToManyField('Date', blank = True)
+    values = models.ManyToManyField('Value', blank = True)
 
     #cultures = models.ManyToManyField('Culture', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
@@ -150,7 +151,7 @@ class Creator(models.Model):
             return 'dates unknown'
 
 class Medium(models.Model):
-    def __unicode__(self):
+    def __str__(self):
         return self.get_display_name()
     class Meta:
         ordering = ["name"]
@@ -179,7 +180,7 @@ class Medium(models.Model):
         choices=MEDIA, blank=True, default="lithograph")
 
 class Size(models.Model):
-    def __unicode__(self):
+    def __str__(self):
         output = self.size_type + ': '
         if self.height:
             output += str(self.height)
@@ -220,7 +221,7 @@ class Size(models.Model):
 class Date(models.Model):
     def __str__(self):
         if self.approx_year:
-            return "{}: c.{}".format(self.qualifier, self.day)
+            return "{}: c.{}".format(self.qualifier, self.year)
         if self.approx_month:
             return "{}: {}".format(self.qualifier, self.year)
         if self.approx_day:
@@ -270,3 +271,18 @@ class Date(models.Model):
     qualifier = models.CharField(max_length=11, default='created',
         choices=QUALIFIERS, blank=True, null=True)
     location  = models.CharField(max_length=100, blank=True, null=True)
+
+class Value(models.Model):
+    def __str__(self):
+        return "{0} {1} {2} {3}".format(self.value_type, self.date,
+            self.value, self.agent)
+    VALUE_TYPES = (
+            ("fmv", "Fair Market"),
+            ("rep", "Replacement"),
+        )
+    value_type = models.CharField(max_length = 3, blank=False, null=False,
+        default="fmv", choices=VALUE_TYPES)
+    date = models.DateField()
+    value = models.DecimalField(blank = False, null=False,
+        max_digits=10, decimal_places=2)
+    agent = models.CharField(max_length = 100)
