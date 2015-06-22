@@ -9,9 +9,9 @@ class ImportTestCase(TestCase):
 
     def setUp(self):
         self.import_files_ok = [
-            os.path.join(settings.BASE_DIR,
+            os.path.join(settings.BASE_DIR, # artifacts
                 'artcase/tests/test_data/artifacts.csv'),
-            os.path.join(settings.BASE_DIR,
+            os.path.join(settings.BASE_DIR, # creators
                 'artcase/tests/test_data/artists.csv')
         ]
         self.non_file = '/abcd/efg/test.csv'
@@ -20,12 +20,15 @@ class ImportTestCase(TestCase):
 
         artifacts = Artifact.objects.all()
         self.assertEqual(artifacts.count(), 0)
-        media = Medium.objects.all()
-        self.assertEqual(media.count(), 0)
-
         artifacts_import = Importer(self.import_files_ok[0])
         artifacts_import.do_import()
         self.assertEqual(artifacts.count(), 51)
+
+        creators = Creator.objects.all()
+        self.assertEqual(creators.count(), 0)
+        creators_import = Importer(self.import_files_ok[1])
+        creators_import.do_import()
+        self.assertEqual(creators.count(), 314)
 
         self.artifact_PP001 = Artifact.objects.get(pk=1)
         self.artifact_PP002 = Artifact.objects.get(pk=2)
@@ -92,3 +95,17 @@ class ImportTestCase(TestCase):
 
         values = Value.objects.all()
         self.assertEqual(values.count(), 51)
+
+    def test_import_creators(self):
+        """
+        When imports have related fields, they should import correctly.
+        """
+        creators = Creator.objects.all()
+
+        c1 = Creator.objects.get(
+            name_latin_last = 'Angelushev')
+        self.assertEqual(c1.description, 'Bulgarian graphic artist')
+        self.assertEqual(c1.name_cyrillic_last, 'Ангелушев')
+        self.assertEqual(c1.name_cyrillic_first, 'Борис')
+
+

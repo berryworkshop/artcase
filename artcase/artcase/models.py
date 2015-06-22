@@ -110,7 +110,7 @@ class Creator(models.Model):
         ordering = ["name_latin_last", "name_latin_first"]
         unique_together = (
             ('name_latin_last', 'name_latin_first'),
-            ('name_cyrillic_last', 'name_cyrillic_first')
+            #('name_cyrillic_last', 'name_cyrillic_first')
         )
 
     def get_name_latin(self):
