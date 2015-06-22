@@ -110,12 +110,8 @@ class Importer(object):
                     if col_value and target_type in [TextField, CharField, IntegerField]:
                         setattr(instance, target_field, col_value)
 
-                # more complicated crosswalks
+                # custom crosswalks
                 if col_value and type(instance) == Artifact:
-                    cols = ['Notes', 'Todo']
-                    if col_name in cols and col_name not in completed_cols:
-                        set_artifact_description(instance, row)
-                        completed_cols.extend(cols)
                     if col_name == 'Media':
                         set_media(instance, col_value)
                     if col_name == 'Media size':
@@ -125,11 +121,29 @@ class Importer(object):
                     if col_name == 'Value':
                         set_value(instance, col_value)
 
+                    # compound
+                    cols = ['Notes', 'Todo']
+                    if col_name in cols and col_name not in completed_cols:
+                        set_artifact_description(instance, row)
+                        completed_cols.extend(cols)
+
                 if col_value and type(instance) == Creator:
                     if col_name == 'Artist Notes':
                         parse_creator_notes(instance, col_value)
                     if col_name == 'Artist Name Cyrillic':
                         set_name_cyrillic(instance, col_value)
+
+                    # compound
+                    cols = ['Artifact Number', 'Transcribed Name',
+                        'Poster Notes']
+                    if col_name in cols and col_name not in completed_cols:
+                        set_creator_artifact(instance, row)
+                        completed_cols.extend(cols)
+
+                    cols = ['Second Artist Name Roman', 'Second Artist Name Cyrillic']
+                    if col_name in cols and col_name not in completed_cols:
+                        set_additional_creator(row)
+                        completed_cols.extend(cols)
 
                 # housekeeping
                 if col_name not in completed_cols:
@@ -279,17 +293,39 @@ def set_name_cyrillic(creator, col_value):
     creator.name_cyrillic_first = make_name_first(col_value)
     creator.save()
 
-def set_creator_artifact(creator, col_value):
-    # operations on artifact
-    fields = {
-        'Artifact Number': None,
-        'Transcribed Name': None,
-        'Poster Notes': None
-    }
+def set_creator_artifact(creator, row):
+    code_number = row.get('Artifact Number', None).strip()
+    creator_name = row.get(
+        'Transcribed Name', None).strip()
+    notes = row.get('Poster Notes', None).strip()
+    artifact, created = Artifact.objects.get_or_create(code_number=code_number)
+    if artifact.description:
+        desc = artifact.description
+    else:
+        desc = ''
+    creator_tagline = 'Artist transcribed as: {}'.format(creator_name)
+    artifact.description = '\n'.join((desc, creator_tagline, notes)).strip()
 
-def set_additional_creator(creator, col_value):
+    artifact.save()
+    artifact.creators.add(creator)
+    creator.save()
+
+def set_additional_creator(row):
     # operations on second artist
-    fields = {
-        'Second Artist Name Roman': None,
-        'Second Artist Name Cyrillic': None
-    }
+    name_latin = row.get('Second Artist Name Roman', None).strip()
+    name_cyrillic = row.get('Second Artist Name Roman', None).strip()
+    code_number = row.get('Artifact Number', None).strip()
+
+    c2, created = Creator.objects.get_or_create(
+        name_latin_last=make_name_last(name_latin).strip(),
+        name_latin_first=make_name_first(name_latin).strip(),
+        slug=slugify(name_latin)
+    )
+
+    c2.name_cyrillic_last = make_name_last(name_cyrillic).strip()
+    c2.name_cyrillic_first = make_name_last(name_cyrillic).strip()
+    c2.save()
+
+    artifact, created = Artifact.objects.get_or_create(code_number=code_number)
+    artifact.creators.add(c2)
+    artifact.save()

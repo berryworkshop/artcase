@@ -99,9 +99,10 @@ class ImportTestCase(TestCase):
         self.assertEqual(creators.count(), 0)
         creators_import = Importer(self.import_files_ok[1])
         creators_import.do_import()
-        self.assertEqual(creators.count(), 314)
+        self.assertEqual(creators.count(), 348)
 
         creators = Creator.objects.all()
+        artifacts = Artifact.objects.all()
 
         c1 = Creator.objects.get(
             name_latin_last = 'Angelushev')
@@ -109,4 +110,6 @@ class ImportTestCase(TestCase):
         self.assertEqual(c1.name_cyrillic_last, 'Ангелушев')
         self.assertEqual(c1.name_cyrillic_first, 'Борис')
 
+        a1 = Artifact.objects.get(code_number='PP 007')
+        self.assertTrue('Apsit' in a1.description)
 
