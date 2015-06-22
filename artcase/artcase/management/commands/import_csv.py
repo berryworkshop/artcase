@@ -69,6 +69,8 @@ class Importer(object):
 
         # execute
         for row in self.reader:
+            completed_cols = [] # quick and dirty list to indicate which columns have been dealt with in multiple-column operations
+
             # provide an instance to work with
             if model == Artifact:
                 # create artifact, based on code_number if exists
@@ -85,69 +87,71 @@ class Importer(object):
             else:
                 pass
 
-            # cherry-pick aggregate columns (those which don't replace values)
-            for col_name in mapping['aggregate_fields']:
-                col_value = row.pop(col_name, None)
-                set_field(instance, col_name, col_value, mapping,
-                    aggregate=True)
 
             # march through remaining columns
             for col_name, col_value in row.items():
-                set_field(instance, col_name, col_value, mapping)
+                target_field = mapping['fields'].get(col_name, None)
 
-            instance.save()
+                # direct mapping
+                if col_value and target_field:
+                    # get type of field this will populate
+                    target_type = type(
+                        instance._meta.get_field_by_name(target_field)[0])
 
+                    # cleanup by field type
+                    if target_type in [TextField, CharField]:
+                        col_value = col_value.strip()
+                    if target_type == IntegerField:
+                        col_value = col_value.replace(',', '')
+                        col_value = col_value.replace('$', '')
+                        col_value = int(col_value)
 
-def set_field(instance, col_name, col_value, mapping, aggregate=False):
-    instance.save()
-    target_field = mapping['fields'].get(col_name, None)
+                    # attempt to set the field quickly if possible
+                    if col_value and target_type in [TextField, CharField, IntegerField]:
+                        setattr(instance, target_field, col_value)
 
-    # direct mapping
-    if col_value and target_field:
-        # columns which should not be overwritten
-        if aggregate:
-            existing_val = getattr(instance, target_field, None)
-            if existing_val:
-                col_value = existing_val + "\n" + col_value
+                # more complicated crosswalks
+                if col_value and type(instance) == Artifact:
+                    cols = ['Notes', 'Todo']
+                    if col_name in cols and col_name not in completed_cols:
+                        set_artifact_description(instance, row)
+                        completed_cols.extend(cols)
+                    if col_name == 'Media':
+                        set_media(instance, col_value)
+                    if col_name == 'Media size':
+                        set_media_size(instance, col_value)
+                    if col_name == 'Print date' or col_name == 'Publish date':
+                        set_date(instance, col_value, col_name)
+                    if col_name == 'Value':
+                        set_value(instance, col_value)
 
-        # get type of field this will populate
-        target_type = type(
-            instance._meta.get_field_by_name(target_field)[0])
+                if col_value and type(instance) == Creator:
+                    if col_name == 'Artist Notes':
+                        parse_creator_notes(instance, col_value)
+                    if col_name == 'Artist Name Cyrillic':
+                        set_name_cyrillic(instance, col_value)
 
-        # cleanup by field type
-        if target_type in [TextField, CharField]:
-            col_value = col_value.strip()
-        if target_type == IntegerField:
-            col_value = col_value.replace(',', '')
-            col_value = col_value.replace('$', '')
-            col_value = int(col_value)
-
-        # attempt to set the field quickly if possible
-        if col_value and target_type in [TextField, CharField, IntegerField]:
-            setattr(instance, target_field, col_value)
-
-    # more complicated crosswalks
-    if col_value and type(instance) == Artifact:
-        if col_name == 'Media':
-            set_media(instance, col_value)
-        if col_name == 'Media size':
-            set_media_size(instance, col_value)
-        if col_name == 'Print date' or col_name == 'Publish date':
-            set_date(instance, col_value, col_name)
-        if col_name == 'Value':
-            set_value(instance, col_value)
-
-    if col_value and type(instance) == Creator:
-        if col_name == 'Artist Notes':
-            parse_creator_notes(instance, col_value)
-        if col_name == 'Artist Name Cyrillic':
-            set_name_cyrillic(instance, col_value)
+                # housekeeping
+                if col_name not in completed_cols:
+                    completed_cols.append(col_name)
+                instance.save()
 
 
 
 # # # # # # # # # # # # # # # # #
 # Artifact crosswalk functions  #
 # # # # # # # # # # # # # # # # #
+
+def set_artifact_description(artifact, row):
+    desc = ''
+    notes = row.get('Notes', None).strip()
+    todo = row.get('Todo', None).strip()
+    if artifact.description:
+        desc = artifact.description
+
+    artifact.description = '\n'.join((desc, notes, todo)).strip()
+    artifact.save()
+
 
 def set_media(artifact, col_value):
     media_equivalents = {

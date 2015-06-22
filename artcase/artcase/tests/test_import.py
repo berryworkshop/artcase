@@ -24,12 +24,6 @@ class ImportTestCase(TestCase):
         artifacts_import.do_import()
         self.assertEqual(artifacts.count(), 51)
 
-        creators = Creator.objects.all()
-        self.assertEqual(creators.count(), 0)
-        creators_import = Importer(self.import_files_ok[1])
-        creators_import.do_import()
-        self.assertEqual(creators.count(), 314)
-
         self.artifact_PP001 = Artifact.objects.get(pk=1)
         self.artifact_PP002 = Artifact.objects.get(pk=2)
         self.artifact_PP003 = Artifact.objects.get(pk=3)
@@ -100,6 +94,13 @@ class ImportTestCase(TestCase):
         """
         When imports have related fields, they should import correctly.
         """
+
+        creators = Creator.objects.all()
+        self.assertEqual(creators.count(), 0)
+        creators_import = Importer(self.import_files_ok[1])
+        creators_import.do_import()
+        self.assertEqual(creators.count(), 314)
+
         creators = Creator.objects.all()
 
         c1 = Creator.objects.get(
