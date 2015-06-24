@@ -1,62 +1,62 @@
-Artifact Code,Name of Publisher,Location,Description
+Artifact Code,Name,Location,Description
 PP 001,Political Directorate of the National Commissariat on Military Affairs of Ukraine,Ukraine,
 PP 002,Polish Communist Publishing House,Kiev,
 PP 003,Iskusstvo,Moscow-Leningrad,Art
-PP 004,IzoGiz,NA,State Publishing House of Fine Art
-PP 005,NA,NA,
+PP 004,IzoGiz,,State Publishing House of Fine Art
+PP 005,,,
 PP 006,Krymizdat,[Crimea],Crimean Publishing House
 PP 007,Gosizdat,Moscow,State Publishing House
 PP 008,Mistetstvo,Ukraine,Union of the Soviet Artists of Ukraine
 PP 009,State Publishing House,Moscow,
 PP 010,State Publishing House,Kiev,
 PP 011,Odessa Region Department of Printing,Odessa,
-PP 012,NA,NA,
-PP 013,NA,NA,
-PP 014,NA,NA,
-PP 015,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
+PP 012,,,
+PP 013,,,
+PP 014,,,
+PP 015,All-Russian Bureau of Military Commissars Agitation and Education Department,,
 PP 016,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 017,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
+PP 017,All-Russian Bureau of Military Commissars Agitation and Education Department,,
 PP 018,Kiev Garrison Site of Military Propaganda,Kiev,
 PP 019,Iskusstvo,Moscow-Leningrad,Art
-PP 020,NA,NA,
-PP 021,NA,NA,
-PP 022,Art Section of Brigade Management Unit 12,NA,
+PP 020,,,
+PP 021,,,
+PP 022,Art Section of Brigade Management Unit 12,,
 PP 023,State Publishing House of the Ukrainian Soviet Socialist Republic,Kiev,
 PP 024,Department of Soviet Propaganda of the Executive Committee of the Soviet of Working Deputies of Odessa,Odessa,
-PP 025,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
-PP 026,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",NA,
-PP 027,IZO Graphic Workshop Of The Art Fund,NA,
+PP 025,All-Russian Bureau of Military Commissars Agitation and Education Department,,
+PP 026,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",,
+PP 027,IZO Graphic Workshop Of The Art Fund,,
 PP 028,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 029,State Publishing House,Moscow-Leningrad,
-PP 030,NA,NA,
-PP 031,NA,NA,
+PP 030,,,
+PP 031,,,
 PP 032,Iskusstvo,Moscow-Leningrad,Art
 PP 033,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 034,Glavkomtrud and Narkomtrud Agitation Publishing Department,NA,
+PP 034,Glavkomtrud and Narkomtrud Agitation Publishing Department,,
 PP 035,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 036,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 037,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 038,Publishing House of the All-Russian Central Executive Committee,NA,
+PP 038,Publishing House of the All-Russian Central Executive Committee,,
 PP 039,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 040,Publishing House of the All-Russian Central Executive Committee,NA,
+PP 040,Publishing House of the All-Russian Central Executive Committee,,
 PP 041,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 042,State Publishing House of the RSFSR ,NA,Russian Soviet Federative Socialist Republic
+PP 042,State Publishing House of the RSFSR ,,Russian Soviet Federative Socialist Republic
 PP 043,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 044,Iskusstvo,Moscow-Leningrad,Art
 PP 045,State Publishing House of the Ukrainian Soviet Socialist Republic,Kiev,
 PP 046,Gubpechat' ,Kharkov,Kharkov Province Department of Printing
-PP 047,Chief Department [Control Center] of Obligatory Individual Military Training of the All-Russian Main Headquarters,NA,
+PP 047,Chief Department [Control Center] of Obligatory Individual Military Training of the All-Russian Main Headquarters,,
 PP 048,UkRosta,Ukraine,
 PP 049,Plakat  Moscow,Moscow,Poster
 PP 050,Iskusstvo,Moscow-Leningrad,Art
-PP 051,NA,NA,
-PP 052,NA,NA,
+PP 051,,,
+PP 052,,,
 PP 053,Iskusstvo,Moscow-Leningrad,Art
 PP 054,Political Directorate of the Kiev Military Region,Kiev,
-PP 055,NA,NA,
-PP 056,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazak Deputies",NA,
+PP 055,,,
+PP 056,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazak Deputies",,
 PP 057,Military-Training Operations of Ukraine,Kiev,
-PP 058,NA,NA,
+PP 058,,,
 PP 059,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 060,Oznaşr,[Uzbekistan],Uzbek State Publishing
 PP 061,Iskusstvo,Moscow-Leningrad,Art
@@ -70,7 +70,7 @@ PP 068,Iskusstvo,Moscow-Leningrad,Art
 PP 069,Iskusstvo,Moscow,Art
 PP 070,Iskusstvo,Moscow,Art
 PP 071,Ogiz,Leningrad,Association of the State Book-Magazine Publishing Houses
-PP 072,NA,NA,
+PP 072,,,
 PP 073,Iskusstvo,Moscow-Leningrad,Art
 PP 074,Iskusstvo,Moscow-Leningrad,Art
 PP 075,Iskusstvo ,Moscow-Leningrad,Art
@@ -92,9 +92,9 @@ PP 090,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishin
 PP 091,State Publishing House,Petersburg,
 PP 092,State Publishing House,Moscow-Leningrad,
 PP 093,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 094,Editorial Publication Department of Aeroflot,NA,
+PP 094,Editorial Publication Department of Aeroflot,,
 PP 095,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 096,NA,NA,
+PP 096,,,
 PP 097,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 098,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 099,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -103,17 +103,17 @@ PP 101,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 102,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 103,Iskusstvo ,Moscow,Art
 PP 104,Iskusstvo ,Moscow,Art
-PP 105,NA,NA,
+PP 105,,,
 PP 106,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 107,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 108,Lenizdat,NA,
+PP 108,Lenizdat,,
 PP 109,Iskusstvo ,Moscow-Leningrad,Art
 PP 110,Iskusstvo,Moscow-Leningrad,Art
 PP 111,Iskusstvo,Moscow-Leningrad,Art
 PP 112,Iskusstvo ,Moscow-Leningrad,Art
 PP 113,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
 PP 114,Iskusstvo,Moscow,Art
-PP 115,NA,NA,
+PP 115,,,
 PP 116,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 117,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 118,Iskusstvo,Moscow,Art
@@ -123,29 +123,29 @@ PP 121,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 122,Iskusstvo,Moscow-Leningrad,Art
 PP 123,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 124,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 125,Political Directorate of the Revolutionary Military Council of the Republic,NA,
+PP 125,Political Directorate of the Revolutionary Military Council of the Republic,,
 PP 126,State Publishing House,Petersburg,
-PP 127,Political Directorate of the Revolutionary Military Council of the Republic,NA,
-PP 128,Political Directorate of the Revolutionary Military Council of the Republic,NA,
-PP 129,NA,NA,
-PP 130,Gosizdat,NA,State Publishing House
-PP 131,Political Directorate of the Revolutionary Military Council of the Republic,NA,
-PP 132,Political Directorate of the Revolutionary Military Council of the Republic,NA,
+PP 127,Political Directorate of the Revolutionary Military Council of the Republic,,
+PP 128,Political Directorate of the Revolutionary Military Council of the Republic,,
+PP 129,,,
+PP 130,Gosizdat,,State Publishing House
+PP 131,Political Directorate of the Revolutionary Military Council of the Republic,,
+PP 132,Political Directorate of the Revolutionary Military Council of the Republic,,
 PP 133,Iskusstvo,Moscow-Leningrad,Art
 PP 134,Latgosizdat,[Latvia],Latvian State Publishing House
 PP 135,Iskusstvo,Moscow-Leningrad,Art
 PP 136,Latgosizdat,[Latvia],Latvian State Publishing House
-PP 137,NA,NA,
+PP 137,,,
 PP 138,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association Of Artists Of The Revolution
-PP 139,NA,NA,
+PP 139,,,
 PP 140,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 141,Goslit,NA,Central Union Publishing House
+PP 141,Goslit,,Central Union Publishing House
 PP 142,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 143,Revolutionary Military Committee [Center] No. 954,Simbirsk,
-PP 144,State Publishing House of the RSFSR,NA,Russian Soviet Federative Socialist Republic
+PP 144,State Publishing House of the RSFSR,,Russian Soviet Federative Socialist Republic
 PP 145,Turkpolitprosvet,[Turkmenistan],Turkmenian Political Education Department
 PP 146,Mosoblit,Moscow,Moscow Regional Publishing House
-PP 147,OkrLit,NA,
+PP 147,OkrLit,,
 PP 148,Central Publishing House,Moscow,
 PP 149,Iskusstvo,Moscow-Leningrad,Art
 PP 150,Executive Committee of the Union of Red Cross and Red Crescent Societies USSR,Moscow,
@@ -158,7 +158,7 @@ PP 156,Union Of Czecho-Slovak-Soviet Friendship,Czechoslovakia,
 PP 157,Iskusstvo,Moscow-Leningrad,Art
 PP 158,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 159,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 160,TASS,NA,
+PP 160,TASS,,
 PP 161,Pravda Vostoka and Kzyl Uzbekistan Joint Publishing House,[Uzbekistan],
 PP 162,Iskusstvo,Moscow,Art
 PP 163,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -169,11 +169,11 @@ PP 167,Iskusstvo,Moscow-Leningrad,Art
 PP 168,Iskusstvo,Moscow-Leningrad,Art
 PP 169,Executive Party Committee of the Socialist Unity Party of Germany,[Germany],
 PP 170,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 171,NA,NA,
+PP 171,,,
 PP 172,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 173,Iskusstvo ,Moscow-Leningrad,Art
 PP 174,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 175,NA,NA,
+PP 175,,,
 PP 176,Standardization and Rationalization Publishing House,Moscow,
 PP 177,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 178,Soviet Russia Publishing House,Moscow,
@@ -191,14 +191,14 @@ PP 189,Iskusstvo,Moscow-Leningrad,Art
 PP 190,Iskusstvo,Moscow-Leningrad,Art
 PP 191,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 192,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 193,NA,NA,
-PP 194,NA,NA,
+PP 193,,,
+PP 194,,,
 PP 195,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 196,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 197,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
 PP 198,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 199,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 200,NA,NA,
+PP 200,,,
 PP 201,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 202,Iskusstvo,Moscow-Leningrad,Art
 PP 203,Iskusstvo,Moscow-Leningrad,Art
@@ -208,9 +208,9 @@ PP 206,"Central Committee of the Socialist Unity Party of Germany, Agitation Dep
 PP 207,KazIZO,[Kazakhstan],Creation And Production Union Of Artists Of 
 PP 208,Iskusstvo,Moscow,Art
 PP 209,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 210,NA,NA,
+PP 210,,,
 PP 211,Iskusstvo,Moscow,Art
-PP 212,NA,NA,
+PP 212,,,
 PP 213,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 214,Iskusstvo,Moscow,Art
 PP 215,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -219,7 +219,7 @@ PP 217,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 218,Rostizo,Rostov-On-Don,Rostov Artists’ Partnership
 PP 219,Plakat,Moscow,Poster
 PP 220,Plakat,Moscow,Poster
-PP 221,NA,NA,
+PP 221,,,
 PP 222,People’s Arts Publishing House,China,
 PP 223,Military Publishing House of the Military Ministry of the USSR,[USSR],
 PP 224,Iskusstvo,Moscow-Leningrad,Art
@@ -246,23 +246,23 @@ PP 244,Plakat,Moscow,Poster
 PP 245,Plakat,Moscow,Poster
 PP 246,Plakat,Moscow,Poster
 PP 247,All-Ukrainian State Publishing House ,Kharkov,
-PP 248,NA,NA,
-PP 249,NA,NA,
-PP 250,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 248,,,
+PP 249,,,
+PP 250,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 251,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
-PP 252,NA,NA,"Printer is Redizdat, People's commisar for military affairs, Kiev"
+PP 252,,,"Printer is Redizdat, People's commisar for military affairs, Kiev"
 PP 253,"Pending Translation, Poster is in Azerbaijani",Pending Translation,
 PP 254,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 255,Plakat,Moscow,Poster
-PP 256,NA,NA,
+PP 256,,,
 PP 257,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazak Deputies",Moscow,
 PP 258,State Publishing House of the RSFSR,Tsaritsin,
 PP 259,Yekaterinoslavsk Regional Military Commissariat Agitation and Education Department,[Yekaterinoslavsk],
 PP 260,State Publishing House,Kazan,
-PP 261,Tsentrizdat,NA,Central Government Publishing House
-PP 262,NA,NA,
+PP 261,Tsentrizdat,,Central Government Publishing House
+PP 262,,,
 PP 263,Ogiz-IzoGiz,Moscow,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 264,Financial Publishing House,NA,
+PP 264,Financial Publishing House,,
 PP 265,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 266,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
 PP 267,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
@@ -274,19 +274,19 @@ PP 272,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 273,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 274,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 275,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 276,NA,NA,
+PP 276,,,
 PP 277,A.Kh.R.,Moscow,Association of Artists of the Revolution
 PP 278,Plakat,Moscow,Poster
-PP 279,Central Political Administrative Board of the People’s Army Publishing Center,NA,
+PP 279,Central Political Administrative Board of the People’s Army Publishing Center,,
 PP 280,Nauka i Izkustvo,Sofia,State Publishing House
 PP 281,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 282,NA,NA,
+PP 282,,,
 PP 283,May Fine Art Prints Publishing House,Dresden,
-PP 284,NA,NA,
+PP 284,,,
 PP 285,Iskusstvo,Moscow-Leningrad,Art
 PP 286,Iskusstvo,Moscow-Leningrad,Art
-PP 287,NA,NA,
-PP 288,State Publishing House,NA,
+PP 287,,,
+PP 288,State Publishing House,,
 PP 289,VAPP,"11 Moskovskaia Street, Riga, [Latvia]",Department of State Book Publishers and Polygraphic Enterprises
 PP 290,Iskusstvo,Moscow-Leningrad,Art
 PP 291,Iskusstvo,Moscow,Art
@@ -295,19 +295,19 @@ PP 293,Ogiz-IzoGiz,Moscow,Association of State Book-Magazine Publishing Houses a
 PP 294,Iskusstvo,Moscow-Leningrad,Art
 PP 295,Sverdlovsk Department of the Art Fund of the USSR,[USSR],
 PP 296,Iskusstvo,Moscow-Leningrad,Art
-PP 297,NA,NA,
+PP 297,,,
 PP 298,Iskusstvo,Moscow-Leningrad,Art
 PP 299,Iskusstvo,Moscow-Leningrad,Art
 PP 300,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 301,Iskusstvo,Moscow-Leningrad,Art
 PP 302,Rostov Book Publishing House,[Rostov],
 PP 303,Uzlit Publishing House No. 1,[Uzbekistan],Uzbek Literature
-PP 304,State Publishing House,NA,
+PP 304,State Publishing House,,
 PP 305,State Publishing House,Saratov,
 PP 306,Iskusstvo,Moscow-Leningrad,Art
 PP 307,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 308,Iskusstvo,Moscow-Leningrad,Art
-PP 309,Commission of the Presidium of the Central Executive Committee of the Union of Soviet Socialist Republics,NA,
+PP 309,Commission of the Presidium of the Central Executive Committee of the Union of Soviet Socialist Republics,,
 PP 310,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 311,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 312,Plakat,Moscow,Poster
@@ -319,28 +319,28 @@ PP 317,Iskusstvo,Moscow,Art
 PP 318,Mistetstvo,Ukraine,State Publishing House
 PP 319,Iskusstvo,Moscow-Leningrad,Art
 PP 320,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 321,NA,NA,
-PP 322,Political Directorate of the Revolutionary Military Council of the Republic,NA,
-PP 323,State Publishing House,NA,
+PP 321,,,
+PP 322,Political Directorate of the Revolutionary Military Council of the Republic,,
+PP 323,State Publishing House,,
 PP 324,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
-PP 325,NA,NA,
+PP 325,,,
 PP 326,Iskusstvo,Moscow-Leningrad,Art
 PP 327,Ogiz-IzoGiz,Moscow,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 328,Iskusstvo,Moscow-Leningrad,Art
 PP 329,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 330,Sovietskaia Rossia,Moscow,Soviet Russia
-PP 331,NA,NA,
+PP 331,,,
 PP 332,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 333,State Scientific-Technical Publishing House,Moscow-Leningrad,
-PP 334,Chief Department of Obligatory Individual Military Training of the All-Russian Main Headquarters,NA,
-PP 335,NA,NA,
-PP 336,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
+PP 334,Chief Department of Obligatory Individual Military Training of the All-Russian Main Headquarters,,
+PP 335,,,
+PP 336,All-Russian Bureau of Military Commissars Agitation and Education Department,,
 PP 337,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
 PP 338,State Publishing House,Leningrad,
 PP 339,M.K.B.K.P.,[Moscow],Moscow Committee of the All Union Communist Party Bolshevik
 PP 340,Iskusstvo,Moscow-Leningrad,Art
-PP 341,Vsekopromsoiuz,NA,All-Russian Union of Producers' Cooperatives
-PP 342,Ogiz,NA,Association of State Book-Magazine Publishing Houses
+PP 341,Vsekopromsoiuz,,All-Russian Union of Producers' Cooperatives
+PP 342,Ogiz,,Association of State Book-Magazine Publishing Houses
 PP 343,Iskusstvo,Moscow,Art
 PP 344,Iskusstvo,Moscow-Leningrad,Art
 PP 345,Iskusstvo,Moscow-Leningrad,Art
@@ -350,106 +350,106 @@ PP 348,"UAVNF at Orbis Publishing House, Public Manufacturer",Czechoslovakia,
 PP 349,"Osveta Publishing, Ministry of Information and Education",Czechoslovakia,
 PP 350,"Iskusstvo (Art), Moscow-Leningrad",Moscow-Leningrad,
 PP 351,Party Workers of the Kharkov Regional Committee of the Communist Party of Ukraine (Bolshevik),[Ukraine],
-PP 352,NA,NA,
+PP 352,,,
 PP 353,Iskusstvo,Moscow-Leningrad,Art
 PP 354,Gostrudizdat,Moscow,State Publishing House of Labor Issues
-PP 355,Organizational Department Tranposektsii ,NA,Union of Consumer Societies Section of the Employees of Railway & Water Transport
+PP 355,Organizational Department Tranposektsii ,,Union of Consumer Societies Section of the Employees of Railway & Water Transport
 PP 356,State Publishing House,Moscow-Leningrad,
-PP 357,NA,NA,
-PP 358,Glavkomtrud and Narkomtrud,NA,Main Labor Committee / Public Commissariat of Labor
-PP 359,NA,NA,
-PP 360,NA,NA,
-PP 361,NA,NA,
+PP 357,,,
+PP 358,Glavkomtrud and Narkomtrud,,Main Labor Committee / Public Commissariat of Labor
+PP 359,,,
+PP 360,,,
+PP 361,,,
 PP 362,Art Fund of the USSR,Khabarovsk Region,
 PP 363,Pending Translation,Pending Translation,
-PP 364,NA,NA,
+PP 364,,,
 PP 365,Iskusstvo,Moscow-Leningrad,Art
-PP 366,NA,NA,
+PP 366,,,
 PP 367,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 368,Iskusstvo,Moscow-Leningrad,Art
 PP 369,Iskusstvo,Moscow-Leningrad,Art
 PP 370,Plakat,Moscow,Poster
-PP 371,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 371,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 372,Iskusstvo,Moscow-Leningrad,Art
-PP 373,Gosvonizdat NKO,NA,National Commissariat of Defense
+PP 373,Gosvonizdat NKO,,National Commissariat of Defense
 PP 374,Iskusstvo,Moscow-Leningrad,Art
 PP 375,Iskusstvo,Moscow-Leningrad,Art
 PP 376,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 377,"Political Directorate of the Revolutionary Military Council of the Republic, Literary and Art Department",NA,
-PP 378,NA,NA,
+PP 377,"Political Directorate of the Revolutionary Military Council of the Republic, Literary and Art Department",,
+PP 378,,,
 PP 379,Mistetstvo,Kharkov,State Art Publishing House
-PP 380,NA,NA,
+PP 380,,,
 PP 381,Latgosizdat ,Riga,Latvian State Publishing House
-PP 382,State Publishing House,NA,
+PP 382,State Publishing House,,
 PP 383,Communist,Talinn,
 PP 384,Estonian National Publishing,[Estonia],
 PP 385,Fine Art Publishing House,Moscow,
 PP 386,Plakat,Moscow,Poster
 PP 387,State Publishing House,Moscow-Petrograd,
-PP 388,State Publishing House,NA,
+PP 388,State Publishing House,,
 PP 389,Ogiz,"Tashkent, [Uzbekistan]",Association of State Book-Magazine Publishing Houses
 PP 390,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 391,A.Kh.Ch.U.,[Ukraine],All Ukrainian Art Publishing House
-PP 392,IzoGiz,NA,State Publishing House of Fine Art
+PP 392,IzoGiz,,State Publishing House of Fine Art
 PP 393,Knigospilka,[Ukraine],All-Ukrainian Cooperative Book Merchandising and Publishing Organization
 PP 394,Book Dealer Publishing House,Khabarovsk,
-PP 395,State Publishing House,NA,
+PP 395,State Publishing House,,
 PP 396,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 397,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 398,IzoGiz,NA,State Publishing House of Fine Art
+PP 398,IzoGiz,,State Publishing House of Fine Art
 PP 399,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 400,NA,NA,
+PP 400,,,
 PP 401,State Publishing House No. 8,USSR,Ukrainian Soviet Socialist Republic
 PP 402,State Publishing House,Moscow,
 PP 403,Knigospilka,[Ukraine],All-Ukrainian Cooperative Book Merchandising and Publishing Organization
-PP 404,Agit-Prop Glavpolitput,NA,Political Administration Department of the Commisariat of Transport
+PP 404,Agit-Prop Glavpolitput,,Political Administration Department of the Commisariat of Transport
 PP 405,Moscow Union of Mercantile Coops.,[Moscow],
 PP 406,All-Ukrainian Publishing House,[Ukraine],
 PP 407,Moscow Union of Coops.,[Moscow],
 PP 408,State Publishing House,Simbirsk Department,
-PP 409,Political Directorate of the Revolutionary Council of the Western Front,NA,
-PP 410,Revolutionary Military Committee (Center),NA,
+PP 409,Political Directorate of the Revolutionary Council of the Western Front,,
+PP 410,Revolutionary Military Committee (Center),,
 PP 411,"Ogiz-IzoGiz, Moscow-Leningrad",Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 412,NA,NA,
+PP 412,,,
 PP 413,VSNKh [and] TsKVS,[Moscow],Higher Soviet National Economy and All-Russian Central Committee of the Union of Mineworkers
 PP 414,3rd State Publishing House Kub-Chern. [Kuban-Black Seas Area] Regional Department 50,[Krasnodar],
-PP 415,Glavpolitprosvet,NA,Main Department of Political Education of the People's Commissariat of Education of the RSFSR
+PP 415,Glavpolitprosvet,,Main Department of Political Education of the People's Commissariat of Education of the RSFSR
 PP 416,"16th State Publishing Typography Workshop, M.S.N.Kh.",[Moscow],Moscow Council of National Economy
-PP 417,NA,NA,
+PP 417,,,
 PP 418,Kazan Department of Publishing,Kazan,
 PP 419,Department of Political Education of the Petrograd Military Zone,[Petrograd],
-PP 420,Revolutionary Military Committee (Center),NA,
+PP 420,Revolutionary Military Committee (Center),,
 PP 421,All-Ukrainian State Publishing,Poltava,
 PP 422,Tambov Regional Branch of the State Publishing House,[Tambov],
-PP 423,2nd O.Kh.R. Publication 23 ,NA,Association of Realist Artists
-PP 424,Pacific Coast Region Publishing House Organizing Committee for the All-Russian “Day Of The Book”,NA,
+PP 423,2nd O.Kh.R. Publication 23 ,,Association of Realist Artists
+PP 424,Pacific Coast Region Publishing House Organizing Committee for the All-Russian “Day Of The Book”,,
 PP 425,Mistetstvo,Kharkiv,State Art Publishing House
-PP 426,NA,NA,
-PP 427,Glavpoliput Publishing House Agitation and Education Department,NA,
+PP 426,,,
+PP 427,Glavpoliput Publishing House Agitation and Education Department,,
 PP 428,Vyatka Regional Exhibition Committee,[Vyatka],
 PP 429,"Political Directorate of the R.V.S.R., Literary Publication Department",Moscow,Revolutionary Military Council of the Republic
 PP 430,Political Directorate of the Public Military Commissariat Of Ukraine,[Ukraine],
-PP 431,Tsentrosoiuz,NA,All-Russian Central Union of Consumers' Societies
+PP 431,Tsentrosoiuz,,All-Russian Central Union of Consumers' Societies
 PP 432,State Publishing House,Petrograd,
 PP 433,Central Publishing House of the Peoples of the USSR,Moscow,
 PP 434,M.K.B.K.P.,[Moscow],Moscow Committee of the All-Russian Communist Party of Bolsheviks
 PP 435,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 436,Art,[Ukraine],Ukranian State Publishing
-PP 437,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",NA,
+PP 437,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",,
 PP 438,State Publishing House,Irkutsk,
 PP 439,Moldavia State Publishing House,[Moldavia],
-PP 440,State Publishing House,NA,
-PP 441,Editorial Publishing Department of the Political Directorate of the Kiev Regional Military Committee,NA,
+PP 440,State Publishing House,,
+PP 441,Editorial Publishing Department of the Political Directorate of the Kiev Regional Military Committee,,
 PP 442,Kub-Chern State Publication [Kuban-Black Seas Area] Regional Department,[Kuban],
-PP 443,NA,NA,
-PP 444,Vseobuch Publishing,NA,Universal Education/Training
+PP 443,,,
+PP 444,Vseobuch Publishing,,Universal Education/Training
 PP 445,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 446,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 447,IzoGiz ,Moscow,State Publishing House of Fine Art
 PP 448,IzoGiz and Iskusstvo,"Moscow, Leningrad",State Publishing House of Fine Art
-PP 449,NA,NA,
-PP 450,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",NA,RVSR (Revolutionary Military Council of the Republic) No. 3
-PP 451,NA,NA,
+PP 449,,,
+PP 450,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",,RVSR (Revolutionary Military Council of the Republic) No. 3
+PP 451,,,
 PP 452,IzoGiz ,Moscow-Leningrad,State Publishing House of Fine Art
 PP 453,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 454,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
@@ -460,28 +460,28 @@ PP 458,Mistetstvo,Kiev,State Publishing House
 PP 459,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 460,Mistetstvo,Kharkov,State Art Publishing House
 PP 461,Narkomvoen,Ukraine,People's Commissariat of Millitary and Naval Affairs
-PP 462,"Political Directorate of the R.V.S.R., Literary Publication Department",NA,Revolutionary Military Council of the Republic
+PP 462,"Political Directorate of the R.V.S.R., Literary Publication Department",,Revolutionary Military Council of the Republic
 PP 463,IzoGiz ,Moscow,State Publishing House of Fine Art
 PP 464,Iskusstvo ,Moscow-Leningrad,Art
 PP 465,A.Kh.Ch.U.,[Ukraine],All-Ukrainian Art Publishing House
-PP 466,"Political Directorate of the R.V.S.R., Literary Publication Department",NA,Revolutionary Military Council of the Republic
+PP 466,"Political Directorate of the R.V.S.R., Literary Publication Department",,Revolutionary Military Council of the Republic
 PP 467,"Military Publishing House of the Ministry of Defense of the USSR, Moscow",Moscow,
-PP 468,NA,NA,
+PP 468,,,
 PP 469,State Publishing House,Moscow,
 PP 470,Kuban’ Black Sea Directorate of Publishing Matters,Krasnodar,
 PP 471,Political Directorate of the Odessa Military Region Commissariat Publishing House,[Odessa],
-PP 472,Tsekult,NA,Central Soviet of Culture-Literacy of Railway Organizations
+PP 472,Tsekult,,Central Soviet of Culture-Literacy of Railway Organizations
 PP 473,State Publishing House,Peterburg [as seen on poster],
-PP 474,Political Directorate of the Revolutionary Military Council of the Republic,NA,
+PP 474,Political Directorate of the Revolutionary Military Council of the Republic,,
 PP 475,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association of Artists of the Revolution
 PP 476,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 477,NA,NA,
+PP 477,,,
 PP 478,Iskusstvo,Moscow-Leningrad,Art
 PP 479,Iskusstvo,Moscow-Leningrad,Art
 PP 480,Gosenergoizdat,Moscow,
 PP 481,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 482,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 483,NA,NA,
+PP 483,,,
 PP 484,Iskusstvo,Moscow-Leningrad,Art
 PP 485,Iskusstvo,Moscow-Leningrad,Art
 PP 486,Iskusstvo,Moscow-Leningrad,Art
@@ -518,7 +518,7 @@ PP 516,"IzoGiz (State Publishing House of Fine Art), Moscow",Moscow,
 PP 517,"IzoGiz (State Publishing House of Fine Art), Moscow",Moscow,
 PP 518,"IzoGiz (State Publishing House of Fine Art), Moscow",Moscow,
 PP 519,"IzoGiz (State Publishing House of Fine Art), Moscow",Moscow,
-PP 520,NA,NA,
+PP 520,,,
 PP 521,Nauka i Izkustvo,Sofia,Science and Art State Publishing House
 PP 522,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 523,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
@@ -526,23 +526,23 @@ PP 524,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
 PP 525,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
 PP 526,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
 PP 527,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
-PP 528,State Military Publishing House MNO,NA,Ministry of Defense of the USSR
+PP 528,State Military Publishing House MNO,,Ministry of Defense of the USSR
 PP 529,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 530,Soviet Russia Publishing House,Moscow,
 PP 531,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 532,Fine Art Publishing House,Moscow,
-PP 533,NA,NA,
+PP 533,,,
 PP 534,Malysh Publishing House,Moscow,Child
 PP 535,Fine Art Publishing House,Moscow,
 PP 536,Fine Art Publishing House,Moscow,
 PP 537,"Pending Translation, Poster is in Georgian",Pending Translation,
 PP 538,Fine Art Publishing House,Moscow,
-PP 539,NA,NA,
+PP 539,,,
 PP 540,Iskusstvo,Moscow,Art
 PP 541,State Military Publishing House NKO,Moscow,National Commissariat of Defense of the USSR
 PP 542,Iskusstvo,Moscow,Art
 PP 543,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 544,NA,NA,
+PP 544,,,
 PP 545,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 546,Plakat,Moscow,Poster
 PP 547,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -555,17 +555,17 @@ PP 553,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 554,"Sovietskii Khudozhnik, Moscow",Moscow,Soviet Artist
 PP 555,Iskusstvo,Moscow-Leningrad,Art
 PP 556,Department of Propaganda,Kiev,
-PP 557,NA,NA,
+PP 557,,,
 PP 558,Iskusstvo,Moscow-Leningrad,Art
-PP 559,Department of Military Publication of the Front Beyond the Caucasus,NA,
-PP 560,NA,NA,
+PP 559,Department of Military Publication of the Front Beyond the Caucasus,,
+PP 560,,,
 PP 561,M.d.L.,Berlin,Mitglied des Landtages (Member of the State Parliament [of Germany]) 
-PP 562,NA,NA,
-PP 563,Sevtsentropechat,NA,North Central Publishing House
+PP 562,,,
+PP 563,Sevtsentropechat,,North Central Publishing House
 PP 564,Proletar Publishing House,Ukraine,
 PP 565,Congress Publishing House G.m.b.H.,Berlin,Gesellschaft mit beschränkter Haftung (Limited Liability Company)
-PP 566,NA,NA,
-PP 567,NA,NA,
+PP 566,,,
+PP 567,,,
 PP 568,Iskusstvo,Moscow-Leningrad,Art
 PP 569,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 570,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -573,8 +573,8 @@ PP 571,Plakat,Moscow,Poster
 PP 572,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 573,Iskusstvo,Moscow-Leningrad,Art
 PP 574,Albanian Democratic Front Publishing,[Albania],
-PP 575,NA,NA,
-PP 576,People’s Commissariat of Food,NA,
+PP 575,,,
+PP 576,People’s Commissariat of Food,,
 PP 577,Astrakhan Region Book Publishers,[Astrakhan Region],
 PP 578,Iskusstvo,Moscow,Art
 PP 579,Iskusstvo,Moscow,Art
@@ -589,62 +589,62 @@ PP 587,Iskusstvo,Leningrad,Art
 PP 588,Mossovet,[Moscow],Moscow City Council
 PP 589,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 590,IzoGiz,Moscow,State Publishing House of Fine Art
-PP 591,NA,NA,
-PP 592,NA,NA,
+PP 591,,,
+PP 592,,,
 PP 593,Oznaşr,[Uzbekistan],Uzbek State Publishing
-PP 594,Iskusstvo/Gosfinizdat,NA,Art/State Financial Publishing House
+PP 594,Iskusstvo/Gosfinizdat,,Art/State Financial Publishing House
 PP 595,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association Of Artists Of The Revolution
 PP 596,Mossovet,[Moscow],Moscow City Council
-PP 597,Bezbozhnik,NA,Atheist Publishing House
-PP 598,State Publishing House,NA,
+PP 597,Bezbozhnik,,Atheist Publishing House
+PP 598,State Publishing House,,
 PP 599,State Publishing House,Moscow-Leningrad,
-PP 600,NA,NA,
-PP 601,Middle Asia Institute of Silk at the “Turksholk” Joint Stock Company,NA,"""Turkish Silk"""
+PP 600,,,
+PP 601,Middle Asia Institute of Silk at the “Turksholk” Joint Stock Company,,"""Turkish Silk"""
 PP 602,Uzdavnashr Publishing House,"Tashkent, [Uzbekistan]",
 PP 603,Moldavia State Publishing House,[Moldavia],
-PP 604,NA,NA,
-PP 605,Tsentrizdat,NA,Central Government Publishing House
-PP 606,NA,NA,
+PP 604,,,
+PP 605,Tsentrizdat,,Central Government Publishing House
+PP 606,,,
 PP 607,Pending Translation poster is in Georgian,Pending Translation,
 PP 608,Moldavia State Publishing House,[Moldavia],
 PP 609,"State Publishing House, Moscow-Leningrad",Moscow-Leningrad,
 PP 610,"State Publishing House, Moscow-Leningrad",Moscow-Leningrad,
-PP 611,Fine Art Publishing House,NA,
+PP 611,Fine Art Publishing House,,
 PP 612,Iskusstvo,Leningrad,Art
-PP 613,Political Directorate of the Revolutionary Military Council of the Republic,NA,
-PP 614,NA,NA,
+PP 613,Political Directorate of the Revolutionary Military Council of the Republic,,
+PP 614,,,
 PP 615,Plakat,Moscow,Poster
 PP 616,Plakat,Moscow,Poster
 PP 617,Plakat,Moscow,Poster
-PP 618,Fine Art Publishing House,NA,
-PP 619,NA,NA,
+PP 618,Fine Art Publishing House,,
+PP 619,,,
 PP 620,Plakat,Moscow,Poster
 PP 621,Publishing House of the VTsIK,Moscow,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazaks’ Deputies"
-PP 622,All-Russian Central Union of Consumers' Societies,NA,
+PP 622,All-Russian Central Union of Consumers' Societies,,
 PP 623,A.Kh.R.R. Publishing House,Moscow,Association of Arts of Revolutionary Russia
 PP 624,Iskusstvo,Moscow-Leningrad,Art
 PP 625,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 626,East Caucasus Bureau of Proletarian Culture,NA,
-PP 627,NA,NA,
+PP 626,East Caucasus Bureau of Proletarian Culture,,
+PP 627,,,
 PP 628,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 629,Iskusstvo,Moscow-Leningrad,Art
 PP 630,Baksovet Publishing House  S.V.B.,"Baku City, [Azerbaijan]",Baku Soviet Publishing House
 PP 631,Iskusstvo,Moscow-Leningrad,Art
-PP 632,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",NA,
-PP 633,Tsentrizdat,NA,Central Government Publishing House
-PP 634,NA,NA,
+PP 632,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",,
+PP 633,Tsentrizdat,,Central Government Publishing House
+PP 634,,,
 PP 635,ORGOTDEL L.S.P.O.,[Leningrad],Organizational Department of the Leningrad Union of Consumer Societies (L.S.P.O.)
-PP 636,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",NA,
-PP 637,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",NA,
+PP 636,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",,
+PP 637,"Political Directorate of the Revolutionary Military Council of the Republic, Political Literature Department",,
 PP 638,State Publishing House,Petrograd,
-PP 639,Bezbozhnik Publishing ,NA,Godless
+PP 639,Bezbozhnik Publishing ,,Godless
 PP 640,Iskusstvo,Moscow,Art
 PP 641,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 642,Latvian State Publishing House,Riga,
 PP 643,Estonian National Publishing,[Estonia],
 PP 644,Iskusstvo,Moscow-Leningrad,Art
 PP 645,Iskusstvo,Moscow-Leningrad,Art
-PP 646,State Publishing House,NA,
+PP 646,State Publishing House,,
 PP 647,Mosoblit,Moscow,Moscow Regional Publishing House
 PP 648,Nauka i izkustvo,Sofia,Science and Art State Publishing House
 PP 649,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -660,18 +660,18 @@ PP 658,Iskusstvo,Moscow-Leningrad,Art
 PP 659,"Pending Translation, poster is in Chinese",Pending Translation,
 PP 660,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 661,Mosgublit,[Moscow],Moscow Government Literature
-PP 662,NA,NA,
+PP 662,,,
 PP 663,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 664,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 665,Knigospilka,[Ukraine],All-Ukrainian Cooperative of Bookprinter Partnerships
 PP 666,Iskusstvo,Moscow-Leningrad,Art
 PP 667,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 668,TsekTran Literature Publishing Department,NA,
-PP 669,NA,NA,
+PP 668,TsekTran Literature Publishing Department,,
+PP 669,,,
 PP 670,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 671,Plakat,Moscow,Poster
 PP 672,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 673,Izobrazitel’noe Iskusstvo ,NA,Fine Art Publishers
+PP 673,Izobrazitel’noe Iskusstvo ,,Fine Art Publishers
 PP 674,Iskusstvo,Moscow-Leningrad,Art
 PP 675,Iskusstvo,Moscow-Leningrad,Art
 PP 676,IzoGiz,Moscow,State Publishing House of Fine Art
@@ -680,26 +680,26 @@ PP 678,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishin
 PP 679,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association Of Artists Of The Revolution
 PP 680,Iskusstvo,Leningrad,Art
 PP 681,Iskusstvo,Moscow-Leningrad,Art
-PP 682,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",NA,
+PP 682,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",,
 PP 683,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 684,NA,NA,
+PP 684,,,
 PP 685,State Publishing House,Tadjikistan,
-PP 686,NA,[Estonia],
+PP 686,,[Estonia],
 PP 687,Moldavia State Publishing House,[Moldavia],
 PP 688,State Publishing House,Tadjik,
 PP 689,State Publishing House,Moscow-Leningrad,
 PP 690,Latvian State Publishing House,Riga,
 PP 691,October Publishing House and R.K. Political Literature Publishing House,Talinn / NA,
 PP 692,A.Kh.R.R. Publishing House,Moscow,Association of Arts of Revolutionary Russia
-PP 693,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 693,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 694,State Publishing House,Moscow,
-PP 695,NA,NA,
-PP 696,Financial Publishing House Publication NCF of the USSR,NA,
+PP 695,,,
+PP 696,Financial Publishing House Publication NCF of the USSR,,
 PP 697,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association of Artists of the Revolution
-PP 698,Priboi Workers' Publishing House,NA,Surf
+PP 698,Priboi Workers' Publishing House,,Surf
 PP 699,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association of Artists of the Revolution
-PP 700,State Publishing House,NA,
-PP 701,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 700,State Publishing House,,
+PP 701,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 702,A.Kh.Ch.U.,[Ukraine],All Ukrainian Art Publishing House
 PP 703,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 704,State Publishing House,Tver Department,
@@ -710,28 +710,28 @@ PP 709,Latvian State Publishing House,Riga,
 PP 710,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 711,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 712,Iskusstvo,Moscow-Leningrad,Art
-PP 713,Mistetstvo No. 150,NA,State Art Publishing House #150
+PP 713,Mistetstvo No. 150,,State Art Publishing House #150
 PP 714,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 715,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
 PP 716,Osoaviakhim Kiev Regional Council ,[Kiev],"Society for Defense, Aviation and Chemical Construction"
-PP 717,NA,NA,
-PP 718,NA,NA,
-PP 719,NA,NA,
+PP 717,,,
+PP 718,,,
+PP 719,,,
 PP 720,Ogiz-IzoGiz,Moscow-Leningrad,Association of State Book-Magazine Publishing Houses and State Publishing House of Fine Art
-PP 721,Narkomfin Financial Publishing House,NA,People's Commissariat of Finance
+PP 721,Narkomfin Financial Publishing House,,People's Commissariat of Finance
 PP 722,"Pending Translation, Poster is in Georgian",Pending Translation,
-PP 723,Kogiz,NA,State Cooperaive Publishing House
+PP 723,Kogiz,,State Cooperaive Publishing House
 PP 724,Kommunar Typography Workshop Publishing House,Tula,
-PP 725,State Publishing House,NA,
+PP 725,State Publishing House,,
 PP 726,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association of Artists of the Revolution
 PP 727,MOPR Central Committee Publishing House,Moscow,International Organization for Aid to the Fighters of the Revolution
 PP 728,A.Kh.R. Joint-Stock Company Art Publishing House,Moscow,Association of Artists of the Revolution
 PP 729,Iskusstvo,Moscow-Leningrad,Art
-PP 730,Tsentrizdat,NA,Central Government Publishing House
+PP 730,Tsentrizdat,,Central Government Publishing House
 PP 731,"State Publishing House, Moscow-Leningrad",Moscow-Leningrad,
 PP 732,Plakat,Moscow,Poster
 PP 733,Plakat,Moscow,Poster
-PP 734,NA,NA,
+PP 734,,,
 PP 735,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 736,Iskusstvo,Moscow-Leningrad,Art
 PP 737,Iskusstvo,Moscow-Leningrad,Art
@@ -739,23 +739,23 @@ PP 738,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 739,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 740,Latvian State Publishing House,Riga,
 PP 741,Iskusstvo,Moscow-Leningrad,Art
-PP 742,Publishing House of the VTsIK,NA,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazaks’ Deputies"
+PP 742,Publishing House of the VTsIK,,"All-Russian Central Executive Committee of the Council of Workers, Peasants, Red Army Soldiers and Kazaks’ Deputies"
 PP 743,Plakat,Moscow,Poster
 PP 744,Iskusstvo,Moscow-Leningrad,Art
 PP 745,Iskusstvo,Moscow-Leningrad,Art
 PP 746,State Publishing House of Fine Art,Moscow,
-PP 747,"Political Directorate of the R.V.S.R., Literary Publication Department",NA,Revolutionary Military Council of the Republic
-PP 748,State Publishing House,NA,
-PP 749,State Publishing House,NA,
-PP 750,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 747,"Political Directorate of the R.V.S.R., Literary Publication Department",,Revolutionary Military Council of the Republic
+PP 748,State Publishing House,,
+PP 749,State Publishing House,,
+PP 750,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 751,Mistetstvo,Kiev,State Publishing House
-PP 752,CC-PCC Department of Revolutionary Education,NA,Central Committee of the Communist Party of Cuba
+PP 752,CC-PCC Department of Revolutionary Education,,Central Committee of the Communist Party of Cuba
 PP 753,Latvian State Publishing House,Riga,
 PP 754,Iskusstvo,Moscow-Leningrad,Art
 PP 755,All-Russian Bureau of Industrial Propaganda at the VTsSPS / State Publishing House,Moscow,All-Russian Central Council of Professional Unions
-PP 756,NA,NA,
-PP 757,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",NA,
-PP 758,State Publishing House,NA,
+PP 756,,,
+PP 757,"Political Directorate of the Revolutionary Military Council of the Republic, Literature-Publication Department",,
+PP 758,State Publishing House,,
 PP 759,Mistetstvo,Kiev,State Publishing House
 PP 760,Azerneshr Publishing House,Baku,
 PP 761,Plakat,Moscow,Poster
@@ -766,37 +766,37 @@ PP 765,VAPP,"[Riga, Latvia]",Department of State Book Publishers and Polygraphic
 PP 766,State Publishing House of the Ukrainian Soviet Socialist Republic,Kiev,
 PP 767,Sovietskii Khudozhnik,Moscow,Soviet Artist
 PP 768,Sovietskii Khudozhnik,Moscow,Soviet Artist
-PP 769,Izobrazitel’noe Iskusstvo,NA,Fine Art Publishers
+PP 769,Izobrazitel’noe Iskusstvo,,Fine Art Publishers
 PP 770,Latgosizdat,[Latvia],Latvian State Publishing House
 PP 771,Latvian State Publishing House,"[Riga, Latvia]",
 PP 772,Latvian State Publishing House,"[Riga, Latvia]",
 PP 773,State Publishing House of Geokartprom,Rostov-on-Don,Military Topographic Directorate
 PP 774,Tsentrosoiuz,Moscow,All-Russian Central Union of Consumers' Societies
-PP 775,Central Agricultural Bank of the USSR,NA,
-PP 776,National Commissariat of Food Production,NA,
+PP 775,Central Agricultural Bank of the USSR,,
+PP 776,National Commissariat of Food Production,,
 PP 777,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 778,Planeta,Moscow,Planet
 PP 779,IzoGiz,Moscow,State Publishing House of Fine Art
 PP 780,Izobrazitel’noe Iskusstvo,Moscow,Fine Art Publishers
 PP 781,IzoGiz,Moscow-Leningrad,State Publishing House of Fine Art
-PP 782,Liter. Pub. Dept. of Polituprav. R.V.S.R.  ,NA,Literary Publishing Department of the Political Bureau of the Revolutionary Military Soviet of the Republic
-PP 783,Gorod I Derevnia Publishing House of the MSPO,NA,Town and Village
-PP 784,"Chief Commission of Labor, Agitation and Publication",NA,"Chief Commission of Labor, Agitation and Publication"
+PP 782,Liter. Pub. Dept. of Polituprav. R.V.S.R.  ,,Literary Publishing Department of the Political Bureau of the Revolutionary Military Soviet of the Republic
+PP 783,Gorod I Derevnia Publishing House of the MSPO,,Town and Village
+PP 784,"Chief Commission of Labor, Agitation and Publication",,"Chief Commission of Labor, Agitation and Publication"
 PP 785,Political Education Bureau Of The Petrograd Military Region ,[Petrograd],
-PP 786,NA,NA,
-PP 787,"State Publishing House, Siberian Department ",NA,[poster contains an illegible stamp]… Commission at the Governate Committee (GUBKOM) of the Russian Communist Party (RKP)
+PP 786,,,
+PP 787,"State Publishing House, Siberian Department ",,[poster contains an illegible stamp]… Commission at the Governate Committee (GUBKOM) of the Russian Communist Party (RKP)
 PP 788,"State Publishing House, Ural Region",Yekaterinburg,
 PP 789,State Publishing House,Moscow,
-PP 790,NA,NA,
+PP 790,,,
 PP 791,Latgosizdat,[Latvia],Latvian State Publishing House
-PP 792,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
-PP 793,All-Russian Bureau of Military Commissars Agitation and Education Department,NA,
+PP 792,All-Russian Bureau of Military Commissars Agitation and Education Department,,
+PP 793,All-Russian Bureau of Military Commissars Agitation and Education Department,,
 PP 794,Moscow Union of Consumer Societies,[Moscow],
 PP 795,All-Russian Bureau of Military Commissars Agitation and Education Department,[Moscow],
-PP 796,illegible data,NA,
+PP 796,illegible data,,
 PP 797,Iskusstvo,Moscow,
-PP 798,NA,NA,
-PP 799,Mosraikom of the VSRM  ,NA,Moscow District Committee of the All-Russian Union of Metal Workers 
+PP 798,,,
+PP 799,Mosraikom of the VSRM  ,,Moscow District Committee of the All-Russian Union of Metal Workers 
 PP 800,VAPP Art Publishing House,"11 Teatrealnaia Street, Riga [Latvia]",Department of State Book Publishers and Polygraphic Enterprises
-PP 801,NA,NA,
-PP 802,Latvian State Publishing House,NA,
+PP 801,,,
+PP 802,Latvian State Publishing House,,

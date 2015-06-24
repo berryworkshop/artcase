@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_delete, pre_save, post_save
+from django.dispatch import receiver
 from .constants import LANGUAGES, PUBLIC_CHOICES
 import datetime
 #from django_date_extensions.fields import ApproximateDateField
@@ -10,6 +12,7 @@ class ArtifactManager(models.Manager):
     '''
     def get_by_natural_key(self, code_number_):
         return self.get(code_number=code_number_)
+
 
 class Artifact(models.Model):
     '''
@@ -77,11 +80,10 @@ class Artifact(models.Model):
         return self.code_number + ": " + self.title_english
     def natural_key(self):
         return (self.code_number,)  # must return a tuple
-    def get_absolute_url(self):
-        return "/collection/artifacts/{}/".format(self.code_number)
 
     def edition(self):
         return "{0} / {1}".format(self.edition_state, str(self.edition_size))
+
 
 class Creator(models.Model):
     '''
@@ -104,8 +106,7 @@ class Creator(models.Model):
 
     def __str__(self):
         return self.get_name_latin()
-    def get_absolute_url(self):
-        return "/collection/creators/{}".format(self.slug)
+
     class Meta:
         ordering = ["name_latin_last", "name_latin_first"]
         unique_together = (
@@ -150,6 +151,12 @@ class Creator(models.Model):
         else:
             return 'dates unknown'
 
+@receiver(pre_save, sender=Creator)
+def callback_create_slug(sender, instance, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.get_name_latin())
+
+
 class Medium(models.Model):
     def __str__(self):
         return self.get_display_name()
@@ -178,6 +185,7 @@ class Medium(models.Model):
     )
     name = models.CharField(max_length = 10,
         choices=MEDIA, blank=True, default="lithograph")
+
 
 class Size(models.Model):
     def __str__(self):
@@ -217,6 +225,7 @@ class Size(models.Model):
         default = 'object', blank=False, null=False)
     unit = models.CharField(max_length = 2, choices=UNITS,
         default = 'in', blank=False, null=False)
+
 
 class Date(models.Model):
     def __str__(self):
@@ -260,7 +269,7 @@ class Date(models.Model):
 
     date = models.DateField()
     # date can be approximate, e.g.:
-        # date is unknown: Aug. 1945
+        # date is unknown: August 1945
         # just the year is known: 1945
         # even the year is approximate: c.1945
     # all parts of date (year, month, day) are required, however, by Django date fields; therefore, I'm marking which of this tuple is approximate, and deal with it after the fact.
@@ -271,6 +280,7 @@ class Date(models.Model):
     qualifier = models.CharField(max_length=11, default='created',
         choices=QUALIFIERS, blank=True, null=True)
     location  = models.CharField(max_length=100, blank=True, null=True)
+
 
 class Value(models.Model):
     def __str__(self):
@@ -286,3 +296,18 @@ class Value(models.Model):
     value = models.DecimalField(blank = False, null=False,
         max_digits=10, decimal_places=2)
     agent = models.CharField(max_length = 100, default="Bill Cellini")
+
+
+class Organization(models.Model):
+    def __str__(self):
+        return "{0}: {1}".format(self.name, self.location)
+
+    name = models.CharField(max_length=100, unique=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False)
+    description = models.TextField(max_length=1000, blank=True, null=True)
+
+@receiver(pre_save, sender=Organization)
+def callback_create_slug(sender, instance, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)

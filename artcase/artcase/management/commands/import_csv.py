@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from artcase.models import Artifact, Creator, Medium, Size, Date, Value
+from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization
 from artcase.import_mappings import mappings
 from django.db.models.fields import TextField, CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField
@@ -56,10 +56,10 @@ class Importer(object):
         # guess at initial mapping
         if 'artifact' in csv_filename.lower():
             self.mapping_name = 'artifact_primary'
-
-                # guess at initial mapping
         if 'artist' in csv_filename.lower():
             self.mapping_name = 'creator_primary'
+        if 'publisher' in csv_filename.lower():
+            self.mapping_name = 'printer_primary'
 
 
     def do_import(self):

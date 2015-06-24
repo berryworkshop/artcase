@@ -1,4 +1,4 @@
-from .models import Artifact, Creator, Medium, Size
+from .models import Artifact, Creator, Medium, Size, Organization
 from collections import OrderedDict
 
 mappings = {
@@ -36,6 +36,15 @@ mappings = {
             # operations on second artist
             'Second Artist Name Roman': None,
             'Second Artist Name Cyrillic': None,
+        }
+    },
+    'publisher_primary': {
+        'model': Organization,
+        'fields': {
+            'Artifact Code': None,
+            'Name': 'name',
+            'Location': 'location',
+            'Description': 'description',
         }
     }
 }

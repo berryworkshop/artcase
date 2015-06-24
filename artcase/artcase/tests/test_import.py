@@ -1,7 +1,7 @@
 import os
 from django.test import TestCase
 from django.conf import settings
-from artcase.models import Artifact, Creator, Medium, Size, Date, Value
+from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization
 from artcase.import_mappings import mappings
 from artcase.management.commands.import_csv import Importer
 
@@ -12,7 +12,9 @@ class ImportTestCase(TestCase):
             os.path.join(settings.BASE_DIR, # artifacts
                 'artcase/tests/test_data/artifacts.csv'),
             os.path.join(settings.BASE_DIR, # creators
-                'artcase/tests/test_data/artists.csv')
+                'artcase/tests/test_data/artists.csv'),
+            os.path.join(settings.BASE_DIR, # publishers
+                'artcase/tests/test_data/publishers.csv')
         ]
         self.non_file = '/abcd/efg/test.csv'
         self.bad_file = os.path.join(settings.BASE_DIR,
