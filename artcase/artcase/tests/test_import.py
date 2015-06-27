@@ -35,7 +35,7 @@ class ImportTestCase(TestCase):
         self.artifact_PP001 = Artifact.objects.get(pk=1)
         self.artifact_PP002 = Artifact.objects.get(pk=2)
         self.artifact_PP003 = Artifact.objects.get(pk=3)
-        self.artifact_PP008 = Artifact.objects.get(code_number='PP 008')
+        self.artifact_PP008 = Artifact.objects.get(code_number='pp-008')
         self.artifact_PP048 = Artifact.objects.get(
             title_english_short='A Wounded Red Soldier Will Find A Mother')
         self.artifact_list = Artifact.objects.filter(edition_size=5000)
@@ -52,12 +52,12 @@ class ImportTestCase(TestCase):
         """
         Files should import correctly
         """
-        self.assertEqual(self.artifact_PP001.code_number, 'PP 001')
+        self.assertEqual(self.artifact_PP001.code_number, 'pp-001')
         self.assertEqual(self.artifact_PP001.condition, 'Excellent')
 
         self.assertEqual(
             self.artifact_PP008.title_english_short, 'Molten Steel Down Throat')
-        self.assertEqual(self.artifact_PP048.code_number, 'PP 048')
+        self.assertEqual(self.artifact_PP048.code_number, 'pp-048')
         self.assertEqual(self.artifact_PP048.condition, 'Very Good')
         self.assertEqual(self.artifact_list.count(), 3)
 
@@ -121,7 +121,7 @@ class ImportTestCase(TestCase):
         self.assertEqual(c1.name_cyrillic_last, 'Ангелушев')
         self.assertEqual(c1.name_cyrillic_first, 'Борис')
 
-        a1 = Artifact.objects.get(code_number='PP 007')
+        a1 = Artifact.objects.get(code_number='pp-007')
         self.assertTrue('Apsit' in a1.description)
 
     def test_import_orgs(self):
@@ -166,7 +166,7 @@ class ImportTestCase(TestCase):
 
         self.assertEqual(artifacts_with_title_full.count(), 51)
 
-        a1 = Artifact.objects.get(code_number='PP 029')
+        a1 = Artifact.objects.get(code_number='pp-029')
         self.assertEqual(a1.title_english_full, 'Kerenshina [government under Kerenskii]')
         self.assertEqual(a1.edition_size, 50000)
         self.assertEqual(a1.condition, 'very_good')

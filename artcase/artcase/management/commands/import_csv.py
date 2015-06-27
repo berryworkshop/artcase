@@ -94,7 +94,7 @@ class Importer(object):
                 # create artifact, based on code_number if exists
                 code_number = row.pop('Code Number', None)
                 instance, created = model.objects.get_or_create(
-                    code_number=code_number)
+                    code_number = slugify(code_number))
             elif model == Creator:
                 name_latin_full = row.pop('Artist Name Roman', None)
                 instance, created = model.objects.get_or_create(
@@ -220,7 +220,7 @@ def set_media(artifact, col_value):
     }
     if col_value in media_equivalents:
         col_value = media_equivalents[col_value]
-    medium, created = Medium.objects.get_or_create(name=col_value)
+    medium, created = Medium.objects.get_or_create(name=col_value.strip())
     medium.save()
     artifact.media.add(medium)
 
@@ -358,11 +358,11 @@ def set_name_cyrillic(creator, col_value):
     creator.save()
 
 def set_creator_artifact(creator, row):
-    code_number = row.get('Artifact Number', None).strip()
+    code_number = row.get('Artifact Number', None)
     creator_name = row.get(
         'Transcribed Name', None).strip()
     notes = row.get('Poster Notes', None).strip()
-    artifact, created = Artifact.objects.get_or_create(code_number=code_number)
+    artifact, created = Artifact.objects.get_or_create(code_number=slugify(code_number))
     if artifact.description:
         desc = artifact.description
     else:
@@ -376,9 +376,9 @@ def set_creator_artifact(creator, row):
 
 def set_additional_creator(row):
     # operations on second artist
-    name_latin = row.get('Second Artist Name Roman', None).strip()
-    name_cyrillic = row.get('Second Artist Name Roman', None).strip()
-    code_number = row.get('Artifact Number', None).strip()
+    name_latin = row.get('Second Artist Name Roman', None)
+    name_cyrillic = row.get('Second Artist Name Roman', None)
+    code_number = row.get('Artifact Number', None)
 
     c2, created = Creator.objects.get_or_create(
         name_latin_last=make_name_last(name_latin).strip(),
@@ -390,7 +390,7 @@ def set_additional_creator(row):
     c2.name_cyrillic_first = make_name_last(name_cyrillic).strip()
     c2.save()
 
-    artifact, created = Artifact.objects.get_or_create(code_number=code_number)
+    artifact, created = Artifact.objects.get_or_create(code_number=slugify(code_number))
     artifact.creators.add(c2)
     artifact.save()
 
@@ -408,7 +408,7 @@ def set_org_description(organization, col_value):
     organization.save()
 
 def set_org_artifact(organization, col_value, mapping_name):
-    artifact, created = Artifact.objects.get_or_create(code_number=col_value)
+    artifact, created = Artifact.objects.get_or_create(code_number=slugify(col_value))
 
     if 'print' in mapping_name:
         artifact.printer = organization

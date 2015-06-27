@@ -4,6 +4,7 @@ from django.db.models.signals import post_delete, pre_save, post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 from .constants import LANGUAGES, PUBLIC_CHOICES
+from django.core.validators import validate_slug
 #from django_date_extensions.fields import ApproximateDateField
 
 
@@ -44,7 +45,7 @@ class Artifact(models.Model):
         related_name='artifacts_printed',   blank = True, null = True)
 
     code_number = models.SlugField(
-        'Code Number', unique=True, blank=False)
+        'Code Number', unique=True, blank=False, validators=[validate_slug])
     title_english_short = models.CharField(
         max_length = 255, default='Untitled', blank=False)
     title_english_full = models.TextField(
@@ -97,7 +98,7 @@ class Creator(models.Model):
         Any creator who had a hand in making an artifact.
     '''
 
-    slug = models.SlugField(unique=True, blank=False)
+    slug = models.SlugField(unique=True, blank=False, validators=[validate_slug])
     name_latin_last  = models.CharField(
         "Last Name (Latin Alphabet)", max_length = 100, blank=False)
     name_latin_first = models.CharField(
@@ -312,7 +313,7 @@ class Organization(models.Model):
 
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
-    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False)
+    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False, validators=[validate_slug])
     description = models.TextField(max_length=1000, blank=True, null=True)
 
 @receiver(pre_save, sender=Organization)
