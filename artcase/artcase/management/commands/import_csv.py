@@ -59,17 +59,20 @@ class Importer(object):
         if 'artist' in csv_filename.lower():
             self.mapping_name = 'creator_primary'
         if 'publisher' in csv_filename.lower():
-            self.mapping_name = 'printer_primary'
+            self.mapping_name = 'publisher_primary'
 
 
     def do_import(self):
         # setup
         mapping = mappings.get(self.mapping_name, None)
+
         model = mapping['model']
 
         # execute
         for row in self.reader:
-            completed_cols = [] # quick and dirty list to indicate which columns have been dealt with in multiple-column operations
+            completed_cols = [] # quick and dirty list to indicate which
+            # columns have been dealt with in multiple-column operations
+
 
             # provide an instance to work with
             if model == Artifact:
@@ -84,9 +87,17 @@ class Importer(object):
                     name_latin_first=make_name_first(name_latin_full).strip(),
                     slug=slugify(name_latin_full)
                 )
+            elif model == Organization:
+                name = row.get('Name', None)
+                loc = row.get('Location', None)
+                if loc:
+                    slug = slugify('{}_{}'.format(name[:50], loc[:49]))
+                else:
+                    slug = slugify(name)
+                instance, created = model.objects.get_or_create(slug=slug[:100])
+                print(slug)
             else:
                 pass
-
 
             # march through remaining columns
             for col_name, col_value in row.items():
@@ -107,7 +118,8 @@ class Importer(object):
                         col_value = int(col_value)
 
                     # attempt to set the field quickly if possible
-                    if col_value and target_type in [TextField, CharField, IntegerField]:
+                    if col_value and target_type in [TextField,
+                        CharField, IntegerField]:
                         setattr(instance, target_field, col_value)
 
                 # custom crosswalks
@@ -140,10 +152,18 @@ class Importer(object):
                         set_creator_artifact(instance, row)
                         completed_cols.extend(cols)
 
-                    cols = ['Second Artist Name Roman', 'Second Artist Name Cyrillic']
+                    cols = ['Second Artist Name Roman',
+                        'Second Artist Name Cyrillic']
                     if col_name in cols and col_name not in completed_cols:
                         set_additional_creator(row)
                         completed_cols.extend(cols)
+
+                if col_value and type(instance) == Organization:
+                    if col_name == 'Description':
+                        set_org_name(instance, col_value)
+                    if col_name == 'Artifact Code':
+                        set_org_artifact(instance, col_value)
+
 
                 # housekeeping
                 if col_name not in completed_cols:
@@ -329,3 +349,10 @@ def set_additional_creator(row):
     artifact, created = Artifact.objects.get_or_create(code_number=code_number)
     artifact.creators.add(c2)
     artifact.save()
+
+
+def set_org_name(instance, col_value):
+    pass
+
+def set_org_artifact(instance, col_value):
+    pass

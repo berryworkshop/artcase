@@ -41,10 +41,10 @@ mappings = {
     'publisher_primary': {
         'model': Organization,
         'fields': {
-            'Artifact Code': None,
             'Name': 'name',
             'Location': 'location',
-            'Description': 'description',
+            'Description': None,
+            'Artifact Code': None,
         }
     }
 }

@@ -1,8 +1,9 @@
+import datetime
 from django.db import models
 from django.db.models.signals import post_delete, pre_save, post_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 from .constants import LANGUAGES, PUBLIC_CHOICES
-import datetime
 #from django_date_extensions.fields import ApproximateDateField
 
 
@@ -302,7 +303,7 @@ class Organization(models.Model):
     def __str__(self):
         return "{0}: {1}".format(self.name, self.location)
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True, blank=False, null=False)
     description = models.TextField(max_length=1000, blank=True, null=True)

@@ -38,6 +38,7 @@ class ImportTestCase(TestCase):
         """File specified in import_files should exist."""
         self.assertTrue(os.path.isfile(self.import_files_ok[0]))
         self.assertTrue(os.path.isfile(self.import_files_ok[1]))
+        self.assertTrue(os.path.isfile(self.import_files_ok[2]))
 
     def test_basic_import(self):
         """
@@ -94,7 +95,7 @@ class ImportTestCase(TestCase):
 
     def test_import_creators(self):
         """
-        When imports have related fields, they should import correctly.
+        Creators should import properly.
         """
 
         creators = Creator.objects.all()
@@ -115,3 +116,12 @@ class ImportTestCase(TestCase):
         a1 = Artifact.objects.get(code_number='PP 007')
         self.assertTrue('Apsit' in a1.description)
 
+    def test_import_publishers(self):
+        """
+        Publishers should import properly.
+        """
+        publishers = Organization.objects.all()
+        self.assertEqual(publishers.count(), 0)
+        publishers_import = Importer(self.import_files_ok[2])
+        publishers_import.do_import()
+        self.assertEqual(publishers.count(), 247)
