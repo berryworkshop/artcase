@@ -60,6 +60,12 @@ class Importer(object):
             self.mapping_name = 'creator_primary'
         if 'publisher' in csv_filename.lower():
             self.mapping_name = 'publisher_primary'
+        if 'printer' in csv_filename.lower():
+            self.mapping_name = 'printer_primary'
+        if 'glavlit' in csv_filename.lower():
+            self.mapping_name = 'glavlit_primary'
+        if 'translation' in csv_filename.lower():
+            self.mapping_name = 'translations_primary'
 
 
     def do_import(self):
@@ -95,7 +101,6 @@ class Importer(object):
                 else:
                     slug = slugify(name)
                 instance, created = model.objects.get_or_create(slug=slug[:100])
-                print(slug)
             else:
                 pass
 
@@ -104,6 +109,8 @@ class Importer(object):
                 target_field = mapping['fields'].get(col_name, None)
 
                 # direct mapping
+                # these are the fields not marked as 'None' in the mapping.
+                # 'None' fields are dealt with below in custom crosswalks.
                 if col_value and target_field:
                     # get type of field this will populate
                     target_type = type(
@@ -123,7 +130,7 @@ class Importer(object):
                         setattr(instance, target_field, col_value)
 
                 # custom crosswalks
-                if col_value and type(instance) == Artifact:
+                if col_value and self.mapping_name == 'artifact_primary':
                     if col_name == 'Media':
                         set_media(instance, col_value)
                     if col_name == 'Media size':
@@ -139,7 +146,7 @@ class Importer(object):
                         set_artifact_description(instance, row)
                         completed_cols.extend(cols)
 
-                if col_value and type(instance) == Creator:
+                if col_value and self.mapping_name == 'creator_primary':
                     if col_name == 'Artist Notes':
                         parse_creator_notes(instance, col_value)
                     if col_name == 'Artist Name Cyrillic':
@@ -158,12 +165,25 @@ class Importer(object):
                         set_additional_creator(row)
                         completed_cols.extend(cols)
 
-                if col_value and type(instance) == Organization:
+                if col_value and self.mapping_name in ['publisher_primary', 'printer_primary']:
                     if col_name == 'Description':
-                        set_org_name(instance, col_value)
+                        set_org_description(instance, col_value)
                     if col_name == 'Artifact Code':
-                        set_org_artifact(instance, col_value)
+                        set_org_artifact(instance, col_value, self.mapping_name)
 
+                if col_value and self.mapping_name == 'translations_primary':
+                    if col_name == 'Artist':
+                        set_trans_artist(instance, col_value)
+                    if col_name == 'Print Run':
+                        set_trans_print_run(instance, col_value)
+                    if col_name == 'Type':
+                        set_trans_type(instance, col_value)
+                    if col_name == 'Print Date':
+                        set_trans_date(instance, col_value)
+                    if col_name == 'Condition':
+                        set_trans_condition(instance, col_value)
+                    if col_name == 'Notes':
+                        set_trans_notes(instance, col_value)
 
                 # housekeeping
                 if col_name not in completed_cols:
@@ -351,8 +371,48 @@ def set_additional_creator(row):
     artifact.save()
 
 
-def set_org_name(instance, col_value):
-    pass
+# # # # # # # # # # # # # # # # # # #
+# Organization crosswalk functions  #
+# # # # # # # # # # # # # # # # # # #
 
-def set_org_artifact(instance, col_value):
-    pass
+def set_org_description(organization, col_value):
+    if organization.description:
+        desc = '{}\n{}'.format(organization.description, col_value)
+        organization.description = desc.strip()
+    else:
+        organization.description = col_value.strip()
+    organization.save()
+
+def set_org_artifact(organization, col_value, mapping_name):
+    artifact, created = Artifact.objects.get_or_create(code_number=col_value)
+
+    if 'print' in mapping_name:
+        artifact.printer = organization
+    elif 'publish' in mapping_name:
+        artifact.publisher = organization
+
+    organization.save()
+    artifact.save()
+
+
+# # # # # # # # # # # # # # # # # #
+# Translation crosswalk functions #
+# # # # # # # # # # # # # # # # # #
+
+def set_trans_artist(artifact, col_value):
+    artifact.save()
+
+def set_trans_print_run(artifact, col_value):
+    artifact.save()
+
+def set_trans_type(artifact, col_value):
+    artifact.save()
+
+def set_trans_date(artifact, col_value):
+    artifact.save()
+
+def set_trans_condition(artifact, col_value):
+    artifact.save()
+
+def set_trans_notes(artifact, col_value):
+    artifact.save()

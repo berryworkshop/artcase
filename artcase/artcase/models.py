@@ -23,7 +23,7 @@ class Artifact(models.Model):
     '''
 
     class Meta:
-        ordering = ["title_english", "code_number"]
+        ordering = ["title_english_short", "code_number"]
 
     objects = ArtifactManager()
 
@@ -38,18 +38,24 @@ class Artifact(models.Model):
 
     #category  = models.ForeignKey('Category', blank = False,
     #    null = False, default=0)
-    #publisher = models.ForeignKey('Organization',
-    #    related_name='artifacts_published', blank = True, null = True)
-    #printer   = models.ForeignKey('Organization',
-    #    related_name='artifacts_printed',   blank = True, null = True)
+    publisher = models.ForeignKey('Organization',
+        related_name='artifacts_published', blank = True, null = True)
+    printer   = models.ForeignKey('Organization',
+        related_name='artifacts_printed',   blank = True, null = True)
 
     code_number = models.SlugField(
         'Code Number', unique=True, blank=False)
-    title_english = models.CharField(
+    title_english_short = models.CharField(
         max_length = 255, default='Untitled', blank=False)
+    title_english_full = models.TextField(
+        max_length = 1000, blank=True, null=True)
     title_original = models.CharField(
         max_length = 255, blank=True)
+    #title_original_language = models.CharField(
+    #    max_length = 3,choices=LANGUAGES, blank=True)
     description = models.TextField(max_length=100000, blank=True)
+
+    glavlit = models.CharField(max_length = 255, blank=True, null=True)
 
     edition_state = models.CharField(max_length=255, blank=True)
     edition_size  = models.IntegerField(blank=True, null=True)
@@ -78,7 +84,7 @@ class Artifact(models.Model):
         max_length = 100, choices=SUPPORTS, default="paper", blank=True)
 
     def __str__(self):
-        return self.code_number + ": " + self.title_english
+        return self.code_number + ": " + self.title_english_short
     def natural_key(self):
         return (self.code_number,)  # must return a tuple
 

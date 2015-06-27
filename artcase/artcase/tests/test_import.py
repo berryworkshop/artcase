@@ -8,21 +8,27 @@ from artcase.management.commands.import_csv import Importer
 class ImportTestCase(TestCase):
 
     def setUp(self):
-        self.import_files_ok = [
-            os.path.join(settings.BASE_DIR, # artifacts
+        self.import_files_ok = {
+            'artifacts': os.path.join(settings.BASE_DIR, # artifacts
                 'artcase/tests/test_data/artifacts.csv'),
-            os.path.join(settings.BASE_DIR, # creators
+            'creators': os.path.join(settings.BASE_DIR, # creators
                 'artcase/tests/test_data/artists.csv'),
-            os.path.join(settings.BASE_DIR, # publishers
-                'artcase/tests/test_data/publishers.csv')
-        ]
+            'publishers': os.path.join(settings.BASE_DIR, # publishers
+                'artcase/tests/test_data/publishers.csv'),
+            'printers': os.path.join(settings.BASE_DIR, # printers
+                'artcase/tests/test_data/printers.csv'),
+            'glavlit': os.path.join(settings.BASE_DIR, # glavlit directory
+                'artcase/tests/test_data/glavlit.csv'),
+            'translations': os.path.join(settings.BASE_DIR, # translations
+                'artcase/tests/test_data/translations.csv')
+        }
         self.non_file = '/abcd/efg/test.csv'
         self.bad_file = os.path.join(settings.BASE_DIR,
                 'artcase/tests/test_data/bad_file.csv')
 
         artifacts = Artifact.objects.all()
         self.assertEqual(artifacts.count(), 0)
-        artifacts_import = Importer(self.import_files_ok[0])
+        artifacts_import = Importer(self.import_files_ok['artifacts'])
         artifacts_import.do_import()
         self.assertEqual(artifacts.count(), 51)
 
@@ -31,14 +37,16 @@ class ImportTestCase(TestCase):
         self.artifact_PP003 = Artifact.objects.get(pk=3)
         self.artifact_PP008 = Artifact.objects.get(code_number='PP 008')
         self.artifact_PP048 = Artifact.objects.get(
-            title_english='A Wounded Red Soldier Will Find A Mother')
+            title_english_short='A Wounded Red Soldier Will Find A Mother')
         self.artifact_list = Artifact.objects.filter(edition_size=5000)
 
     def test_files_exist(self):
         """File specified in import_files should exist."""
-        self.assertTrue(os.path.isfile(self.import_files_ok[0]))
-        self.assertTrue(os.path.isfile(self.import_files_ok[1]))
-        self.assertTrue(os.path.isfile(self.import_files_ok[2]))
+        for key, value in self.import_files_ok.items():
+            try:
+                self.assertTrue(os.path.isfile(value))
+            except AssertionError:
+                raise AssertionError('{} is not a file'.format(value))
 
     def test_basic_import(self):
         """
@@ -48,7 +56,7 @@ class ImportTestCase(TestCase):
         self.assertEqual(self.artifact_PP001.condition, 'Excellent')
 
         self.assertEqual(
-            self.artifact_PP008.title_english, 'Molten Steel Down Throat')
+            self.artifact_PP008.title_english_short, 'Molten Steel Down Throat')
         self.assertEqual(self.artifact_PP048.code_number, 'PP 048')
         self.assertEqual(self.artifact_PP048.condition, 'Very Good')
         self.assertEqual(self.artifact_list.count(), 3)
@@ -100,7 +108,7 @@ class ImportTestCase(TestCase):
 
         creators = Creator.objects.all()
         self.assertEqual(creators.count(), 0)
-        creators_import = Importer(self.import_files_ok[1])
+        creators_import = Importer(self.import_files_ok['creators'])
         creators_import.do_import()
         self.assertEqual(creators.count(), 348)
 
@@ -116,12 +124,46 @@ class ImportTestCase(TestCase):
         a1 = Artifact.objects.get(code_number='PP 007')
         self.assertTrue('Apsit' in a1.description)
 
-    def test_import_publishers(self):
+    def test_import_orgs(self):
         """
-        Publishers should import properly.
+        Organizations (publishers and printers) should import properly.
         """
-        publishers = Organization.objects.all()
-        self.assertEqual(publishers.count(), 0)
-        publishers_import = Importer(self.import_files_ok[2])
+        orgs = Organization.objects.all()
+        self.assertEqual(orgs.count(), 0)
+        publishers_import = Importer(self.import_files_ok['publishers'])
         publishers_import.do_import()
+        self.assertEqual(orgs.count(), 247)
+
+        printers_import = Importer(self.import_files_ok['printers'])
+        printers_import.do_import()
+
+        self.assertEqual(orgs.count(), 607)
+
+        artifacts_with_publishers = Artifact.objects.filter(publisher__isnull=False)
+        publishers = Organization.objects.filter(
+            artifacts_published__in=artifacts_with_publishers).distinct()
         self.assertEqual(publishers.count(), 247)
+
+        artifacts_with_printers = Artifact.objects.filter(printer__isnull=False)
+        printers = Organization.objects.filter(
+            artifacts_printed__in=artifacts_with_printers).distinct()
+        self.assertEqual(printers.count(), 366)
+
+    def test_import_glavlit(self):
+        artifacts_with_glavlit = Artifact.objects.filter(glavlit__isnull=False)
+        self.assertEqual(artifacts_with_glavlit.count(), 0)
+
+        glavlit_import = Importer(self.import_files_ok['glavlit'])
+        glavlit_import.do_import()
+        self.assertEqual(artifacts_with_glavlit.count(), 132)
+
+    def test_import_translations(self):
+        artifacts_with_title_full = Artifact.objects.filter(title_english_full__isnull=False)
+        self.assertEqual(artifacts_with_title_full.count(), 0)
+
+        translation_import = Importer(self.import_files_ok['translations'])
+        translation_import.do_import()
+
+        self.assertEqual(artifacts_with_title_full.count(), 51)
+
+

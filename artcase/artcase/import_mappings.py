@@ -6,9 +6,9 @@ mappings = {
         'model': Artifact,
         'fields': {
             # 'CSV Column Name': target model attribute
-            # None means this column needs custom processing
+            # 'None' means this column needs custom processing
             'Code Number': 'code_number',
-            'Title': 'title_english',
+            'Title': 'title_english_short',
             'Print Run': 'edition_size',
             'Condition': 'condition',
             'Notes': None,
@@ -45,6 +45,34 @@ mappings = {
             'Location': 'location',
             'Description': None,
             'Artifact Code': None,
+        }
+    },
+    'printer_primary': {
+        'model': Organization,
+        'fields': {
+            'Name': 'name',
+            'Location': 'location',
+            'Description': None,
+            'Artifact Code': None,
+        }
+    },
+    'glavlit_primary': {
+        'model': Artifact,
+        'fields': {
+            'Glavlit Directory Number': 'glavlit',
+        }
+    },
+    'translations_primary': {
+        'model': Artifact,
+        'fields': {
+            #'Code Number': 'code_number',
+            'Title': 'title_english_full',
+            'Artist': None,
+            'Print Run': None,
+            'Type': None,
+            'Print Date': None,
+            'Condition': None,
+            'Notes': None,
         }
     }
 }
