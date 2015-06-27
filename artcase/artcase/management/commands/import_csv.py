@@ -5,6 +5,7 @@ from django.db.models.fields import TextField, CharField, IntegerField
 from django.db.models.fields.related import ManyToManyField
 import csv
 import os
+import re
 import datetime
 import locale
 from django.utils.text import slugify
@@ -136,7 +137,7 @@ class Importer(object):
                     if col_name == 'Media size':
                         set_media_size(instance, col_value)
                     if col_name == 'Print date' or col_name == 'Publish date':
-                        set_date(instance, col_value, col_name)
+                        set_date(instance, col_value, col_name=col_name)
                     if col_name == 'Value':
                         set_value(instance, col_value)
 
@@ -172,16 +173,12 @@ class Importer(object):
                         set_org_artifact(instance, col_value, self.mapping_name)
 
                 if col_value and self.mapping_name == 'translations_primary':
-                    if col_name == 'Artist':
-                        set_trans_artist(instance, col_value)
                     if col_name == 'Print Run':
                         set_trans_print_run(instance, col_value)
                     if col_name == 'Type':
-                        set_trans_type(instance, col_value)
-                    if col_name == 'Print Date':
-                        set_trans_date(instance, col_value)
+                        set_media(instance, col_value)
                     if col_name == 'Condition':
-                        set_trans_condition(instance, col_value)
+                        set_condition(instance, col_value)
                     if col_name == 'Notes':
                         set_trans_notes(instance, col_value)
 
@@ -232,6 +229,23 @@ def set_media_size(artifact, col_value):
     artifact.sizes.add(size)
 
 
+def set_condition(artifact, col_value):
+    condition_equivalents = {
+        'Poor': 'poor',
+        'Fair': 'fair',
+        'Good': 'good',
+        'Very Good': 'very_good',
+        'Excellent': 'excellent',
+        'Near Mint': 'near_mint',
+        'Mint': 'mint',
+    }
+    if col_value in condition_equivalents:
+        col_value = condition_equivalents[col_value]
+
+    artifact.condition = col_value
+    artifact.save()
+
+
 def set_value(artifact, col_value):
     '''
     set related dollar values based on an artifact instance
@@ -243,7 +257,7 @@ def set_value(artifact, col_value):
     artifact.values.add(value)
 
 
-def set_date(artifact, col_value, col_name):
+def set_date(artifact, col_value, **kwargs):
     #setup
     day, month, year = [False,False,False]
     approximates = {}
@@ -258,7 +272,8 @@ def set_date(artifact, col_value, col_name):
         approximates['year'] = True
 
     # split into tuple
-    date_split = col_value.split('-')
+    date_split = re.split('[-/ ,]', col_value)
+
     try:
         # ideally, we get three values
         day, month, year = date_split
@@ -296,10 +311,11 @@ def set_date(artifact, col_value, col_name):
     if 'year' in approximates:
         date.approx_year = True
 
-    if col_name == 'Print date':
-        date.qualifier='printed'
-    if col_name == 'Publish date':
-        date.qualifier='published'
+    if kwargs.get('col_name', None):
+        if 'print' in kwargs['col_name'].lower():
+            date.qualifier='printed'
+        if 'publish' in kwargs['col_name'].lower():
+            date.qualifier='published'
 
     date.save()
     artifact.dates.add(date)
@@ -399,20 +415,15 @@ def set_org_artifact(organization, col_value, mapping_name):
 # Translation crosswalk functions #
 # # # # # # # # # # # # # # # # # #
 
-def set_trans_artist(artifact, col_value):
-    artifact.save()
-
 def set_trans_print_run(artifact, col_value):
-    artifact.save()
-
-def set_trans_type(artifact, col_value):
-    artifact.save()
-
-def set_trans_date(artifact, col_value):
-    artifact.save()
-
-def set_trans_condition(artifact, col_value):
+    col_value = col_value.replace(',', '')
+    artifact.edition_size = int(col_value)
     artifact.save()
 
 def set_trans_notes(artifact, col_value):
+    if artifact.description:
+        desc = '{}\n{}'.format(artifact.description, col_value)
+        artifact.description = desc.strip()
+    else:
+        artifact.description = col_value.strip()
     artifact.save()

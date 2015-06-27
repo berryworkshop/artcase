@@ -179,16 +179,17 @@ class Medium(models.Model):
     #    through=Artifact.media.through, blank = True)
 
     MEDIA = (
+        ('lithograph', 'lithograph'),
+        ('etching', 'etching'),
+        ('offset', 'offset'),
+        ('lithograph_offset', 'lithograph/offset'),
+
         ('acrylic', 'acrylic paint'),
         ('oil', 'oil paint'),
         ('ink', 'ink'),
         ('graphite', 'graphite'),
         ('mixed_media', 'mixed media'),
         ('aquatint', 'aquatint'),
-        ('lithograph', 'lithograph'),
-        ('etching', 'etching'),
-        ('offset', 'offset'),
-        ('lithograph_offset', 'lithograph/offset'),
     )
     name = models.CharField(max_length = 10,
         choices=MEDIA, blank=True, default="lithograph")

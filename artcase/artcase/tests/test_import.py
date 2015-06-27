@@ -166,4 +166,8 @@ class ImportTestCase(TestCase):
 
         self.assertEqual(artifacts_with_title_full.count(), 51)
 
+        a1 = Artifact.objects.get(code_number='PP 029')
+        self.assertEqual(a1.title_english_full, 'Kerenshina [government under Kerenskii]')
+        self.assertEqual(a1.edition_size, 50000)
+        self.assertEqual(a1.condition, 'very_good')
 

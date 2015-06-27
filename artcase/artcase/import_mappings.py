@@ -7,7 +7,8 @@ mappings = {
         'fields': {
             # 'CSV Column Name': target model attribute
             # 'None' means this column needs custom processing
-            'Code Number': 'code_number',
+
+            #'Code Number': 'code_number', # parsed automatically
             'Title': 'title_english_short',
             'Print Run': 'edition_size',
             'Condition': 'condition',
@@ -65,12 +66,12 @@ mappings = {
     'translations_primary': {
         'model': Artifact,
         'fields': {
-            #'Code Number': 'code_number',
+            #'Code Number': 'code_number', # parsed automatically
             'Title': 'title_english_full',
-            'Artist': None,
+            #'Artist': None, # Defer to artists.csv
             'Print Run': None,
             'Type': None,
-            'Print Date': None,
+            #'Print Date': None, # Defer to artifacts.csv
             'Condition': None,
             'Notes': None,
         }
