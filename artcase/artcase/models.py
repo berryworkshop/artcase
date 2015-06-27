@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 from .constants import LANGUAGES, PUBLIC_CHOICES
 from django.core.validators import validate_slug
+from django.core.urlresolvers import reverse
 #from django_date_extensions.fields import ApproximateDateField
 
 
@@ -84,13 +85,16 @@ class Artifact(models.Model):
     support   = models.CharField(
         max_length = 100, choices=SUPPORTS, default="paper", blank=True)
 
-    def __str__(self):
-        return self.code_number + ": " + self.title_english_short
+    def format_code_number(self):
+        return self.code_number.replace('-', ' ').upper()
     def natural_key(self):
         return (self.code_number,)  # must return a tuple
-
     def edition(self):
         return "{0} / {1}".format(self.edition_state, str(self.edition_size))
+    def get_absolute_url(self):
+        return reverse('artifact', kwargs={'code_number': self.code_number})
+    def __str__(self):
+        return '{}: {}'.format(self.format_code_number(), self.title_english_short)
 
 
 class Creator(models.Model):
@@ -133,7 +137,7 @@ class Creator(models.Model):
         if output:
             return output
         else:
-            return None
+            return "<Unknown Artist>"
 
     def get_name_cyrillic(self):
         output = ''
@@ -146,7 +150,7 @@ class Creator(models.Model):
         if output:
             return output
         else:
-            return None
+            return "<Unknown Artist>"
 
     def get_lifespan(self):
         if self.year_birth:
@@ -200,15 +204,15 @@ class Size(models.Model):
     def __str__(self):
         output = self.size_type + ': '
         if self.height:
-            output += str(self.height)
+            output += "{:.2f}".format(self.height)
             if self.width or self.depth:
                 output += ' x '
         if self.width:
-            output += str(self.width)
+            output += "{:.2f}".format(self.width)
             if self.depth:
                 output += ' x '
         if self.depth:
-            output += str(self.depth)
+            output += "{:.2f}".format(self.depth)
         output += ' ' + self.unit
         return output
     TYPES = (

@@ -22,6 +22,15 @@ class ArtifactListView(ListView):
     model = Artifact
     template_name = "artcase/artifact_list.html"
 
+    def get_queryset(self):
+        sort = self.request.GET.get('sort', None)
+        default_sort = 'code_number'
+        if sort:
+            qs = super(ArtifactListView, self).get_queryset().order_by(sort)
+        else:
+            qs = super(ArtifactListView, self).get_queryset().order_by(default_sort)
+        return qs
+
 
 class CreatorView(DetailView):
     model = Creator
