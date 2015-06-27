@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from decimal import Decimal
 from os.path import split
 from django_date_extensions.fields import ApproximateDate
+from django.test import TestCase
 
 
 class Command(BaseCommand):
@@ -21,13 +22,20 @@ class Command(BaseCommand):
         parser.add_argument('filename', type=str)
 
     def handle(self, *args, **options):
+        try:
+            testy = TestCase()
+            testy.assertTrue(os.path.isfile(options['filename']))
+        except AssertionError:
+            raise AssertionError('{} is not a file'.format(options['filename']))
 
-        #with open(options['filename'], 'r') as f:
-        #    reader = csv.reader(f)
-
-        self.stdout.write(
-            'No items from file {} imported.'.format(
-                options['filename']))
+        try:
+            generic_importer = Importer(options['filename'])
+            generic_importer.do_import()
+        except:
+            self.stdout.write(
+                'No items from file {} imported.'.format(
+                    options['filename']))
+            raise
 
 class Importer(object):
     '''
