@@ -5,10 +5,15 @@
 <div class="container drop_50">
     <div class="row">
         <div class="col-xs-12">
-            <h1 class="page-header">Artifacts</h1>
+            <h1 class="page-header">Printers and Publishers</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel aliquet dolor. Maecenas non leo neque, in congue mi. Nulla fringilla turpis mollis dolor laoreet id tempus risus consequat. Curabitur vulputate risus sit amet magna dictum congue. Nam vitae tortor at arcu bibendum sagittis. Sed ultricies justo sit amet sapien pulvinar a egestas est viverra. Phasellus vel orci lacus. Donec augue lectus, adipiscing sed vulputate sed, vulputate non elit.</p>
+
+            <ul>
+                {% for organization in object_list %}
+                <li><a href="{{ organization.get_absolute_url }}">{{ organization }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
-    {% include "artcase/includes/slides_artifact.html" %}
 </div>
 {% endblock main %}

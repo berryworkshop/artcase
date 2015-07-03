@@ -1,0 +1,11 @@
+/* Pages other than the home page need to be dropped 50px to account for Bootstrap fixed titlebar. */
+.drop_50 {
+    margin-top: 50px;
+}
+
+.slide {}
+
+.slide > a {
+    height: 0;
+    padding-bottom: 100%;
+}

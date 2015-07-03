@@ -315,6 +315,9 @@ class Organization(models.Model):
     def __str__(self):
         return "{0}: {1}".format(self.name, self.location)
 
+    def get_absolute_url(self):
+        return reverse('organization', kwargs={'slug': self.slug})
+
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True, blank=False, null=False, validators=[validate_slug])

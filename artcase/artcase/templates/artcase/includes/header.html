@@ -1,1 +1,114 @@
-<h1>The Cellini Soviet Collection</h1>
+{% load static from staticfiles %}
+<nav class="navbar navbar-fixed-top navbar-inverse" id="navbar_main" role="navigation">
+    <div class="container-fluid">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle navbar-btn" id="navbar_toggle" data-toggle="collapse" data-target="#bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/"><img id="site_logo" class="navbar-brand" src="{% static 'artcase/img/cellini_logo_100.png' %}" /> <span class="navbar-brand">Cellini Soviet Collection</span></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown active">
+                    <a class="navbar_link dropdown-toggle" data-toggle="dropdown">Art <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li role="presentation" class="dropdown-header">Types</li>
+                        <li><a>Categories</a></li>
+                        <li><a href="{% url 'artifact_list' %}">Artifacts</a></li>
+                        <li><a>Artists</a></li>
+                        <li><a href="{% url 'organization_list' %}">Printers &amp; Publishers</a></li>
+                        <li><a>Subjects</a></li>
+                        <li><a>Cultures</a></li>
+                        <!--<li><a>Publishers</a></li>-->
+
+                        <li class="divider"></li>
+
+                        <li role="presentation" class="dropdown-header">Categories</li>
+                        {% for category in categories %}
+                            <li><a href="{{ category.get_absolute_url }}"><span class="badge pull-right">{{ category.artifact_set.all.count }}</span>{{ category.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="navbar_link dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+                        <li role="presentation" class="dropdown-header">The Collection</li>
+                        <li><a>About the Collection</a></li>
+                        <li><a>Privacy Policy</a></li>
+                        <li><a>Usage &amp; Copyright</a></li>
+                        <li><a>Contact Us</a></li>
+
+                        <li class="divider"></li>
+
+                        <li role="presentation" class="dropdown-header">Connect</li>
+                        <li><a>Exhibit Information</a></li>
+                        <li><a>Links</a></li>
+
+                    </ul>
+                </li>
+                {% if user.is_active%}
+                    <li><a class="navbar_link" href="/admin/">Admin</a></li>
+                {% endif %}
+
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown visible-sm">
+                    <a class="dropdown-toggle navbar_link" data-toggle="dropdown"> <b class="caret"></b> <span class="glyphicon glyphicon-search" id="glyphicon-search"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+
+                        <form class="navbar-form" role="search" action="/collection/search_results/">
+                            <div class="input-group" id="small_navbar_search_form_group">
+                                <input type="text" class="form-control" placeholder="Search" name="q" id="navbar_search_input">
+                                <div class="input-group-btn" >
+                                    <button class="btn btn-default" id="navbar_search_submit" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                </div>
+                            </div>
+                        </form>
+
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle navbar_link" data-toggle="dropdown"> <b class="caret"></b> <span class="glyphicon glyphicon-user" id="glyphicon-user"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a>Profile</a></li>-->
+                        {% if user.is_active%}
+                            <li class="dropdown-header">Hello, {% firstof user.get_short_name user.get_username %}</li>
+
+                            <li>{% if user.has_usable_password %}<a href="{% url 'admin:password_change' %}">Change password</a>{% endif %}</li>
+
+                            <li class="divider"></li>
+
+                            <li><a href="{% url 'admin:logout' %}">Log out</a></li>
+                        {% else %}
+                            <li><a href="/admin/">Log in</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            <div class="col-xs-12 hidden-sm col-md-4 col-lg-3 navbar-right" id="navbar_search">
+                 <form class="navbar-form" role="search" action="/collection/search_results/">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="navbar_search_input">
+                        <div class="input-group-btn" >
+                            <button class="btn btn-default" id="navbar_search_submit" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+    {% block nav-global %}{% endblock %}
+</nav>

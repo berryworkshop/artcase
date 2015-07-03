@@ -5,7 +5,9 @@ from .views import (
     ArtifactView,
     ArtifactListView,
     CreatorView,
-    CreatorListView
+    CreatorListView,
+    OrganizationView,
+    OrganizationListView,
 )
 
 urlpatterns = [
@@ -19,5 +21,10 @@ urlpatterns = [
     url(r'^creators/(?P<slug>[a-z|A-Z|0-9|_-]+/?)/$', CreatorView.as_view(), name='creator'),
     # "collection/creators/"
     url(r'^creators/$', CreatorListView.as_view(), name='creator_list'),
+
+    # "collection/organizations/amazing_org-kiev"
+    url(r'^organizations/(?P<slug>[a-z|A-Z|0-9|_-]+/?)/$', OrganizationView.as_view(), name='organization'),
+    # "collection/organizations/"
+    url(r'^organizations/$', OrganizationListView.as_view(), name='organization_list'),
 
 ]

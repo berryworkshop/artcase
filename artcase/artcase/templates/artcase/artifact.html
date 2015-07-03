@@ -2,66 +2,76 @@
 {% load humanize %}
 
 {% block main %}
-<h2>{{ object.title_english_short }}</h2>
-<dl>
-    <dt>Title (original language)</dt><dd>{{ object.title_original }}</dd>
-    <dt>Code Number</dt><dd>{{ object.code_number }}</dd>
+<div class="container drop_50">
+    <div class="row">
+        <div class="col-xs-12">
 
-    {% comment %}
-    <dt>Creators</dt>
-    <dd>
-        <ul>
-        {% for creator in object.creators %}
-            <li>{{ creator }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Media</dt>
-    <dd>
-        <ul>
-        {% for medium in object.media %}
-            <li>{{ medium }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Sizes</dt>
-    <dd>
-        <ul>
-        {% for size in object.sizes %}
-            <li>{{ size }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Dates</dt>
-    <dd>
-        <ul>
-        {% for date_ in object.dates %}
-            <li>{{ date_ }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Values</dt>
-    <dd>
-        <ul>
-        {% for value in object.values %}
-            <li>{{ value }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    {% endcomment %}
+        <h2>{{ object.title_english_short }}</h2>
+        <dl class="dl-horizontal">
+            <dt>Title (original language)</dt><dd>{{ object.title_original }}</dd>
+            <dt>Code Number</dt><dd>{{ object.code_number }}</dd>
 
-    <dt>Publisher</dt><dd>{{ object.publisher }}</dd>
-    <dt>Printer</dt><dd>{{ object.printer }}</dd>
-    <dt>Title English Short</dt><dd>{{ object.title_english_short }}</dd>
-    <dt>Title English Full</dt><dd>{{ object.title_english_full }}</dd>
-    <dt>Title Original</dt><dd>{{ object.title_original }}</dd>
-    <dt>Description</dt><dd>{{ object.description }}</dd>
-    <dt>Glavlit</dt><dd>{{ object.glavlit }}</dd>
-    <dt>Edition State</dt><dd>{{ object.edition_state }}</dd>
-    <dt>Edition Size</dt><dd>{{ object.edition_size }}</dd>
-    <dt>Public</dt><dd>{{ object.public }}</dd>
-    <dt>Condition</dt><dd>{{ object.condition }}</dd>
-    <dt>Support</dt><dd>{{ object.support }}</dd>
+            {% comment %}
+            <dt>Creators</dt>
+            <dd>
+                <ul>
+                {% for creator in object.creators %}
+                    <li>{{ creator }}</li>
+                {% endfor %}
+                </ul>
+            </dd>
+            <dt>Media</dt>
+            <dd>
+                <ul>
+                {% for medium in object.media %}
+                    <li>{{ medium }}</li>
+                {% endfor %}
+                </ul>
+            </dd>
+            <dt>Sizes</dt>
+            <dd>
+                <ul>
+                {% for size in object.sizes %}
+                    <li>{{ size }}</li>
+                {% endfor %}
+                </ul>
+            </dd>
+            <dt>Dates</dt>
+            <dd>
+                <ul>
+                {% for date_ in object.dates %}
+                    <li>{{ date_ }}</li>
+                {% endfor %}
+                </ul>
+            </dd>
+            <dt>Values</dt>
+            <dd>
+                <ul>
+                {% for value in object.values %}
+                    <li>{{ value }}</li>
+                {% endfor %}
+                </ul>
+            </dd>
+            {% endcomment %}
 
-</dl>
+            <dt>Publisher</dt>
+            <dd><a href="{{ object.publisher.get_absolute_url }}">{{ object.publisher }}</a></dd>
+            <dt>Printer</dt>
+            <dd><a href="{{ object.printer.get_absolute_url }}">{{ object.printer }}</a></dd>
+
+            <dt>Title English Short</dt><dd>{{ object.title_english_short }}</dd>
+            <dt>Title English Full</dt><dd>{{ object.title_english_full }}</dd>
+            <dt>Title Original</dt><dd>{{ object.title_original }}</dd>
+            <dt>Description</dt><dd>{{ object.description }}</dd>
+            <dt>Glavlit</dt><dd>{{ object.glavlit }}</dd>
+            <dt>Edition State</dt><dd>{{ object.edition_state }}</dd>
+            <dt>Edition Size</dt><dd>{{ object.edition_size }}</dd>
+            <dt>Public</dt><dd>{{ object.public }}</dd>
+            <dt>Condition</dt><dd>{{ object.condition }}</dd>
+            <dt>Support</dt><dd>{{ object.support }}</dd>
+
+        </dl>
+        </div>
+    </div>
+</div>
 {% endblock main %}

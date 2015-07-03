@@ -1,20 +1,46 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>{{ site_title }}</title>
+
+    {% block head_meta %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock head_meta %}
+
+    {% block head_links %}
+        <link rel="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,900&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href="{% static 'lib/bootstrap-3.3.5-dist/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'artcase/css/base.css' %}" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    {% endblock head_links %}
+
+    {% block head_scripts %}
+        <script src="{% static 'lib/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'lib/bootstrap-3.3.5-dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'artcase/js/base.js' %}"></script>
+    {% endblock head_scripts %}
+
+    <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-{% block header %}
-    {% include 'artcase/includes/header.html' %}
-{% endblock header %}
 
-{% block main %}
-    <p>Lorem Ipsum.</p>
-{% endblock main %}
+    {% block header %}
+        {% include 'artcase/includes/header.html' %}
+    {% endblock header %}
 
-{% block footer %}
-    {% include 'artcase/includes/footer.html' %}
-{% endblock footer %}
+    {% block main %}
+    {% endblock main %}
+
+    {% block footer %}
+        {% include 'artcase/includes/footer.html' %}
+    {% endblock footer %}
 
 </body>
 </html>
