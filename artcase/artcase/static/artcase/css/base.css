@@ -7,4 +7,20 @@ body {
 .slide > a {
     height: 0;
     padding-bottom: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
+
+.slide > a:hover,
+.slide > a:active {
+    text-decoration: none;
+}
+
+.slide_title {
+    margin-left: 1em;
+    color: white;
+    text-shadow: 0 0 .5rem #000000;
+    text-decoration: none;
+}
+

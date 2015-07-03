@@ -1,5 +1,6 @@
 import os
 from unipath import Path
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 # 2015_artcase_project/artcase/
 BASE_DIR =  Path(__file__).ancestor(3)

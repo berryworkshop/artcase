@@ -1,5 +1,12 @@
+{% load static from staticfiles %}
 <div class="row">
-    <div class="col-xs-12">
-        <h2>Slides: by Category</h2>
+
+    {% for category in categories %}
+
+    <div class="slide col-xs-6 col-sm-4 col-md-3">
+        <a href="{{category.get_absolute_url}}" class="thumbnail" style="background-image: url({% static 'artcase/img/categories/' %}{{category.image}});">
+            <h3 class='slide_title'>{{ category }}</h3>
+        </a>
     </div>
+    {% endfor %}
 </div>

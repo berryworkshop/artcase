@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Artifact, Creator, Organization
+from .models import Artifact, Creator, Organization, Category
 
 class CreatorAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -18,10 +18,8 @@ class CreatorAdmin(admin.ModelAdmin):
         'year_birth', 'year_death', 'description']
     prepopulated_fields = {"slug": ("name_latin_last", "name_latin_first")}
 
-class OrganizationAdmin(admin.ModelAdmin):
-    ordering = ('slug',)
-
 
 admin.site.register(Artifact)
 admin.site.register(Creator, CreatorAdmin)
-admin.site.register(Organization, OrganizationAdmin)
+admin.site.register(Organization)
+admin.site.register(Category)

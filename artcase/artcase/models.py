@@ -16,7 +16,6 @@ class ArtifactManager(models.Manager):
     def get_by_natural_key(self, code_number_):
         return self.get(code_number=code_number_)
 
-
 class Artifact(models.Model):
     '''
         Artifacts are the main object tracked by the site.  One artifact
@@ -329,6 +328,9 @@ class Organization(models.Model):
     def get_absolute_url(self):
         return reverse('organization', kwargs={'slug': self.slug})
 
+    class Meta:
+        ordering = ["name"]
+
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True, blank=False, null=False, validators=[validate_slug])
@@ -338,3 +340,29 @@ class Organization(models.Model):
 def callback_create_slug(sender, instance, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)
+
+
+class CategoryManager(models.Manager):
+    '''
+    Refer to category by a meaningful name: its slug.
+    '''
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
+
+class Category(models.Model):
+    '''
+    Categories are the major organizing system for the site.
+        Each artifact has a single category.
+    '''
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name_plural = "categories"
+    objects = CategoryManager()
+
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True, blank=False, null=False)
+    description = models.TextField(max_length = 10000, blank = True, null=True)
+    image = models.CharField(max_length=1000, blank = True, null=True)
