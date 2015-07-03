@@ -1,5 +1,4 @@
-/* Pages other than the home page need to be dropped 50px to account for Bootstrap fixed titlebar. */
-.drop_50 {
+body {
     margin-top: 50px;
 }
 

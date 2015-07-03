@@ -87,14 +87,22 @@ class Artifact(models.Model):
 
     def format_code_number(self):
         return self.code_number.replace('-', ' ').upper()
+
     def natural_key(self):
         return (self.code_number,)  # must return a tuple
+
     def edition(self):
         return "{0} / {1}".format(self.edition_state, str(self.edition_size))
+
     def get_absolute_url(self):
         return reverse('artifact', kwargs={'code_number': self.code_number})
+
     def __str__(self):
         return '{}: {}'.format(self.format_code_number(), self.title_english_short)
+
+    def code_number_display(self):
+        code = self.code_number
+        return code.replace('-', ' ').upper()
 
 
 class Creator(models.Model):
@@ -118,6 +126,9 @@ class Creator(models.Model):
 
     def __str__(self):
         return self.get_name_latin()
+
+    def get_absolute_url(self):
+        return reverse('creator', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ["name_latin_last", "name_latin_first"]

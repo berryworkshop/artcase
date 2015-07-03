@@ -2,9 +2,23 @@
 {% load humanize %}
 
 {% block main %}
-<h2>{{ object.get_name_latin }}</h2>
-<dl>
+<h2><a href="{% url 'creator_list' %}">Artist</a>: {{ object.get_name_latin }}</h2></h2>
+
+<dl class="dl-horizontal">
     <dt>Nationality</dt><dd>{{ object.nationality }}</dd>
     <dt>Lifespan</dt><dd>{{ object.get_lifespan }}</dd>
+
+    <dt>Artifacts</dt>
+    {% if artifacts %}
+    <dd>
+        <ul>
+            {% for artifact in artifacts %}
+                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
+            {% endfor %}
+        </ul>
+    </dd>
+    {% else %}
+    <dd>None</dd>
+    {% endif %}
 </dl>
 {% endblock main %}

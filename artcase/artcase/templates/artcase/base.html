@@ -32,11 +32,17 @@
 <body>
 
     {% block header %}
-        {% include 'artcase/includes/header.html' %}
+        {% include 'artcase/includes/navbar.html' %}
     {% endblock header %}
 
-    {% block main %}
-    {% endblock main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+            {% block main %}
+            {% endblock main %}
+            </div>
+        </div>
+    </div>
 
     {% block footer %}
         {% include 'artcase/includes/footer.html' %}

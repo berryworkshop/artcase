@@ -2,40 +2,35 @@
 {% load humanize %}
 
 {% block main %}
-<div class="container drop_50">
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>{{ object }}</h2>
-            <dl class="dl-horizontal">
-                <dt>Location</dt><dd>{{ object.location }}</dd>
-                <dt>Description</dt><dd>{{ object.description }}</dd>
 
-                <dt>Artifacts Printed</dt>
-                {% if artifacts_printed %}
-                <dd>
-                    <ul>
-                        {% for artifact in artifacts_printed %}
-                            <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </dd>
-                {% else %}
-                <dd>None</dd>
-                {% endif %}
-                <dt>Artifacts Published</dt>
-                {% if artifacts_published %}
-                <dd>
-                    <ul>
-                        {% for artifact in artifacts_published %}
-                            <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </dd>
-                {% else %}
-                <dd>None</dd>
-                {% endif %}
-            </dl>
-        </div>
-    </div>
-</div>
+<h2><a href="{% url 'organization_list' %}">Organization</a>: {{ object.name }}</h2></h2>
+<dl class="dl-horizontal">
+    <dt>Location</dt><dd>{{ object.location }}</dd>
+    <dt>Description</dt><dd>{{ object.description }}</dd>
+
+    <dt>Artifacts Printed</dt>
+    {% if artifacts_printed %}
+    <dd>
+        <ul>
+            {% for artifact in artifacts_printed %}
+                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
+            {% endfor %}
+        </ul>
+    </dd>
+    {% else %}
+    <dd>None</dd>
+    {% endif %}
+    <dt>Artifacts Published</dt>
+    {% if artifacts_published %}
+    <dd>
+        <ul>
+            {% for artifact in artifacts_published %}
+                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
+            {% endfor %}
+        </ul>
+    </dd>
+    {% else %}
+    <dd>None</dd>
+    {% endif %}
+</dl>
 {% endblock main %}

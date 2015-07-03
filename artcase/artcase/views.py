@@ -17,6 +17,15 @@ class ArtifactView(DetailView):
         return get_object_or_404(
             Artifact, code_number=self.kwargs['code_number'])
 
+    def get_context_data(self, **kwargs):
+        context = super(ArtifactView, self).get_context_data(**kwargs)
+        artifact = Artifact.objects.get(code_number=self.kwargs['code_number'])
+        creators = Creator.objects.filter(artifact=artifact)
+        context.update({
+            'creators': creators,
+        })
+        return context
+
 
 class ArtifactListView(ListView):
     model = Artifact
@@ -33,6 +42,15 @@ class CreatorView(DetailView):
     model = Creator
     template_name = "artcase/creator.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(CreatorView, self).get_context_data(**kwargs)
+        creator = Creator.objects.get(slug=self.kwargs['slug'])
+        artifacts = Artifact.objects.filter(creators=creator)
+        context.update({
+            'artifacts': artifacts,
+        })
+        return context
+
 
 class CreatorListView(ListView):
     model = Creator
@@ -45,13 +63,9 @@ class OrganizationView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(OrganizationView, self).get_context_data(**kwargs)
-
         org = Organization.objects.get(slug=self.kwargs['slug'])
-
         artifacts_printed = Artifact.objects.filter(printer=org)
         artifacts_published = Artifact.objects.filter(publisher=org)
-
-
         context.update({
             'artifacts_printed':artifacts_printed,
             'artifacts_published':artifacts_published,
