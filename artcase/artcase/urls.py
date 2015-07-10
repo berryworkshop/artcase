@@ -8,6 +8,8 @@ from .views import (
     CreatorListView,
     OrganizationView,
     OrganizationListView,
+    CategoryView,
+    CategoryListView,
 )
 
 urlpatterns = [
@@ -26,5 +28,10 @@ urlpatterns = [
     url(r'^organizations/(?P<slug>[a-z|A-Z|0-9|_-]+/?)/$', OrganizationView.as_view(), name='organization'),
     # "collection/organizations/"
     url(r'^organizations/$', OrganizationListView.as_view(), name='organization_list'),
+
+    # "collection/categories/civwar"
+    url(r'^categories/(?P<slug>[a-z|A-Z|0-9|_-]+/?)/$', CategoryView.as_view(), name='category'),
+    # "collection/categories/"
+    url(r'^categories/$', CategoryListView.as_view(), name='category_list'),
 
 ]

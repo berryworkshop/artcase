@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
-from artcase.models import Artifact, Creator, Organization
+from artcase.models import Artifact, Creator, Organization, Category
 
 
 class HomeView(TemplateView):
@@ -81,3 +81,26 @@ class OrganizationListView(ListView):
         sort = self.request.GET.get('sort', 'slug')
         qs = super(OrganizationListView, self).get_queryset().order_by(sort)
         return qs
+
+
+class CategoryView(DetailView):
+    model = Category
+    template_name = "artcase/category.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        artifacts = Artifact.objects.all()
+        context.update({
+            'artifacts': artifacts,
+        })
+        return context
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = "artcase/category_list.html"
+
+    #def get_queryset(self):
+    #    sort = self.request.GET.get('sort', 'slug')
+    #    qs = super(OrganizationListView, self).get_queryset().order_by(sort)
+    #    return qs

@@ -19,21 +19,22 @@
                 <li class="dropdown active">
                     <a class="navbar_link dropdown-toggle" data-toggle="dropdown">Art <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li role="presentation" class="dropdown-header">Types</li>
-                        <li><a>Categories</a></li>
+                        <!--<li role="presentation" class="dropdown-header">Types</li>
+                        <li><a>Categories</a></li>-->
                         <li><a href="{% url 'artifact_list' %}">Artifacts</a></li>
                         <li><a href="{% url 'creator_list' %}">Artists</a></li>
                         <li><a href="{% url 'organization_list' %}">Printers &amp; Publishers</a></li>
-                        <li><a>Subjects</a></li>
+                        <!--<li><a>Subjects</a></li>
                         <li><a>Cultures</a></li>
-                        <!--<li><a>Publishers</a></li>-->
+                        <li><a>Publishers</a></li>-->
 
+                        {% comment %}
                         <li class="divider"></li>
-
                         <li role="presentation" class="dropdown-header">Categories</li>
                         {% for category in categories %}
                             <li><a href="{{ category.get_absolute_url }}"><span class="badge pull-right">{{ category.artifact_set.all.count }}</span>{{ category.name }}</a></li>
                         {% endfor %}
+                        {% endcomment %}
                     </ul>
                 </li>
 

@@ -24,7 +24,7 @@ class Artifact(models.Model):
     '''
 
     class Meta:
-        ordering = ["title_english_short", "code_number"]
+        ordering = ["code_number"]
 
     objects = ArtifactManager()
 
@@ -33,12 +33,12 @@ class Artifact(models.Model):
     sizes = models.ManyToManyField('Size', blank = True)
     dates = models.ManyToManyField('Date', blank = True)
     values = models.ManyToManyField('Value', blank = True)
+    category  = models.ManyToManyField('Category', blank=True)
 
     #cultures = models.ManyToManyField('Culture', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
 
-    #category  = models.ForeignKey('Category', blank = False,
-    #    null = False, default=0)
+
     publisher = models.ForeignKey('Organization',
         related_name='artifacts_published', blank = True, null = True)
     printer   = models.ForeignKey('Organization',
@@ -109,7 +109,7 @@ class Creator(models.Model):
         Any creator who had a hand in making an artifact.
     '''
 
-    slug = models.SlugField(unique=True, blank=False, validators=[validate_slug])
+    slug = models.SlugField(unique=True, blank=False, null=False)
     name_latin_last  = models.CharField(
         "Last Name (Latin Alphabet)", max_length = 100, blank=False)
     name_latin_first = models.CharField(
@@ -171,7 +171,7 @@ class Creator(models.Model):
         elif self.year_death:
             return 'died ' + str(self.year_death)
         else:
-            return 'dates unknown'
+            return '<dates unknown>'
 
 @receiver(pre_save, sender=Creator)
 def callback_create_slug(sender, instance, **kwargs):
@@ -333,7 +333,7 @@ class Organization(models.Model):
 
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
-    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False, validators=[validate_slug])
+    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False)
     description = models.TextField(max_length=1000, blank=True, null=True)
 
 @receiver(pre_save, sender=Organization)
@@ -341,13 +341,6 @@ def callback_create_slug(sender, instance, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)
 
-
-class CategoryManager(models.Manager):
-    '''
-    Refer to category by a meaningful name: its slug.
-    '''
-    def get_by_natural_key(self, slug):
-        return self.get(slug=slug)
 
 class Category(models.Model):
     '''
@@ -357,10 +350,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ["name"]
         verbose_name_plural = "categories"
-    objects = CategoryManager()
 
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True, blank=False, null=False)
