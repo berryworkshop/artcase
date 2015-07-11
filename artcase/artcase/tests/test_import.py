@@ -110,7 +110,7 @@ class ImportTestCase(TestCase):
         self.assertEqual(creators.count(), 0)
         creators_import = Importer(self.import_files_ok['creators'])
         creators_import.do_import()
-        self.assertEqual(creators.count(), 348)
+        self.assertEqual(creators.count(), 347)
 
         creators = Creator.objects.all()
         artifacts = Artifact.objects.all()
@@ -124,6 +124,9 @@ class ImportTestCase(TestCase):
         a1 = Artifact.objects.get(code_number='pp-007')
         self.assertTrue('Apsit' in a1.description)
 
+        creators_no_slug = Creator.objects.filter(slug='')
+        self.assertEqual(creators_no_slug.count(), 0)
+
     def test_import_orgs(self):
         """
         Organizations (publishers and printers) should import properly.
@@ -132,22 +135,25 @@ class ImportTestCase(TestCase):
         self.assertEqual(orgs.count(), 0)
         publishers_import = Importer(self.import_files_ok['publishers'])
         publishers_import.do_import()
-        self.assertEqual(orgs.count(), 247)
+        self.assertEqual(orgs.count(), 246)
 
         printers_import = Importer(self.import_files_ok['printers'])
         printers_import.do_import()
 
-        self.assertEqual(orgs.count(), 607)
+        self.assertEqual(orgs.count(), 606)
 
         artifacts_with_publishers = Artifact.objects.filter(publisher__isnull=False)
         publishers = Organization.objects.filter(
             artifacts_published__in=artifacts_with_publishers).distinct()
-        self.assertEqual(publishers.count(), 247)
+        self.assertEqual(publishers.count(), 246)
 
         artifacts_with_printers = Artifact.objects.filter(printer__isnull=False)
         printers = Organization.objects.filter(
             artifacts_printed__in=artifacts_with_printers).distinct()
-        self.assertEqual(printers.count(), 366)
+        self.assertEqual(printers.count(), 365)
+
+        orgs_no_slug = Organization.objects.filter(slug='')
+        self.assertEqual(orgs_no_slug.count(), 0)
 
     def test_import_glavlit(self):
         artifacts_with_glavlit = Artifact.objects.filter(glavlit__isnull=False)

@@ -1,4 +1,4 @@
-Django==1.8.2
+Django==1.8
 django-ckeditor==4.4.8
 django-date-extensions==1.0.0
 django-dbbackup==2.0.4
@@ -9,6 +9,7 @@ paramiko==1.15.2
 Pillow==2.8.1
 pycrypto==2.6.1
 pysftp==0.2.8
+PyYAML==3.11
 six==1.9.0
 slugify==0.0.1
 Unidecode==0.4.17

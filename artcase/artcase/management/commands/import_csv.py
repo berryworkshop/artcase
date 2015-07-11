@@ -97,11 +97,13 @@ class Importer(object):
                     code_number = slugify(code_number))
             elif model == Creator:
                 name_latin_full = row.pop('Artist Name Roman', None)
-                instance, created = model.objects.get_or_create(
-                    name_latin_last=make_name_last(name_latin_full).strip(),
-                    name_latin_first=make_name_first(name_latin_full).strip(),
-                    slug=slugify(name_latin_full)
-                )
+                if slugify(name_latin_full):
+                    instance, created = model.objects.get_or_create(
+                        name_latin_last=make_name_last(
+                            name_latin_full).strip(),
+                        name_latin_first=make_name_first(
+                            name_latin_full).strip(),
+                        slug=slugify(name_latin_full))
             elif model == Organization:
                 name = row.get('Name', None)
                 loc = row.get('Location', None)
@@ -109,9 +111,10 @@ class Importer(object):
                     slug = slugify('{}_{}'.format(name[:50], loc[:49]))
                 else:
                     slug = slugify(name)
-                instance, created = model.objects.get_or_create(slug=slug[:100])
-            else:
-                pass
+                if slug:
+                    instance, created = model.objects.get_or_create(
+                        slug=slug[:100])
+
 
             # march through remaining columns
             for col_name, col_value in row.items():
@@ -178,7 +181,8 @@ class Importer(object):
                     if col_name == 'Description':
                         set_org_description(instance, col_value)
                     if col_name == 'Artifact Code':
-                        set_org_artifact(instance, col_value, self.mapping_name)
+                        set_org_artifact(
+                            instance, col_value, self.mapping_name)
 
                 if col_value and self.mapping_name == 'translations_primary':
                     if col_name == 'Print Run':
@@ -380,19 +384,20 @@ def set_additional_creator(row):
     name_cyrillic = row.get('Second Artist Name Roman', None)
     code_number = row.get('Artifact Number', None)
 
-    c2, created = Creator.objects.get_or_create(
-        name_latin_last=make_name_last(name_latin).strip(),
-        name_latin_first=make_name_first(name_latin).strip(),
-        slug=slugify(name_latin)
-    )
+    if slugify(name_latin):
+        c2, created = Creator.objects.get_or_create(
+            name_latin_last=make_name_last(name_latin).strip(),
+            name_latin_first=make_name_first(name_latin).strip(),
+            slug=slugify(name_latin)
+        )
 
-    c2.name_cyrillic_last = make_name_last(name_cyrillic).strip()
-    c2.name_cyrillic_first = make_name_last(name_cyrillic).strip()
-    c2.save()
+        c2.name_cyrillic_last = make_name_last(name_cyrillic).strip()
+        c2.name_cyrillic_first = make_name_last(name_cyrillic).strip()
+        c2.save()
 
-    artifact, created = Artifact.objects.get_or_create(code_number=slugify(code_number))
-    artifact.creators.add(c2)
-    artifact.save()
+        artifact, created = Artifact.objects.get_or_create(code_number=slugify(code_number))
+        artifact.creators.add(c2)
+        artifact.save()
 
 
 # # # # # # # # # # # # # # # # # # #
