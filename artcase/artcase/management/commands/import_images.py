@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.test import TestCase
@@ -42,38 +43,23 @@ class Importer(object):
         self.output_dir = output_dir
 
     def go(self):
-        tc = TestCase()
-        try:
-            tc.assertTrue(os.path.exists(self.input_path))
-        except AssertionError:
-            raise AssertionError('input "{}" does not exist'.format(self.input_path))
-        try:
-            tc.assertTrue(os.path.exists(self.output_dir))
-        except AssertionError:
-            raise AssertionError('output "{}" is not a directory'.format(self.output_dir))
-
-        if os.path.isfile(self.input_path):
-            self.import_image()
-        elif os.path.isdir(self.input_path):
-            self.import_images()
+        p = Path(self.input_path)
+        if p.is_dir():
+            for item in p.iterdir():
+                if item.is_file():
+                    self.import_image(item)
+        elif p.is_file():
+            self.import_image(p)
 
 
-    def import_image(self):
+    def import_image(self, input_file):
         # ensure item exists
         # make sure file is an image
         # create destination folder if it doesn't exist already
         # copy image to destination
         # rename destination file
-        print('single image')
+        print('{}'.format(input_file))
 
 
-    def import_images(self):
-        # ensure item exists
-        # make sure input is a directory
-        # import each item in directory
-        images = ['image 1', 'image 2', 'image 3']
-
-        for img in images:
-            print(img)
 
 
