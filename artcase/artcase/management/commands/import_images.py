@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.test import TestCase
 from artcase.models import Artifact
+from django.utils.text import slugify
 
 
 class Command(BaseCommand):
@@ -29,12 +30,6 @@ class Command(BaseCommand):
             settings.MEDIA_ROOT, 'pictures/artifacts/')
 
         importer = Importer(input_path, output_directory)
-
-        # assemble input into a list of files
-        # if os.path.isfile(input_path):
-        #     self.import_image(input_path, output_directory)
-        # if os.path.isdir(input_path):
-        #     self.import_images(input_path, output_directory)
 
 
 class Importer(object):
@@ -61,11 +56,40 @@ class Importer(object):
         except AssertionError:
             raise AssertionError('{} is not an image'.format(input_file))
 
+        infile = str(input_file)
+        outfile = str(self.output_dir / self.rename_filestem(input_file.name)) + input_file.suffix
+
         # copy image to destination
-        shutil.copy(str(input_file), str(self.output_dir))
-
-        # rename destination file
+        shutil.copyfile(infile, outfile)
 
 
+    def rename_filestem(self, stem):
+        # split up the stem
+        regex = r'([a-zA-Z]*)[-_ ]*([\d]+)([a-zA-Z]?)[-]?([\w -]*)'
+        code_prefix_raw, code_digits_raw, code_suffix_raw, file_detail_raw \
+            = re.findall(regex, stem)[0]
 
+        # intial cleanup
+        file_detail_raw = file_detail_raw.lower()
+        strings_to_remove = ['images', 'image', 'catalog']
+        for s in strings_to_remove:
+            file_detail_raw = file_detail_raw.replace(s, '')
+
+        # image roles
+        image_roles = {'verso':'verso', 'detail':'detail', 'print key':'key'}
+        roles_to_add = []
+        for key, value in image_roles.items():
+            if key in file_detail_raw:
+                file_detail_raw = file_detail_raw.replace(key, '')
+                roles_to_add.append(value)
+        roles_to_add.sort()
+
+        # reassemble
+        new_stem = '{}-{}{}_{}_{}'.format(code_prefix_raw.lower(), code_digits_raw, code_suffix_raw.lower(), '-'.join(roles_to_add), slugify(file_detail_raw))
+
+        # final cleanup
+        new_stem = new_stem.replace('__', '_')
+        new_stem = new_stem.rstrip('_')
+
+        return new_stem
 

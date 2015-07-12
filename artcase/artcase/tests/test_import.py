@@ -2,6 +2,7 @@ import os
 import tempfile
 import random
 import string
+from pathlib import Path
 from django.test import TestCase
 from django.conf import settings
 from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization
@@ -205,10 +206,11 @@ class ImportImagesTestCase(TestCase):
 
 
     def test_import_images(self):
-        test_dir = self.image_source_dir
-        test_img = os.path.join(self.image_source_dir, self.image_filename_1)
-        dest_directory = self.tmp_dest_dir
-        self.assertTrue(os.path.exists(self.tmp_dest_dir))
+        test_dir = Path(self.image_source_dir)
+        test_img = Path(self.image_source_dir) / self.image_filename_1
+
+        dest_directory = Path(self.tmp_dest_dir)
+        self.assertTrue(dest_directory.exists())
 
         importer_1 = import_images.Importer(test_img, dest_directory)
         importer_1.go()
@@ -217,6 +219,12 @@ class ImportImagesTestCase(TestCase):
         importer_2.go()
 
         self.assertEqual(len(os.listdir(self.tmp_dest_dir)), 19)
-        self.assertTrue(os.path.exists(
-             os.path.join(self.tmp_dest_dir, self.image_filename_1)))
+
+        img_in_1 = Path(self.image_source_dir) / 'PP 007 Catalog Image detail.jpg'
+        img_out_1 = Path(dest_directory) / 'pp-007_detail.jpg'
+
+        self.assertTrue(img_in_1.exists())
+        self.assertTrue(img_out_1.exists())
+
+
 

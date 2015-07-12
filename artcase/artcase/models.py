@@ -361,3 +361,21 @@ class Category(models.Model):
     slug = models.SlugField(max_length=100, unique=True, blank=False, null=False)
     description = models.TextField(max_length = 10000, blank = True, null=True)
     image = models.CharField(max_length=1000, blank = True, null=True)
+
+
+class ArtifactImage(models.Model):
+    '''
+    Simple class: path to an image in the filesystem
+    '''
+    ROLES = (
+            ("primary", "Primary"),
+            ("secondary", "Secondary"),
+            ("verso", "Verso"),
+            ("detail", "Detail"),
+            ("key", "Printer Key"),
+        )
+
+    artifact = models.ForeignKey('Artifact', blank=False, null=False)
+    name = models.CharField(max_length=100, unique=True)
+    role = models.CharField(max_length = 10, blank=True, choices=ROLES)
+    description = models.TextField(max_length = 1000, blank = True)
