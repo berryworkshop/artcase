@@ -1,12 +1,14 @@
 import os
+import tempfile
+import random
+import string
 from django.test import TestCase
 from django.conf import settings
 from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization
 from artcase.import_mappings import mappings
-from artcase.management.commands.import_csv import Importer
+from artcase.management.commands import import_csv, import_images
 
-class ImportTestCase(TestCase):
-
+class ImportCSVTestCase(TestCase):
     def setUp(self):
         self.import_files_ok = {
             'artifacts': os.path.join(settings.BASE_DIR, # artifacts
@@ -28,7 +30,7 @@ class ImportTestCase(TestCase):
 
         artifacts = Artifact.objects.all()
         self.assertEqual(artifacts.count(), 0)
-        artifacts_import = Importer(self.import_files_ok['artifacts'])
+        artifacts_import = import_csv.Importer(self.import_files_ok['artifacts'])
         artifacts_import.do_import()
         self.assertEqual(artifacts.count(), 51)
 
@@ -108,7 +110,7 @@ class ImportTestCase(TestCase):
 
         creators = Creator.objects.all()
         self.assertEqual(creators.count(), 0)
-        creators_import = Importer(self.import_files_ok['creators'])
+        creators_import = import_csv.Importer(self.import_files_ok['creators'])
         creators_import.do_import()
         self.assertEqual(creators.count(), 347)
 
@@ -133,11 +135,11 @@ class ImportTestCase(TestCase):
         """
         orgs = Organization.objects.all()
         self.assertEqual(orgs.count(), 0)
-        publishers_import = Importer(self.import_files_ok['publishers'])
+        publishers_import = import_csv.Importer(self.import_files_ok['publishers'])
         publishers_import.do_import()
         self.assertEqual(orgs.count(), 246)
 
-        printers_import = Importer(self.import_files_ok['printers'])
+        printers_import = import_csv.Importer(self.import_files_ok['printers'])
         printers_import.do_import()
 
         self.assertEqual(orgs.count(), 606)
@@ -159,7 +161,7 @@ class ImportTestCase(TestCase):
         artifacts_with_glavlit = Artifact.objects.filter(glavlit__isnull=False)
         self.assertEqual(artifacts_with_glavlit.count(), 0)
 
-        glavlit_import = Importer(self.import_files_ok['glavlit'])
+        glavlit_import = import_csv.Importer(self.import_files_ok['glavlit'])
         glavlit_import.do_import()
         self.assertEqual(artifacts_with_glavlit.count(), 132)
 
@@ -167,7 +169,7 @@ class ImportTestCase(TestCase):
         artifacts_with_title_full = Artifact.objects.filter(title_english_full__isnull=False)
         self.assertEqual(artifacts_with_title_full.count(), 0)
 
-        translation_import = Importer(self.import_files_ok['translations'])
+        translation_import = import_csv.Importer(self.import_files_ok['translations'])
         translation_import.do_import()
 
         self.assertEqual(artifacts_with_title_full.count(), 51)
@@ -177,3 +179,48 @@ class ImportTestCase(TestCase):
         self.assertEqual(a1.edition_size, 50000)
         self.assertEqual(a1.condition, 'very_good')
 
+class ImportImagesTestCase(TestCase):
+    def setUp(self):
+        #./manage.py import_images ~/Desktop/cellini_photos/PP\ 048\ Catalog\ Image.jpg --settings=core.settings.local
+        #./manage.py import_images ~/Desktop/cellini_photos/ --settings=core.settings.local
+
+        # specify source files/directories to import
+        self.image_source_dir = os.path.join(settings.TEST_DATA, 'images')
+        self.image_filename_1 = 'PP 007 Catalog Image detail.jpg'
+
+        # create a temporary destination directory
+        self.tmp_dest_dir = os.path.join(tempfile.gettempdir(), 'django_test', ''.join([random.choice(string.ascii_letters + string.digits) for n in range(10)]))
+
+        # basic assertions to make sure shit is OK
+        self.assertFalse(os.path.exists(self.tmp_dest_dir))
+        self.assertTrue(os.path.exists(self.image_source_dir))
+
+        os.makedirs(self.tmp_dest_dir, exist_ok=True)
+        self.assertTrue(os.path.exists(self.tmp_dest_dir))
+
+        # more specific assertions about known data in source folder
+        self.assertEqual(len(os.listdir(self.image_source_dir)), 19)
+        self.assertTrue(os.path.exists(
+            os.path.join(self.image_source_dir, self.image_filename_1)))
+
+
+
+    def test_import_images(self):
+        test_dir = self.image_source_dir
+        test_img = os.path.join(self.image_source_dir, self.image_filename_1)
+        dest_directory = self.tmp_dest_dir
+
+        importer_1 = import_images.Importer(test_img, dest_directory)
+        importer_1.go()
+
+        importer_2 = import_images.Importer(test_dir, dest_directory)
+        importer_2.go()
+        # command.import_images(self.image_source_dir, self.tmp_dest_dir)
+
+        # import_images(self.image_source_dir, self.tmp_dest_dir)
+
+        # self.assertTrue(os.path.exists(tmp_dest_dir))
+        # self.assertEqual(len(os.listdir(tmp_dest_dir)), 19)
+        # self.assertTrue(os.path.exists(
+        #     os.path.join(tmp_dest_dir, image_filename_1)))
+        pass
