@@ -39,26 +39,32 @@ class Command(BaseCommand):
 
 class Importer(object):
     def __init__(self, input_path, output_dir):
-        self.input_path = input_path
-        self.output_dir = output_dir
+        self.input_path = Path(input_path)
+        self.output_dir = Path(output_dir)
 
     def go(self):
-        p = Path(self.input_path)
-        if p.is_dir():
-            for item in p.iterdir():
+        if self.input_path.is_dir():
+            for item in self.input_path.iterdir():
                 if item.is_file():
                     self.import_image(item)
-        elif p.is_file():
-            self.import_image(p)
-
+        elif self.input_path.is_file():
+            self.import_image(self.input_path)
 
     def import_image(self, input_file):
-        # ensure item exists
-        # make sure file is an image
-        # create destination folder if it doesn't exist already
+        # ensure item exists, is a file, and is an image
+        tc = TestCase()
+        suffixes = ['.jpg', '.jpeg', '.gif', '.png']
+        tc.assertTrue(input_file.exists())
+        tc.assertTrue(input_file.is_file())
+        try:
+            tc.assertTrue(input_file.suffix in suffixes)
+        except AssertionError:
+            raise AssertionError('{} is not an image'.format(input_file))
+
         # copy image to destination
+        shutil.copy(str(input_file), str(self.output_dir))
+
         # rename destination file
-        print('{}'.format(input_file))
 
 
 

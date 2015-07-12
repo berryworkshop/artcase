@@ -204,23 +204,19 @@ class ImportImagesTestCase(TestCase):
             os.path.join(self.image_source_dir, self.image_filename_1)))
 
 
-
     def test_import_images(self):
         test_dir = self.image_source_dir
         test_img = os.path.join(self.image_source_dir, self.image_filename_1)
         dest_directory = self.tmp_dest_dir
+        self.assertTrue(os.path.exists(self.tmp_dest_dir))
 
         importer_1 = import_images.Importer(test_img, dest_directory)
         importer_1.go()
 
         importer_2 = import_images.Importer(test_dir, dest_directory)
         importer_2.go()
-        # command.import_images(self.image_source_dir, self.tmp_dest_dir)
 
-        # import_images(self.image_source_dir, self.tmp_dest_dir)
+        self.assertEqual(len(os.listdir(self.tmp_dest_dir)), 19)
+        self.assertTrue(os.path.exists(
+             os.path.join(self.tmp_dest_dir, self.image_filename_1)))
 
-        # self.assertTrue(os.path.exists(tmp_dest_dir))
-        # self.assertEqual(len(os.listdir(tmp_dest_dir)), 19)
-        # self.assertTrue(os.path.exists(
-        #     os.path.join(tmp_dest_dir, image_filename_1)))
-        pass
