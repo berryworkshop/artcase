@@ -367,6 +367,9 @@ class ArtifactImage(models.Model):
     '''
     Simple class: path to an image in the filesystem
     '''
+    def __str__(self):
+        return "{} -- {}".format(self.artifact, self.filename)
+
     ROLES = (
             ("primary", "Primary"),
             ("secondary", "Secondary"),
@@ -375,7 +378,7 @@ class ArtifactImage(models.Model):
             ("key", "Printer Key"),
         )
 
-    artifact = models.ForeignKey('Artifact', blank=False, null=False)
-    name = models.CharField(max_length=100, unique=True)
+    artifact = models.ForeignKey(Artifact, blank=False, null=False)
+    filename = models.CharField(max_length=100, unique=True)
     role = models.CharField(max_length = 10, blank=True, choices=ROLES)
     description = models.TextField(max_length = 1000, blank = True)

@@ -5,7 +5,7 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.test import TestCase
-from artcase.models import Artifact
+from artcase.models import Artifact, ArtifactImage
 from django.utils.text import slugify
 
 
@@ -36,6 +36,10 @@ class Importer(object):
     def __init__(self, input_path, output_dir):
         self.input_path = Path(input_path)
         self.output_dir = Path(output_dir)
+        self.image_roles = {
+            'verso':'verso',
+            'detail':'detail',
+            'print key':'key'}
 
     def go(self):
         if self.input_path.is_dir():
@@ -46,6 +50,9 @@ class Importer(object):
             self.import_image(self.input_path)
 
     def import_image(self, input_file):
+        '''
+        main import machinery.
+        '''
         # ensure item exists, is a file, and is an image
         tc = TestCase()
         suffixes = ['.jpg', '.jpeg', '.gif', '.png']
@@ -56,11 +63,47 @@ class Importer(object):
         except AssertionError:
             raise AssertionError('{} is not an image'.format(input_file))
 
+        # get source and target
         infile = str(input_file)
-        outfile = str(self.output_dir / self.rename_filestem(input_file.name)) + input_file.suffix
+        outfile = str(self.rename_filestem(input_file.name)) + input_file.suffix
+        outfile_path = str(self.output_dir / outfile)
+
+        # get role
+        role = None
+        for key, value in self.image_roles.items():
+            if key in input_file.name:
+                role = key
+                break
+
+        # get an artifact to work with
+        code_number = self.get_code_number(input_file.name)
+        a, created = Artifact.objects.get_or_create(
+            code_number=code_number,
+            title_english_short="Lorem Ipsum",
+            public=True)
+
+        # outfile must be unique
+        while ArtifactImage.objects.filter(filename=outfile).count() > 0:
+            p = Path(outfile)
+            p_stem = str(p.stem) + '_1'
+            outfile = p_stem + p.suffix
+
+        image = ArtifactImage.objects.create(
+            artifact=a, filename=outfile)
+
+        if role:
+            image.role = role
 
         # copy image to destination
-        shutil.copyfile(infile, outfile)
+        shutil.copyfile(infile, outfile_path)
+
+
+    def get_code_number(self, stem):
+        # split up the stem
+        regex = r'([a-zA-Z]*)[-_ ]*([\d]+)[a-zA-Z]?[-]?[\w -]*'
+        code_prefix_raw, code_digits_raw = re.findall(regex, stem)[0]
+        code_number = '{}-{}'.format(code_prefix_raw.lower(), code_digits_raw)
+        return slugify(code_number)
 
 
     def rename_filestem(self, stem):
@@ -75,10 +118,9 @@ class Importer(object):
         for s in strings_to_remove:
             file_detail_raw = file_detail_raw.replace(s, '')
 
-        # image roles
-        image_roles = {'verso':'verso', 'detail':'detail', 'print key':'key'}
+        # image role replacement
         roles_to_add = []
-        for key, value in image_roles.items():
+        for key, value in self.image_roles.items():
             if key in file_detail_raw:
                 file_detail_raw = file_detail_raw.replace(key, '')
                 roles_to_add.append(value)

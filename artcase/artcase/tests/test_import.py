@@ -5,7 +5,7 @@ import string
 from pathlib import Path
 from django.test import TestCase
 from django.conf import settings
-from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization
+from artcase.models import Artifact, Creator, Medium, Size, Date, Value, Organization, ArtifactImage
 from artcase.import_mappings import mappings
 from artcase.management.commands import import_csv, import_images
 
@@ -221,10 +221,13 @@ class ImportImagesTestCase(TestCase):
         self.assertEqual(len(os.listdir(self.tmp_dest_dir)), 19)
 
         img_in_1 = Path(self.image_source_dir) / 'PP 007 Catalog Image detail.jpg'
-        img_out_1 = Path(dest_directory) / 'pp-007_detail.jpg'
+        img_out_1 = Path(dest_directory) / 'pp-003.jpg'
+        img_out_2 = Path(dest_directory) / 'pp-007_detail.jpg'
+        img_out_3 = Path(dest_directory) / 'pp-010_detail-key.jpg'
 
         self.assertTrue(img_in_1.exists())
         self.assertTrue(img_out_1.exists())
-
+        self.assertTrue(img_out_2.exists())
+        self.assertTrue(img_out_3.exists())
 
 
