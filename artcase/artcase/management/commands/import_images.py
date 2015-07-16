@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 from pathlib import Path
-from django.conf import settings
+from django.conf import settings 
 from django.core.management.base import BaseCommand, CommandError
 from django.test import TestCase
 from artcase.models import Artifact, ArtifactImage
@@ -13,23 +13,25 @@ class Command(BaseCommand):
     help = 'Imports images, either singly, or as a folder.'
 
     def add_arguments(self, parser):
-        parser.add_argument('path', type=str)
+        parser.add_argument('input_path')
 
     def handle(self, *args, **options):
         try:
             testy = TestCase()
-            testy.assertTrue(os.path.exists(options['path']))
+            testy.assertTrue(os.path.exists(options['input_path']))
         except AssertionError:
-            raise AssertionError('{} does not exist'.format(options['path']))
+            raise AssertionError('{} does not exist'.format(
+                options['input_path']))
 
         # get input; can be an image or a directory of images
-        input_path = options['path']
+        input_path = options['input_path']
 
         # specify output target directory
-        self.output_directory = os.path.join(
+        output_directory = os.path.join(
             settings.MEDIA_ROOT, 'pictures/artifacts/')
 
         importer = Importer(input_path, output_directory)
+        importer.go()
 
 
 class Importer(object):
@@ -65,7 +67,8 @@ class Importer(object):
 
         # get source and target
         infile = str(input_file)
-        outfile = str(self.rename_filestem(input_file.name)) + input_file.suffix
+        outfile = str(self.rename_filestem(input_file.name)) + \
+            input_file.suffix
         outfile_path = str(self.output_dir / outfile)
 
         # get role
@@ -95,7 +98,14 @@ class Importer(object):
             image.role = role
 
         # copy image to destination
+        os.makedirs(str(self.output_dir), exist_ok=True)
         shutil.copyfile(infile, outfile_path)
+        tc.assertTrue(os.path.exists(outfile_path))
+
+        # write out to console
+        print('imported: {}'.format(outfile_path))
+
+
 
 
     def get_code_number(self, stem):
@@ -127,7 +137,12 @@ class Importer(object):
         roles_to_add.sort()
 
         # reassemble
-        new_stem = '{}-{}{}_{}_{}'.format(code_prefix_raw.lower(), code_digits_raw, code_suffix_raw.lower(), '-'.join(roles_to_add), slugify(file_detail_raw))
+        new_stem = '{}-{}{}_{}_{}'.format(
+                code_prefix_raw.lower(),
+                code_digits_raw,
+                code_suffix_raw.lower(), 
+                '-'.join(roles_to_add),
+                slugify(file_detail_raw))
 
         # final cleanup
         new_stem = new_stem.replace('__', '_')

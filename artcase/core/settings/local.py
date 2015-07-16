@@ -22,8 +22,8 @@ STATICFILES_DIRS = (BASE_DIR.child('artcase').child('static'),)
 
 
 MEDIA_URL  = '/media/'
+MEDIA_ROOT =  '/Users/aljabear/Projects/cellini_2015/media'
 
-MEDIA_ROOT =  PROJ_DIR.child('media')
 #MEDIA_URL  = 'http://localhost:1917/media/'
 UPLOAD_ROOT = MEDIA_ROOT + 'artcase/pictures/uploads/'
 

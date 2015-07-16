@@ -1,13 +1,12 @@
 import datetime
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.core.validators import validate_slug
 from django.db import models
 from django.db.models.signals import post_delete, pre_save, post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 from .constants import LANGUAGES, PUBLIC_CHOICES
-from django.core.validators import validate_slug
-from django.core.urlresolvers import reverse
-#from django_date_extensions.fields import ApproximateDateField
-
 
 class ArtifactManager(models.Manager):
     '''
@@ -62,7 +61,10 @@ class Artifact(models.Model):
     edition_size  = models.IntegerField(blank=True, null=True)
 
     public = models.BooleanField(
-        'Public or Private', choices=PUBLIC_CHOICES, default=False, blank=False)
+        'Public or Private',
+        choices=PUBLIC_CHOICES,
+        default=False,
+        blank=False)
 
     CONDITIONS = (
         ('poor', 'poor'),
@@ -97,11 +99,50 @@ class Artifact(models.Model):
         return reverse('artifact', kwargs={'code_number': self.code_number})
 
     def __str__(self):
-        return '{}: {}'.format(self.format_code_number(), self.title_english_short)
+        return '{}: {}'.format(self.format_code_number(),
+            self.title_english_short)
 
     def code_number_display(self):
         code = self.code_number
         return code.replace('-', ' ').upper()
+
+    def image(self):
+        images_primary = ArtifactImage.objects.filter(
+            artifact=self, role='primary')
+        
+        if images_primary.count() > 0:
+            return images_primary.first()
+        else:
+            images = ArtifactImage.objects.filter(artifact=self)
+            return images.first()
+
+
+class ArtifactImage(models.Model):
+    '''
+    Simple class: name of an image in the filesystem.
+    No Path data... just a filename.
+    '''
+    def __str__(self):
+        return "{} -- {}".format(self.artifact, self.filename)
+
+    def get_file(self):
+        path = '{}{}{}'.format(
+            settings.MEDIA_URL, 'pictures/artifacts/', self.filename)
+        return path
+
+    ROLES = (
+            ("primary", "Primary"),
+            ("secondary", "Secondary"),
+            ("verso", "Verso"),
+            ("detail", "Detail"),
+            ("key", "Printer Key"),
+        )
+
+    artifact = models.ForeignKey(Artifact, blank=False, null=False)
+    filename = models.CharField(
+        max_length=100, unique=True,blank=False, null=False)
+    role = models.CharField(max_length = 10, blank=True, choices=ROLES)
+    description = models.TextField(max_length = 1000, blank = True)
 
 
 class Creator(models.Model):
@@ -118,7 +159,8 @@ class Creator(models.Model):
         "Last Name (Cyrillic Alphabet)" , max_length = 100, blank=True)
     name_cyrillic_first = models.CharField(
         "First Name (Cyrillic Alphabet)", max_length = 100, blank=True)
-    nationality = models.CharField(max_length = 3, choices=LANGUAGES, blank=True)
+    nationality = models.CharField(
+        max_length = 3, choices=LANGUAGES, blank=True)
     year_birth = models.IntegerField('Year of Birth', blank=True, null=True)
     year_death = models.IntegerField('Year of Death', blank=True, null=True)
     description = models.TextField(max_length = 1000, blank=True)
@@ -257,9 +299,11 @@ class Date(models.Model):
         if self.approx_month:
             return "{}: {}".format(self.qualifier, self.year)
         if self.approx_day:
-            return "{}: {} {}".format(self.qualifier, self.month_str, self.year)
+            return "{}: {} {}".format(
+                self.qualifier, self.month_str, self.year)
         else:
-            return "{}: {} {} {}".format(self.qualifier, self.day, self.month_str, self.year)
+            return "{}: {} {} {}".format(
+                self.qualifier, self.day, self.month_str, self.year)
 
     class Meta:
         ordering = ["date"]
@@ -274,7 +318,8 @@ class Date(models.Model):
 
     @property
     def month_str(self):
-        names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        names = ['January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December']
         return(names[self.month - 1])
 
     @property
@@ -295,7 +340,9 @@ class Date(models.Model):
         # date is unknown: August 1945
         # just the year is known: 1945
         # even the year is approximate: c.1945
-    # all parts of date (year, month, day) are required, however, by Django date fields; therefore, I'm marking which of this tuple is approximate, and deal with it after the fact.
+    # all parts of date (year, month, day) are required, however,
+        # by Django date fields; therefore, I'm marking which of this tuple
+        # is approximate, and deal with it after the fact.
     approx_day = models.BooleanField(default=False)
     approx_month = models.BooleanField(default=False)
     approx_year = models.BooleanField(default=False)
@@ -333,7 +380,8 @@ class Organization(models.Model):
 
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)
-    slug = models.SlugField(max_length=200, unique=True, blank=False, null=False)
+    slug = models.SlugField(
+        max_length=200, unique=True, blank=False, null=False)
     description = models.TextField(max_length=1000, blank=True, null=True)
 
 @receiver(pre_save, sender=Organization)
@@ -358,27 +406,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True, blank=False, null=False)
+    slug = models.SlugField(
+        max_length=100, unique=True, blank=False, null=False)
     description = models.TextField(max_length = 10000, blank = True, null=True)
     image = models.CharField(max_length=1000, blank = True, null=True)
-
-
-class ArtifactImage(models.Model):
-    '''
-    Simple class: path to an image in the filesystem
-    '''
-    def __str__(self):
-        return "{} -- {}".format(self.artifact, self.filename)
-
-    ROLES = (
-            ("primary", "Primary"),
-            ("secondary", "Secondary"),
-            ("verso", "Verso"),
-            ("detail", "Detail"),
-            ("key", "Printer Key"),
-        )
-
-    artifact = models.ForeignKey(Artifact, blank=False, null=False)
-    filename = models.CharField(max_length=100, unique=True)
-    role = models.CharField(max_length = 10, blank=True, choices=ROLES)
-    description = models.TextField(max_length = 1000, blank = True)
