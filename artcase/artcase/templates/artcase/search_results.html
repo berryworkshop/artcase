@@ -31,4 +31,15 @@
     <p class='small'>No artists found.</p>
     {% endif %}
 
+    <h3>Printers/Publishers</h3>
+    {% if organization_list %}
+    <ul>
+    {% for organization in organization_list %}
+        <li><a href="{{ organization.get_absolute_url }}">{{ organization.name }}</a>{% if organization.location %}- {{ organization.location }}{% endif %}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class='small'>No printers or publishers found.</p>
+    {% endif %}
+
 {% endblock main %}
