@@ -10,6 +10,7 @@ from .views import (
     OrganizationListView,
     CategoryView,
     CategoryListView,
+    SearchResultsView,
 )
 
 urlpatterns = [
@@ -33,5 +34,8 @@ urlpatterns = [
     url(r'^categories/(?P<slug>[a-z|A-Z|0-9|_-]+/?)/$', CategoryView.as_view(), name='category'),
     # "collection/categories/"
     url(r'^categories/$', CategoryListView.as_view(), name='category_list'),
+
+    # "collection/search_results"
+    url(r'^search_results/$', SearchResultsView.as_view(), name='search_results'),
 
 ]

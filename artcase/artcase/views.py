@@ -3,6 +3,41 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
 from artcase.models import Artifact, Creator, Organization, Category
+from .search import get_query
+
+
+class SearchResultsView(TemplateView):
+    template_name = "artcase/search_results.html"
+
+    def get(self, request, *args, **kwargs):
+        return super(SearchResultsView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchResultsView, self).get_context_data(**kwargs)
+        query_string = ''
+        artifact_list = None
+        creator_list = None
+        if ('q' in self.request.GET) and self.request.GET['q'].strip():
+            query_string = self.request.GET['q']
+
+            artifact_query = get_query(query_string,
+                ['code_number', 'title_english_short',
+                 'title_english_full', 'title_original',
+                 'description', 'glavlit'])
+            artifact_list = Artifact.objects.filter(artifact_query, public=True)
+
+            creator_query = get_query(query_string,
+                ['name_latin_last', 'name_latin_first',
+                 'name_cyrillic_last', 'name_cyrillic_first',
+                 'nationality', 'description'])
+            creator_list = Creator.objects.filter(creator_query)
+
+        context.update({
+            'query_string': query_string,
+            "artifact_list": artifact_list,
+            "creator_list": creator_list,
+        })
+        return context
 
 
 class HomeView(TemplateView):

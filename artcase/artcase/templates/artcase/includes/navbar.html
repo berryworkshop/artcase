@@ -69,7 +69,7 @@
                     <ul class="dropdown-menu">
                         <li>
 
-                        <form class="navbar-form" role="search" action="/collection/search_results/">
+                        <form class="navbar-form" role="search" action="{% url 'search_results' %}" action="get">
                             <div class="input-group" id="small_navbar_search_form_group">
                                 <input type="text" class="form-control" placeholder="Search" name="q" id="navbar_search_input">
                                 <div class="input-group-btn" >

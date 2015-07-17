@@ -1,0 +1,34 @@
+{% extends 'artcase/base.html' %}
+{% load humanize %}
+
+{% block main %}
+    <h1 class="page-header">Search Results</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel aliquet dolor. Maecenas non leo neque, in congue mi. Nulla fringilla turpis mollis dolor laoreet id tempus risus consequat. Curabitur vulputate risus sit amet magna dictum congue. Nam vitae tortor at arcu bibendum sagittis. Sed ultricies justo sit amet sapien pulvinar a egestas est viverra. Phasellus vel orci lacus. Donec augue lectus, adipiscing sed vulputate sed, vulputate non elit.</p>
+
+    <h3>Artifacts</h3>
+    {% if artifact_list %}
+    <ul>
+    {% for artifact in artifact_list %}
+        <a href="{{ artifact.get_absolute_url }}">
+            <li>{{ artifact }}</li>
+        </a>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class='small'>No artifacts found.</p>
+    {% endif %}
+
+    <h3>Artists</h3>
+    {% if creator_list %}
+    <ul>
+    {% for creator in creator_list %}
+        <a href="{{ creator.get_absolute_url }}">
+            <li>{{ creator }}</li>
+        </a>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p class='small'>No artists found.</p>
+    {% endif %}
+
+{% endblock main %}
