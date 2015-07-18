@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
 from django.views.generic.detail import DetailView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from artcase.models import Artifact, Creator, Organization, Category
 from .search import get_query
 
@@ -31,6 +32,7 @@ class ArtifactView(DetailView):
 class ArtifactListView(ListView):
     model = Artifact
     template_name = "artcase/artifact_list.html"
+    paginate_by = 12
 
     def get_queryset(self):
         sort = self.request.GET.get('sort', 'code_number')
