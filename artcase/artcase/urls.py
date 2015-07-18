@@ -37,5 +37,4 @@ urlpatterns = [
 
     # "collection/search_results"
     url(r'^search_results/$', SearchResultsView.as_view(), name='search_results'),
-
 ]
