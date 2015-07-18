@@ -11,8 +11,8 @@
 
     {% block head_links %}
         <link rel="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,900&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,500,900&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700&subset=latin' rel='stylesheet' type='text/css'>
         <link href="{% static 'lib/bootstrap-3.3.5-dist/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'artcase/css/base.css' %}" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
@@ -31,22 +31,28 @@
 
 <body>
 
+    <header class="header">
     {% block header %}
         {% include 'artcase/includes/navbar.html' %}
     {% endblock header %}
+    </header>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-            {% block main %}
-            {% endblock main %}
+    <section class="section_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                {% block main %}
+                {% endblock main %}
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
+    <footer class="footer">
     {% block footer %}
         {% include 'artcase/includes/footer.html' %}
     {% endblock footer %}
+    </footer>
 
 </body>
 </html>
