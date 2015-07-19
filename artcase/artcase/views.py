@@ -44,13 +44,14 @@ class ArtifactListView(ListView):
 class CreatorView(DetailView):
     model = Creator
     template_name = "artcase/creator.html"
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super(CreatorView, self).get_context_data(**kwargs)
         creator = Creator.objects.get(slug=self.kwargs['slug'])
-        artifacts = Artifact.objects.filter(creators=creator)
+        artifacts = Artifact.objects.filter(creators=creator).exclude(title_english_short='Untitled')
         context.update({
-            'artifacts': artifacts,
+            'object_list': artifacts,
         })
         return context
 
@@ -67,8 +68,8 @@ class OrganizationView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrganizationView, self).get_context_data(**kwargs)
         org = Organization.objects.get(slug=self.kwargs['slug'])
-        artifacts_printed = Artifact.objects.filter(printer=org)
-        artifacts_published = Artifact.objects.filter(publisher=org)
+        artifacts_printed = Artifact.objects.filter(printer=org).exclude(title_english_short='Untitled')
+        artifacts_published = Artifact.objects.filter(publisher=org).exclude(title_english_short='Untitled')
         context.update({
             'artifacts_printed':artifacts_printed,
             'artifacts_published':artifacts_published,

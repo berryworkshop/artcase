@@ -19,8 +19,8 @@
                 <li class="dropdown active">
                     <a  href="#" class="navbar_link dropdown-toggle" data-toggle="dropdown">Art <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <!--<li role="presentation" class="dropdown-header">Types</li>
-                        <li><a>Categories</a></li>-->
+                        <!--<li role="presentation" class="dropdown-header">Types</li>-->
+                        <li><a href="{% url 'category_list' %}">Categories</a></li>
                         <li><a href="{% url 'artifact_list' %}">Artifacts</a></li>
                         <li><a href="{% url 'creator_list' %}">Artists</a></li>
                         <li><a href="{% url 'organization_list' %}">Printers &amp; Publishers</a></li>

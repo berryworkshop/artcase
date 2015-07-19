@@ -8,29 +8,16 @@
     <dt>Location</dt><dd>{{ object.location }}</dd>
     <dt>Description</dt><dd>{{ object.description }}</dd>
 
-    <dt>Artifacts Printed</dt>
-    {% if artifacts_printed %}
-    <dd>
-        <ul>
-            {% for artifact in artifacts_printed %}
-                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-            {% endfor %}
-        </ul>
-    </dd>
-    {% else %}
-    <dd>None</dd>
-    {% endif %}
-    <dt>Artifacts Published</dt>
-    {% if artifacts_published %}
-    <dd>
-        <ul>
-            {% for artifact in artifacts_published %}
-                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-            {% endfor %}
-        </ul>
-    </dd>
-    {% else %}
-    <dd>None</dd>
-    {% endif %}
+    <h3>Artifacts Printed</h3>
+    {% with object_list=artifacts_printed %}
+        {% include 'artcase/includes/slides_artifact.html' %}
+    {% endwith %}
+
+    <h3>Artifacts Published</h3>
+    {% with object_list=artifacts_published %}
+        {% include 'artcase/includes/slides_artifact.html' %}
+    {% endwith %}
+
+
 </dl>
 {% endblock main %}

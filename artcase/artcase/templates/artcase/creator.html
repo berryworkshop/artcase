@@ -8,17 +8,8 @@
     <dt>Nationality</dt><dd>{{ object.nationality }}</dd>
     <dt>Lifespan</dt><dd>{{ object.get_lifespan }}</dd>
 
-    <dt>Artifacts</dt>
-    {% if artifacts %}
-    <dd>
-        <ul>
-            {% for artifact in artifacts %}
-                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-            {% endfor %}
-        </ul>
-    </dd>
-    {% else %}
-    <dd>None</dd>
-    {% endif %}
+    <h3>Artifacts</h3>
+    {% include 'artcase/includes/slides_artifact.html' %}  
+
 </dl>
 {% endblock main %}
