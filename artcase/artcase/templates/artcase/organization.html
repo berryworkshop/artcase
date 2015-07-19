@@ -8,15 +8,19 @@
     <dt>Location</dt><dd>{{ object.location }}</dd>
     <dt>Description</dt><dd>{{ object.description }}</dd>
 
-    <h3>Artifacts Printed</h3>
-    {% with object_list=artifacts_printed %}
-        {% include 'artcase/includes/slides_artifact.html' %}
-    {% endwith %}
+    {% if artifacts_printed %}
+        <h3>Artifacts Printed</h3>
+        {% with object_list=artifacts_printed %}
+            {% include 'artcase/includes/slides_artifact.html' %}
+        {% endwith %}
+    {% endif %}
 
-    <h3>Artifacts Published</h3>
-    {% with object_list=artifacts_published %}
-        {% include 'artcase/includes/slides_artifact.html' %}
-    {% endwith %}
+    {% if artifacts_published %}
+        <h3>Artifacts Published</h3>
+        {% with object_list=artifacts_published %}
+            {% include 'artcase/includes/slides_artifact.html' %}
+        {% endwith %}
+    {% endif %}
 
 
 </dl>

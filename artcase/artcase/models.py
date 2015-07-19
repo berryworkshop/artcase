@@ -107,7 +107,7 @@ class Artifact(models.Model):
 
     def __str__(self):
         return '{}: {}'.format(self.format_code_number(),
-            self.title_english_short)
+            self.title_english_full)
 
     def code_number_display(self):
         code = self.code_number

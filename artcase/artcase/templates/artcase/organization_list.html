@@ -5,9 +5,30 @@
 <h1 class="page-header">Printers and Publishers</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel aliquet dolor. Maecenas non leo neque, in congue mi. Nulla fringilla turpis mollis dolor laoreet id tempus risus consequat. Curabitur vulputate risus sit amet magna dictum congue. Nam vitae tortor at arcu bibendum sagittis. Sed ultricies justo sit amet sapien pulvinar a egestas est viverra. Phasellus vel orci lacus. Donec augue lectus, adipiscing sed vulputate sed, vulputate non elit.</p>
 
-<ul>
-    {% for organization in object_list %}
-    <li><a href="{{ organization.get_absolute_url }}">{{ organization.name }}</a>{% if organization.location %}: {{ organization.location }}{% endif %}</li>
-    {% endfor %}
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Qty. printed</th>
+                <th>Qty. published</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for org in object_list %}
+            <tr>
+                <td>{{ org.id }}</td>
+                <td><a href="{{ org.get_absolute_url }}">{{ org.name }}</a></td>
+                <td>{{ org.location }}</td>
+                <td>{{ org.artifacts_printed.count }}</td>
+                <td>{{ org.artifacts_published.count }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+</div>
+
 {% endblock main %}

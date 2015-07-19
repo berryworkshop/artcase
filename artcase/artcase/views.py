@@ -68,8 +68,8 @@ class OrganizationView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrganizationView, self).get_context_data(**kwargs)
         org = Organization.objects.get(slug=self.kwargs['slug'])
-        artifacts_printed = Artifact.objects.filter(printer=org).exclude(title_english_short='Untitled')
-        artifacts_published = Artifact.objects.filter(publisher=org).exclude(title_english_short='Untitled')
+        artifacts_printed = Artifact.objects.filter(printer=org)#.exclude(title_english_short='Untitled')
+        artifacts_published = Artifact.objects.filter(publisher=org)#.exclude(title_english_short='Untitled')
         context.update({
             'artifacts_printed':artifacts_printed,
             'artifacts_published':artifacts_published,
