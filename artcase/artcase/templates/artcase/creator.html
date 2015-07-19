@@ -5,11 +5,11 @@
 <h2><a href="{% url 'creator_list' %}">Artist</a>: {{ object.get_name_latin }}</h2></h2>
 
 <dl class="dl-horizontal">
-    <dt>Nationality</dt><dd>{{ object.nationality }}</dd>
-    <dt>Lifespan</dt><dd>{{ object.get_lifespan }}</dd>
-
-    <h3>Artifacts</h3>
-    {% include 'artcase/includes/slides_artifact.html' %}  
-
+    {% if object.nationality %}<dt>Nationality</dt><dd>{{ object.nationality }}</dd>{% endif %}
+    {% if object.lifespan %}<dt>Lifespan</dt><dd>{{ object.get_lifespan }}</dd>{% endif %}
 </dl>
+
+<h3>Artifacts created by this artist</h3>
+{% include 'artcase/includes/slides_artifact.html' %}  
+
 {% endblock main %}

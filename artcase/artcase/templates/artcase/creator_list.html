@@ -5,9 +5,29 @@
 <h1 class="page-header">Artists</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel aliquet dolor. Maecenas non leo neque, in congue mi. Nulla fringilla turpis mollis dolor laoreet id tempus risus consequat. Curabitur vulputate risus sit amet magna dictum congue. Nam vitae tortor at arcu bibendum sagittis. Sed ultricies justo sit amet sapien pulvinar a egestas est viverra. Phasellus vel orci lacus. Donec augue lectus, adipiscing sed vulputate sed, vulputate non elit.</p>
 
-<ul>
-    {% for creator in object_list %}
-    <li><a href="{{ creator.get_absolute_url }}">{{ creator }}</a></li>
-    {% endfor %}
-</ul>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Name, Latin</th>
+                <th>Name, Cyrillic</th>
+                <th>Nationality</th>
+                <th>Dates</th>
+                <th>Quantity of Works</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for creator in object_list %}
+            <tr>
+                <td><a href="{{ creator.get_absolute_url }}">{{ creator.get_name_latin}}</a></td>
+                <td><a href="{{ creator.get_absolute_url }}">{{ creator.get_name_cyrillic }}</a></td>
+                <td>{% if creator.nationality %}{{ creator.nationality }}{% endif %}</td>
+                <td>{% if creator.get_lifespan %}{{ creator.get_lifespan }}{% endif %}</td>
+                <td>{{ creator.artifact_set.count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+</div>
+
 {% endblock main %}

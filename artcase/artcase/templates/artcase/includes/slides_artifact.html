@@ -4,7 +4,7 @@
     {% for artifact in object_list %}
     <div class="slide col-xs-6 col-sm-4 col-md-3">
         <a href="{{artifact.get_absolute_url}}" class="thumbnail" style="background-image: url('{{ artifact.image.get_file }}');">
-            <h3 class='slide_title'>{{ artifact.title_english_short }}</h3>
+            <h3 class='slide_title'>{{ artifact.title_english_full|truncatewords:16 }}</h3>
         </a>
     </div>
     {% endfor %}

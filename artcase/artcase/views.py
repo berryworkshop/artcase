@@ -49,7 +49,7 @@ class CreatorView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CreatorView, self).get_context_data(**kwargs)
         creator = Creator.objects.get(slug=self.kwargs['slug'])
-        artifacts = Artifact.objects.filter(creators=creator).exclude(title_english_short='Untitled')
+        artifacts = Artifact.objects.filter(creators=creator)#.exclude(title_english_short='Untitled')
         context.update({
             'object_list': artifacts,
         })

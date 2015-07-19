@@ -46,7 +46,7 @@ class Artifact(models.Model):
     code_number = models.SlugField(
         'Code Number', unique=True, blank=False, validators=[validate_slug])
     title_english_short = models.CharField(
-        max_length = 255, default='Untitled', blank=False)
+        max_length = 255, default='Untitled', blank=True, null=True)
     title_english_full = models.TextField(
         max_length = 1000, blank=True, null=True)
     title_original = models.CharField(
@@ -197,7 +197,7 @@ class Creator(models.Model):
         if output:
             return output
         else:
-            return "<Unknown Artist>"
+            return None
 
     def get_name_cyrillic(self):
         output = ''
@@ -210,7 +210,7 @@ class Creator(models.Model):
         if output:
             return output
         else:
-            return "<Unknown Artist>"
+            return None
 
     def get_lifespan(self):
         if self.year_birth:
@@ -221,7 +221,7 @@ class Creator(models.Model):
         elif self.year_death:
             return 'died ' + str(self.year_death)
         else:
-            return '<dates unknown>'
+            return None
 
 @receiver(pre_save, sender=Creator)
 def callback_create_slug(sender, instance, **kwargs):
