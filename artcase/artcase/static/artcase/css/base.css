@@ -145,7 +145,7 @@ h5, h6 {
 
     /* MAIN */
 
-    .section_top {
+    .section_main {
         padding-bottom: 8rem;
     }
 
@@ -153,7 +153,7 @@ h5, h6 {
     /* FOOTER */
 
     .footer {
-        background-color: #400;
+        background-color: #500;
         font-family: 'Roboto Slab', serif;
         padding: 12rem 5rem;
         color: white;
@@ -172,3 +172,23 @@ h5, h6 {
     .footer a:active {
         color: #a00;
     }
+
+/* ARTIFACTS */
+
+.header_box_left {}
+.header_box_left h1 {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.header_box_right {
+    text-align: right;
+}
+
+.header_box_right h2 {
+    padding-top: 2.25rem;
+}
+
+#description_tab {
+    padding: 1em;
+}

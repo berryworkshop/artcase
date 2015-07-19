@@ -2,74 +2,204 @@
 {% load humanize %}
 
 {% block main %}
-<h2><a href="{% url 'artifact_list' %}">Artifact</a>: {{ object.title_english_short }}</h2>
 
-<dl class="dl-horizontal">
-    <dt>Full title, English</dt><dd>{{ object.title_english_full }}</dd>
-    <dt>Full title, Original</dt><dd>{{ object.title_original }}</dd>
-    <dt>Code Number</dt><dd>{{ object.code_number_display }}</dd>
-
-    <dt>Artists</dt>
-    {% if creators %}
-    <dd>
-        <ul>
-            {% for creator in creators %}
-                <li><a href="{{ creator.get_absolute_url }}">{{ creator }}</a></li>
-            {% endfor %}
-        </ul>
-    </dd>
-    {% else %}
-    <dd>None</dd>
+<div class="col-xs-12 col-sm-9 header_box_left">
+    <h1 class="page-header">{{ object.title_english_full }}</h1>
+    {% if object.title_original %}
+        <h3>{{ object.title_original }} <span class="small">(Original Title)</span> </h3>
     {% endif %}
+</div>
 
-    {% comment %}
-    <dt>Media</dt>
-    <dd>
-        <ul>
-        {% for medium in object.media %}
-            <li>{{ medium }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Sizes</dt>
-    <dd>
-        <ul>
-        {% for size in object.sizes %}
-            <li>{{ size }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Dates</dt>
-    <dd>
-        <ul>
-        {% for date_ in object.dates %}
-            <li>{{ date_ }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    <dt>Values</dt>
-    <dd>
-        <ul>
-        {% for value in object.values %}
-            <li>{{ value }}</li>
-        {% endfor %}
-        </ul>
-    </dd>
-    {% endcomment %}
+<div class="col-xs-12 col-sm-3 header_box_right">
+    <h2><a href="{% url 'artifact_list' %}">Artifact</a>: {{ object.format_code_number }}</h2>
+</div>
 
-    <dt>Publisher</dt>
-    <dd><a href="{{ object.publisher.get_absolute_url }}">{{ object.publisher }}</a></dd>
-    <dt>Printer</dt>
-    <dd><a href="{{ object.printer.get_absolute_url }}">{{ object.printer }}</a></dd>
+{% include "artcase/includes/nav_relative.html" %}
 
-    <dt>Description</dt><dd>{{ object.description }}</dd>
-    <dt>Glavlit</dt><dd>{{ object.glavlit }}</dd>
-    <dt>Edition State</dt><dd>{{ object.edition_state }}</dd>
-    <dt>Edition Size</dt><dd>{{ object.edition_size }}</dd>
-    <dt>Public</dt><dd>{{ object.public }}</dd>
-    <dt>Condition</dt><dd>{{ object.condition }}</dd>
-    <dt>Support</dt><dd>{{ object.support }}</dd>
+<hr>
 
-</dl>
+<div class="row">
+    <div class="col-sm-6">
+        {% if object.image %}
+        <img data-toggle="modal" data-target="#myModal" class="img-rounded img-responsive" id="artifact_image_main" src='{{ MEDIA_URL }}{{ object.image.get_file }}'>
+        {% endif %}
+
+        {% if object.artifactimage_set.all|length > 1 %}
+        <div id="pic_chooser">
+            {% for image in object.artifactimage_set.all %}
+                <a class="thumbnail col-xs-3"><img src="{{ MEDIA_URL }}{{ image.get_file }}" /></a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="clearfix visible-xs"></div>
+
+    <div class="col-sm-6">
+        {% for creator in object.creators.all %}
+            <h4>
+                <a href="{{ creator.get_absolute_url }}">{% if creator.name_latin_last %}<strong>{{ creator.name_latin_last|title }}</strong>{% endif %}{% if creator.name_latin_last and creator.name_latin_first %}, {% endif %}{% if creator.name_latin_first %}{{ creator.name_latin_first|title }}{% endif %}</a>
+
+                {% if creator.get_name_latin and creator.get_name_cyrillic %}&#47;<br />{% endif %}
+
+                <a href="{{ creator.get_absolute_url }}">{% if creator.name_cyrillic_last %}<strong>{{ creator.name_cyrillic_last|title }}</strong>{% endif %}{% if creator.name_cyrillic_last and creator.name_cyrillic_first %}, {% endif %}{% if creator.name_cyrillic_first %}{{ creator.name_cyrillic_first|title }}{% endif %}</a>
+            </h4>
+
+            <p>{% if creator.nationality %}{{ creator.nationality }}: {% endif %}{{ creator.get_lifespan }}</p>
+        {% endfor %}
+
+        <div id="tab_section">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#metadata_tab" data-toggle="tab">Data</a></li>
+                <li><a href="#description_tab" data-toggle="tab">Narrative</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#values_tab" data-toggle="tab">Values</a></li>
+                {% endif %}
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="metadata_tab">
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            {% if artifact.media.all %}
+                                <tr>
+                                    <th>Media</th><td>{{ artifact.media.all|join:", " }}{% if artifact.support %} on {{ artifact.support }}{% endif %}</td>
+                                </tr>
+                            {% endif %}
+                            {% for size in artifact.sizes.all %}
+                                <tr>
+                                    <th>Size</th><td>{{ size }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% for date in artifact.dates.all %}
+                                <tr>
+                                    <th>Date {{ date.qualifier|title }}</th><td>{{ date.str_date_only }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% if artifact.edition %}
+                                <tr>
+                                    <th>Edition</th><td>{{ artifact.edition }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if artifact.condition %}
+                                <tr>
+                                    <th>Condition</th><td>{{ artifact.condition }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if artifact.printer %}
+                                <tr><th>Printed By</th><td><a href="{{ artifact.printer.get_absolute_url }}"><strong>{{ artifact.printer.name }}</strong></a><br />{{ artifact.printer.location }}</td></tr>
+                            {% endif %}
+                            {% if artifact.publisher %}
+                                <tr><th>Published By</th><td><a href="{{ artifact.publisher.get_absolute_url }}"><strong>{{ artifact.publisher.name }}</strong></a><br />{{ artifact.publisher.location }}</td></tr>
+                            {% endif %}
+                            <!--{% if artifact.inscription_set.all %}
+                                <tr>
+                                    <th>Inscriptions</th>
+                                    <td>
+                                        {% for inscription in artifact.inscription_set.all %}
+                                            {{ inscription.description }}{% if not forloop.last %}<br />
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if artifact.cultures.all %}
+                                <tr>
+                                    <th>Cultures</th>
+                                    <td>
+                                        {% for culture in artifact.cultures.all %}
+                                            <a href="{{ culture.get_absolute_url }}">{{ culture }}</a>{% if not forloop.last %} // {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% if artifact.subjects.all %}
+                                <tr>
+                                    <th>Subjects</th>
+                                    <td>
+                                        {% for subject in artifact.subjects.all %}
+                                            <a href="{{ subject.get_absolute_url }}">{{ subject }}</a>{% if not forloop.last %} // {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endif %}-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="description_tab">
+                    <p>{{ artifact.description|safe }}</p>
+                    <p>{{ artifact.glavlit|safe }}</p>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="tab-pane" id="values_tab">
+                    {% if artifact.values.all %}
+                        <table class="table table-striped table-bordered">
+                            <tr><th>Type</th><th>Amount</th><th>Date</th><th>Agent</th></tr>
+                        {% for value in artifact.values.all %}
+                            <tr><td>{{ value.get_value_type_display }}</td><td>${{ value.value|floatformat:2|intcomma }}</td><td>{{ value.date }}</td><td>{{ value.agent }}</td></tr>
+                        {% endfor %}
+                        </table>
+                    {% else %}
+                        <p><i>No values are present.</i></p>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+                   
+    {% block modal %}
+    <div class="modal fade" id="myModal" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                    <h4 class="modal-title"><small>{{ object.format_code_number }}</small>: {{ object.title_english_full }}</h4>
+
+
+                </div>
+                <div class="modal-body">
+
+                    <div id="modal_carousel" class="carousel slide" data-ride="carousel" data-interval="">
+
+                        <div class="carousel-inner text-center">
+                            {% if object.artifactimage_set.all %}
+                                {% for image in object.artifactimage_set.all %}
+                                    <div class="item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ MEDIA_URL }}{{ image.get_file }}" class="modal_img center-block" />
+                                        <div class="modal_caption">
+                                            <h4>{{ image.filename }}</h4>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <img src="http://placehold.it/600x600" alt="..." class="modal_img center-block active" />
+                                <div class="modal_caption">
+                                    <h4><small>This artifact does not have any photographs.</small></h4>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        {% if object.artifactimage_set.all|length > 1 %}
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#modal_carousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#modal_carousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {% endblock modal %}
+
 
 {% endblock main %}

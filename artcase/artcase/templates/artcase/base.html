@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{{ site_title }}</title>
+    <title>{{ site_title }}{% if page_title %} | {{ page_title }}{% endif %}</title>
 
     {% block head_meta %}
         <meta charset="utf-8">
@@ -37,7 +37,7 @@
     {% endblock header %}
     </header>
 
-    <section class="section_top">
+    <section class="section_main">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">

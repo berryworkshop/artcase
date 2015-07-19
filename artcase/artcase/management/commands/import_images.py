@@ -81,9 +81,7 @@ class Importer(object):
         # get an artifact to work with
         code_number = self.get_code_number(input_file.name)
         a, created = Artifact.objects.get_or_create(
-            code_number=code_number,
-            title_english_short="Lorem Ipsum",
-            public=True)
+            code_number=code_number)
 
         # outfile must be unique
         while ArtifactImage.objects.filter(filename=outfile).count() > 0:

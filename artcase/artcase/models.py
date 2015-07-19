@@ -32,7 +32,7 @@ class Artifact(models.Model):
     sizes = models.ManyToManyField('Size', blank = True)
     dates = models.ManyToManyField('Date', blank = True)
     values = models.ManyToManyField('Value', blank = True)
-    category  = models.ManyToManyField('Category', blank=True)
+    categories = models.ManyToManyField('Category', blank=True)
 
     #cultures = models.ManyToManyField('Culture', blank = True)
     #subjects  = models.ManyToManyField('Subject', blank = True)
@@ -57,7 +57,7 @@ class Artifact(models.Model):
 
     glavlit = models.CharField(max_length = 255, blank=True, null=True)
 
-    edition_state = models.CharField(max_length=255, blank=True)
+    edition_state = models.CharField(max_length=255, blank=True, null=True)
     edition_size  = models.IntegerField(blank=True, null=True)
 
     public = models.BooleanField(
@@ -93,7 +93,14 @@ class Artifact(models.Model):
         return (self.code_number,)  # must return a tuple
 
     def edition(self):
-        return "{0} / {1}".format(self.edition_state, str(self.edition_size))
+        if self.edition_state and self.edition_size:
+            return "{0} / {1}".format(self.edition_state, "{:,}".format(self.edition_size))
+        elif self.edition_state:
+            return self.edition_state
+        elif self.edition_size:
+            return "{:,}".format(self.edition_size)
+        else:
+            return None
 
     def get_absolute_url(self):
         return reverse('artifact', kwargs={'code_number': self.code_number})
@@ -105,6 +112,7 @@ class Artifact(models.Model):
     def code_number_display(self):
         code = self.code_number
         return code.replace('-', ' ').upper()
+
 
     def image(self):
         images_primary = ArtifactImage.objects.filter(
@@ -294,16 +302,17 @@ class Size(models.Model):
 
 class Date(models.Model):
     def __str__(self):
+        return "{}: {}".format(self.qualifier, self.str_date_only())
+
+    def str_date_only(self):
         if self.approx_year:
-            return "{}: c.{}".format(self.qualifier, self.year)
+            return "c.{}".format(self.year)
         if self.approx_month:
-            return "{}: {}".format(self.qualifier, self.year)
+            return "{}".format(self.year)
         if self.approx_day:
-            return "{}: {} {}".format(
-                self.qualifier, self.month_str, self.year)
+            return "{} {}".format(self.month_str, self.year)
         else:
-            return "{}: {} {} {}".format(
-                self.qualifier, self.day, self.month_str, self.year)
+            return "{} {} {}".format(self.day, self.month_str, self.year)
 
     class Meta:
         ordering = ["date"]
