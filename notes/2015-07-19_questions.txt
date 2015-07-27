@@ -1,0 +1,41 @@
+Questions
+    Original artifact titles (in Russian, etc.?)
+    Page and category blurbs?
+    Categories
+        Which artifacts?
+        Which tile images?
+    Images
+        Larger images?
+    Artist
+        nationalities?
+        dates?
+    Artifact
+        Next set? I'll take whatever available.
+        Categories?
+        Cultures?
+        Subjects?
+    Organizations
+        Duplicates?
+
+Next Steps
+    get project online; regular live updates
+    search
+        keyword aviation not finding PP 004
+        artifacts at all?  code numbers?
+    Artist dates not coming from notes field?
+    change artifact to "Poster" throughout
+    Categories: rigidly separated
+    input bug: repeat fields: clear after each line item
+        make sure Iskusstvo is accurate   
+        tests for this and other analogous situations
+    create basic edit pages
+        artifact
+        organization (printer/publisher)
+        creator/artist
+    issues
+        duplicate dates?  Get_or_create not working properly?
+        titles: strip periods
+        creators: same first and last name
+
+Transliteration: can be automatic
+Map for locations?  Would need to be very systematic
