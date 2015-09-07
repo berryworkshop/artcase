@@ -26,6 +26,7 @@ UPLOAD_ROOT = MEDIA_ROOT + 'artcase/pictures/uploads/'
 #email
 EMAIL_HOST          = 'localhost'
 EMAIL_PORT          = 1025
+
 #EMAIL_HOST_USER     = '<mailbox>'
 #EMAIL_HOST_PASSWORD = '<password>'
 #DEFAULT_FROM_EMAIL  = '<address>'
