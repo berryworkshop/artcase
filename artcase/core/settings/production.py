@@ -17,7 +17,6 @@ DATABASES = {
 STATIC_URL = '/static/'
 STATIC_ROOT =  BASE_DIR.parent().parent().child('cellini_static')
 
-
 MEDIA_URL  = '/media/'
 MEDIA_ROOT =  BASE_DIR.parent().parent().child('cellini_media')
 

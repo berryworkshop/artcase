@@ -7,7 +7,6 @@ BASE_DIR =  Path(__file__).ancestor(3)
 # 2015_artcase_project
 PROJ_DIR = BASE_DIR.parent
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '!rf_j7k6sr70vhrv&(^*o0p!j7ug0b!(3gi(04cipqu7o&d-2s'
 

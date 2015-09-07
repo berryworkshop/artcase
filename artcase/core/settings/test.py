@@ -18,12 +18,9 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  PROJ_DIR.child('static')
-STATICFILES_DIRS = (BASE_DIR.child('artcase').child('static'),)
-
 
 MEDIA_URL = '/media/test/'
 TEST_DATA = os.path.join(BASE_DIR, 'artcase/tests/test_data/')
-
 
 MEDIA_ROOT =  PROJ_DIR.child('media')
 #MEDIA_URL  = 'http://localhost:1917/media/'

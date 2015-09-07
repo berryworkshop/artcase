@@ -18,8 +18,6 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  PROJ_DIR.child('static')
-STATICFILES_DIRS = (BASE_DIR.child('artcase').child('static'),)
-
 
 MEDIA_URL  = '/media/'
 MEDIA_ROOT =  '/Users/aljabear/Projects/cellini_2015/media'
