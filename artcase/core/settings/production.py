@@ -1,3 +1,4 @@
+from unipath import Path
 from .base import *
 
 ALLOWED_HOSTS = [
