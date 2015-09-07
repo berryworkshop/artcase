@@ -172,3 +172,23 @@ h5, h6 {
     .footer a:active {
         color: #a00;
     }
+
+/* ARTIFACTS */
+
+.header_box_left {}
+.header_box_left h1 {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.header_box_right {
+    text-align: right;
+}
+
+.header_box_right h2 {
+    padding-top: 2.25rem;
+}
+
+#description_tab {
+    padding: 1em;
+}
