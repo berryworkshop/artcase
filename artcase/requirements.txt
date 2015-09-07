@@ -14,3 +14,5 @@ six==1.9.0
 slugify==0.0.1
 Unidecode==0.4.17
 Unipath==1.1
+URLObject==2.4.0
+wheel==0.24.0
