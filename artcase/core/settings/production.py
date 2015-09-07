@@ -16,10 +16,10 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  BASE_DIR.parent().parent().child('cellini_static')
+STATIC_ROOT =  BASE_DIR.ancestor(2).child('cellini_static')
 
 MEDIA_URL  = '/media/'
-MEDIA_ROOT =  BASE_DIR.parent().parent().child('cellini_media')
+MEDIA_ROOT =  BASE_DIR.ancestor(2).child('cellini_media')
 
 #MEDIA_URL  = 'http://localhost:1917/media/'
 UPLOAD_ROOT = MEDIA_ROOT + 'artcase/pictures/uploads/'
