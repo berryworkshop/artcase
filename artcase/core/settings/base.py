@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     #'widget_tweaks',
     'django.contrib.humanize',
     'django_extensions',
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (
