@@ -19,7 +19,7 @@ DATABASES = {
 }
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  BASE_DIR.ancestor(2).child('cellini_static')
+STATIC_ROOT =  BASE_DIR.ancestor(3).child('cellini_static')
 
 MEDIA_URL  = '/media/'
 MEDIA_ROOT =  BASE_DIR.ancestor(2).child('cellini_media')
