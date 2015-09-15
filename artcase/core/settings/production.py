@@ -2,7 +2,10 @@ from unipath import Path
 from .base import *
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1',
+    'localhost',
+    'cellini.allanberry.webfactional.com',
+    'cellini.berryworkshop.com'
 ]
 
 DEBUG = False
