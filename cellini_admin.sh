@@ -30,7 +30,7 @@ PROJECTLOC="/home/allanberry/webapps/cellini/cellini_2015/artcase"
 DEFAULT_ARGS="--workers=3 --settings=core.settings.production"
 
 # Do not edit below this line
-BASE_CMD="$PYTHON $PROJECTLOC/manage.py run_gunicorn $DEFAULT_ARGS"
+BASE_CMD="gunicorn core.wsgi:application $DEFAULT_ARGS"
 SERVER_PID="$PROJECTLOC/$SERVER1_PORT.pid"
 
 start_server () {
