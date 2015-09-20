@@ -21,7 +21,7 @@ DATABASES = {
 STATIC_URL = '/static/'
 STATIC_ROOT =  BASE_DIR.ancestor(3).child('cellini_static')
 
-MEDIA_URL  = '/media/'
+MEDIA_URL  = '/static/media/'
 MEDIA_ROOT =  STATIC_ROOT.child('media')
 
 #MEDIA_URL  = 'http://localhost:1917/media/'
