@@ -7,7 +7,6 @@ ALLOWED_HOSTS = [
 ]
 
 DEBUG = True
-TEMPLATE_DEBUG = True
 
 DATABASES = {
     'default': {

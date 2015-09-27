@@ -128,7 +128,10 @@ class SearchResultsView(TemplateView):
                 ['code_number', 'title_english_short',
                  'title_english_full', 'title_original',
                  'description', 'glavlit'])
-            artifact_list = Artifact.objects.filter(artifact_query, public=True)
+
+            artifact_list = Artifact.objects.filter(artifact_query)
+
+            print(artifact_list)
 
             creator_query = get_query(query_string,
                 ['name_latin_last', 'name_latin_first',
