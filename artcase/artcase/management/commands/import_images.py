@@ -8,6 +8,9 @@ from django.test import TestCase
 from artcase.models import Artifact, ArtifactImage
 from django.utils.text import slugify
 
+# These commands are for images themselves, not the metadata about those images.
+# Metadata is imported by the other file/command (import_csv.py)
+
 
 class Command(BaseCommand):
     help = 'Imports images, either singly, or as a folder.'

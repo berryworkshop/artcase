@@ -23,9 +23,13 @@ class ArtifactImageAdmin(admin.ModelAdmin):
     list_editable = ['role']
     list_filter =  ['role']
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name_russian', 'description')
+    list_editable = ['name', 'name_russian', 'description']
+
 
 admin.site.register(Artifact)
 admin.site.register(ArtifactImage, ArtifactImageAdmin)
 admin.site.register(Creator, CreatorAdmin)
 admin.site.register(Organization)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)

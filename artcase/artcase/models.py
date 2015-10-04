@@ -415,6 +415,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     name = models.CharField(max_length=100, unique=True)
+    name_russian = models.CharField(max_length=100)
     slug = models.SlugField(
         max_length=100, unique=True, blank=False, null=False)
     description = models.TextField(max_length = 10000, blank = True, null=True)
