@@ -90,12 +90,13 @@ class OrganizationListView(ListView):
 class CategoryView(DetailView):
     model = Category
     template_name = "artcase/category.html"
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
         artifacts = Artifact.objects.all()
         context.update({
-            'artifacts': artifacts,
+            'object_list': artifacts,
         })
         return context
 

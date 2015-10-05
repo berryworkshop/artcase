@@ -2,25 +2,14 @@
 {% load humanize %}
 
 {% block main %}
-<h2><a href="{% url 'category_list' %}">Category</a>: {{ object }}</h2></h2>
+<h2><a href="{% url 'category_list' %}">Category</a>: {{ object }} ({{ object.name_russian }})</h3>
 
 <dl class="dl-horizontal">
     <dt>Name</dt><dd>{{ object.name }}</dd>
     <dt>Objects</dt><dd>{{ object.description }}</dd>
-
-    <dt>Posters</dt>
-    {% if artifacts %}
-
-    <dd>
-        <ul>
-            {% for artifact in artifacts %}
-                <li><a href="{{ artifact.get_absolute_url }}">{{ artifact }}</a></li>
-            {% endfor %}
-        </ul>
-    </dd>
-    {% else %}
-    <dd>None</dd>
-
-    {% endif %}
 </dl>
+
+<h3>Posters in this category</h3>
+{% include 'artcase/includes/slides_artifact.html' %}  
+
 {% endblock main %}
