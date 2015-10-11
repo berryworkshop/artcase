@@ -5,8 +5,9 @@
 
     <div class="slide col-xs-6 col-sm-4 col-md-3">
         <a href="{{category.get_absolute_url}}" class="thumbnail" style="background-image: url({% static 'artcase/img/categories/' %}{{category.image}});">
-            <h3 class='slide_title'>{{ category }}</h3>
+            <h3 class='slide_title heavy'>{{ category }}</h3>
             <h3 class='slide_title'>{{ category.name_russian }}</h3>
+            <div class="slide_bg"></div>
         </a>
     </div>
     {% endfor %}

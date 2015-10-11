@@ -5,6 +5,7 @@
     <div class="slide col-xs-6 col-sm-4 col-md-3">
         <a href="{{artifact.get_absolute_url}}" class="thumbnail" style="background-image: url('{{ artifact.image.get_file }}');">
             <h3 class='slide_title'>{{ artifact|truncatewords:16 }}</h3>
+            <div class="slide_bg"></div>
         </a>
     </div>
     {% endfor %}

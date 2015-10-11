@@ -105,9 +105,14 @@ class Artifact(models.Model):
     def get_absolute_url(self):
         return reverse('artifact', kwargs={'code_number': self.code_number})
 
+    def title(self):
+        title = self.title_english_full
+        if not title:
+            title = 'No Title'
+        return title
+
     def __str__(self):
-        return '{}: {}'.format(self.format_code_number(),
-            self.title_english_full)
+        return '{}: {}'.format(self.format_code_number(), self.title())
 
     def code_number_display(self):
         code = self.code_number
