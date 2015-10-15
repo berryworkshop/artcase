@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, ListView
-from django.views.generic.detail import DetailView
+from django.views.generic.detail import DetailView, SingleObjectMixin
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from artcase.models import Artifact, Creator, Organization, Category
 from .search import get_query
@@ -41,19 +41,24 @@ class ArtifactListView(ListView):
         return qs
 
 
-class CreatorView(DetailView):
-    model = Creator
-    template_name = "artcase/creator.html"
+class CreatorView(SingleObjectMixin, ListView):
     paginate_by = 12
+    template_name = "artcase/creator.html"
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Creator.objects.all())
+        return super(CreatorView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CreatorView, self).get_context_data(**kwargs)
-        creator = Creator.objects.get(slug=self.kwargs['slug'])
-        artifacts = Artifact.objects.filter(creators=creator)#.exclude(title_english_short='Untitled')
         context.update({
-            'object_list': artifacts,
+            'category': self.object,
+            # 'object_list': ''
         })
         return context
+
+    def get_queryset(self):
+        return self.object.artifact_set.all()
 
 
 class CreatorListView(ListView):
@@ -87,17 +92,25 @@ class OrganizationListView(ListView):
         return qs
 
 
-class CategoryView(DetailView):
-    model = Category
+class CategoryView(SingleObjectMixin, ListView):
+    paginate_by = 12
     template_name = "artcase/category.html"
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Category.objects.all())
+        return super(CategoryView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
-        artifacts = Artifact.objects.all()
         context.update({
-            'artifacts': artifacts,
+            'category': self.object,
         })
         return context
+
+    def get_queryset(self):
+        # Turned off temporarily, until I can get some items into categories.
+        # return self.object.artifact_set.all()
+        return Artifact.objects.all()
 
 
 class CategoryListView(ListView):

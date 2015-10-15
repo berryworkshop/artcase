@@ -105,9 +105,14 @@ class Artifact(models.Model):
     def get_absolute_url(self):
         return reverse('artifact', kwargs={'code_number': self.code_number})
 
+    def title(self):
+        title = self.title_english_full
+        if not title:
+            title = 'No Title'
+        return title
+
     def __str__(self):
-        return '{}: {}'.format(self.format_code_number(),
-            self.title_english_full)
+        return '{}: {}'.format(self.format_code_number(), self.title())
 
     def code_number_display(self):
         code = self.code_number
@@ -415,6 +420,7 @@ class Category(models.Model):
         verbose_name_plural = "categories"
 
     name = models.CharField(max_length=100, unique=True)
+    name_russian = models.CharField(max_length=100)
     slug = models.SlugField(
         max_length=100, unique=True, blank=False, null=False)
     description = models.TextField(max_length = 10000, blank = True, null=True)

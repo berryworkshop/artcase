@@ -2,6 +2,7 @@
   pk: 1
   fields:
     name: "Agriculture"
+    name_russian: "Сельское Озяйство"
     slug: "agriculture"
     description: "Soviet agribusiness, specific farm programs, propaganda of Soviet farm production and collective farms."
     image: agriculture.jpg
@@ -9,41 +10,47 @@
   pk: 2
   fields:
     name: "Civil War"
+    name_russian: "Гражданская Война"
     slug: "civwar"
-    description: "Posters made during the Russian Civil War or having a Civil War theme.  Most are from 1919-1923."
+    description: "Posters made during the civil war or having a civil war theme. Most are actual posters from 1919-1923."
     image: civilwar.jpg
 - model: "artcase.category"
   pk: 3
   fields:
     name: "Cold War"
+    name_russian: "Холодная Война"
     slug: "coldwar"
     description: "The Soviet perspective of the Cold War (anti-USA) makes up the large part of this category."
     image: civilwar.jpg
 - model: "artcase.category"
   pk: 4
   fields:
-    name: "Comecon or Warsaw Pact"
+    name: "Comecon, Warsaw Pact"
+    name_russian: "СЭВ (Совет Экономической Взаимопомощи)"
     slug: "comecon"
-    description: "Mostly posters showing 'life' in the USSR with some cross-over into Youth and Revolution."
+    description: "Posters from the nations of the former Comecon organization and the Warsaw Pact membership."
     image: comecon.jpg
 - model: "artcase.category"
   pk: 5
   fields:
     name: "Communist Culture"
+    name_russian: "Коммунистическая Культура"
     slug: "culture"
-    description: "The Soviet perspective of the Cold War (anti-USA) makes up the large part of this category."
+    description: "Mostly posters showing 'life' in the USSR with some cross-over into youth and revolution."
     image: civilwar.jpg
 - model: "artcase.category"
   pk: 6
   fields:
     name: "Economy"
+    name_russian: "Экономика"
     slug: "economy"
-    description: "Soviet economic themes, specific programs like the 5 Year Plan, banking and savings posters."
+    description: "Soviet economic themes, specific programs like the 5 Year Plan, banking and savings posters are also in this set."
     image: economy.jpg
 - model: "artcase.category"
   pk: 7
   fields:
     name: "Events"
+    name_russian: "Мероприятия"
     slug: "events"
     description: "Specific events in the USSR like festivals, elections, party congresses, political events and holidays."
     image: events.jpg
@@ -51,20 +58,23 @@
   pk: 8
   fields:
     name: "Industry"
+    name_russian: "Индустрия и Промышленность"
     slug: "industry"
-    description: "Soviet industry themes, specific industrial programs, and industrial progress."
+    description: "Soviet industry themes, specific industrial programs, industrial progress in the USSR."
     image: industry.jpg
 - model: "artcase.category"
   pk: 9
   fields:
     name: "International"
+    name_russian: "Зарубежный"
     slug: "international"
-    description: "Posters from communist nations or organizations not in the Comecon nor in the Warsaw Pact. Some communist Latin American posters are found here."
+    description: "Posters from communist nations or organizations not in the Comecon nor in the Warsaw Pact, some communist Latin American posters are found here."
     image: industry.jpg
 - model: "artcase.category"
   pk: 10
   fields:
     name: "Lenin"
+    name_russian: "Ленин"
     slug: "lenin"
     description: "Themes with Lenin and posters specifically about Lenin."
     image: industry.jpg
@@ -72,20 +82,23 @@
   pk: 11
   fields:
     name: "Military"
+    name_russian: "Военный"
     slug: "military"
-    description: "Posters propagating the Soviet military from the 1920s to 1991."
+    description: "Posters propagating the Soviet military from the 1920s to 1991 are found here."
     image: industry.jpg
 - model: "artcase.category"
   pk: 12
   fields:
     name: "Revolution"
+    name_russian: "Революция"
     slug: "revolution"
-    description: "Posters commemorating anniversaries of 1905, 1917 and 1922, with some other revolutionary themes."
+    description: "Posters commemorating anniversaries of 1905, 1917 and 1922 are here, some other revolutionary themes do fall into this category."
     image: revolution.jpg
 - model: "artcase.category"
   pk: 13
   fields:
     name: "Stalin"
+    name_russian: "Сталин"
     slug: "stalin"
     description: "Themes with Stalin and posters specifically about Stalin."
     image: revolution.jpg
@@ -93,6 +106,7 @@
   pk: 14
   fields:
     name: "Women"
+    name_russian: "Женщины"
     slug: "women"
     description: "Posters showing women or specific in their messages to women."
     image: women.jpg
@@ -100,6 +114,7 @@
   pk: 15
   fields:
     name: "Workers"
+    name_russian: "Рабочие"
     slug: "workers"
     description: "Posters showing workers or specific to worker themes."
     image: workers.jpg
@@ -107,13 +122,15 @@
   pk: 16
   fields:
     name: "World War II"
+    name_russian: "Великая Отечественная Война"
     slug: "worldwar2"
-    description: "<h2>Posters from WWII or commemorating the anniversary of the war, also posters made during the post-WWII clean-up."
+    description: "Posters from WWII or commemorating the anniversary of the war, also posters made during the post-WWII clean-up are found here."
     image: worldwar2.jpg
 - model: "artcase.category"
   pk: 17
   fields:
     name: "Youth"
+    name_russian: "Молодёжь"
     slug: "youth"
     description: "Portrayal of Soviet children, communist youth organizations such as Young Pioneers and Komsomol."
     image: youth.jpg
