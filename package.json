@@ -1,0 +1,32 @@
+{
+  "name": "artcase",
+  "version": "1.0.0",
+  "description": "A place to put art.",
+  "main": "./artcase/manage.py",
+  "scripts": {
+    "test": "./artcase/manage.py test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berryworkshop/artcase.git"
+  },
+  "keywords": [
+    "art",
+    "catalog"
+  ],
+  "author": "Allan J. Berry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/berryworkshop/artcase/issues"
+  },
+  "homepage": "https://github.com/berryworkshop/artcase#readme",
+  "dependencies": {
+    "d3": "^4.2.6",
+    "riot": "^2.6.2",
+    "sass": "^0.5.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2"
+  }
+}
