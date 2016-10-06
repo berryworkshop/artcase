@@ -35,6 +35,8 @@ gulp.task('build_js', function() {
 
     function build(src, dest) {
         return gulp.src(src)
-            .pipe(gulp.dest(dest))
+        .pipe(jshint({asi: true}))
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(gulp.dest(dest))
     } 
 })
