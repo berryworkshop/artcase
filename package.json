@@ -25,9 +25,11 @@
     "riot": "^2.6.2"
   },
   "devDependencies": {
+    "babelify": "^7.3.0",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.1",
     "gulp-sass": "^2.3.2",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.3"
   }
 }
