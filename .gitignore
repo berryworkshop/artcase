@@ -21,4 +21,4 @@ __pycache__/
 
 # work is done in src.  No real content should be stored in static
 # will confirm this later
-# static/
+static/
