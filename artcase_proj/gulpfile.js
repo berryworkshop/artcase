@@ -1,14 +1,30 @@
-'use strict';
+/* File: gulpfile.js */
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+// grab our gulp packages
+var gulp  = require('gulp'),
+    gutil = require('gulp-util'),
+    sass   = require('gulp-sass')
 
-gulp.task('sass', function () {
-  return gulp.src('./**/static/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./css'));
-});
+gulp.task('default', function() {
+  return gutil.log('Gulp functional.')
+})
 
-gulp.task('sass:watch', function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
-});
+gulp.task('watch', function() {
+    gulp.watch('./**/*.scss', ['build_css'])
+})
+
+gulp.task('build_css', function() {
+    var apps = ['core', 'artcase']
+
+    apps.forEach(function(app_name) {
+        var src  = './'+ app_name +'/src/**/*.scss',
+            dest = './'+ app_name +'/static/'
+        build(src, dest)
+    })
+
+    function build(src, dest) {
+        return gulp.src(src)
+            .pipe(sass())
+            .pipe(gulp.dest(dest))
+    } 
+})

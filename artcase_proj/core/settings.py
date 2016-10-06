@@ -85,4 +85,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '%s/static/' % PROJECT_DIR
+STATIC_ROOT = '%s/static/' % BASE_DIR
