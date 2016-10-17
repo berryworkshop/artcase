@@ -1,7 +1,8 @@
-$color1 : #eee;
-$color2 : #ddd;
+$color_bg : red;
+$color_text : #444;
+
 body {
-    color: $color2;
-    background-color: $color1;
+    color: $color_text;
+    background-color: $color_bg;
     padding: 1em;
 }
