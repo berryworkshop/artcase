@@ -1,6 +1,40 @@
-body {
+html {
   color: #444;
-  background-color: silver;
-  padding: 1em; }
+  background-color: silver; }
+
+body {
+  margin: 0;
+  padding: 0; }
+
+div#page_container {
+  margin: 0 auto;
+  background-color: white; }
+  div#page_container header {
+    color: white;
+    background-color: black; }
+  div#page_container main {
+    padding: 1rem; }
+  div#page_container aside {
+    background-color: #ddd;
+    padding: 1rem; }
+  div#page_container footer {
+    color: white;
+    background-color: black; }
+
+/* print */
+/* desktop */
+@media only screen {
+  div#page_container {
+    max-width: 800px; } }
+
+/* mobile */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  div#page_container {
+    max-width: none; } }
+
+/* tablet */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  div#page_container {
+    max-width: none; } }
 
 /*# sourceMappingURL=base.css.map*/

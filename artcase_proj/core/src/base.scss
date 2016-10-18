@@ -1,8 +1,60 @@
 $color_bg : silver;
 $color_text : #444;
 
-body {
+html {
     color: $color_text;
     background-color: $color_bg;
-    padding: 1em;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+div#page_container {
+    margin: 0 auto;    
+    background-color: white;
+
+    header {    
+        color: white;
+        background-color: black;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    aside {
+        background-color: #ddd;
+        padding: 1rem;
+    }
+
+    footer {    
+        color: white;
+        background-color: black;
+    }
+}
+
+/* print */
+@media only print {}
+
+/* desktop */
+@media only screen {
+    div#page_container {
+        max-width: 800px;
+    }
+}
+
+/* mobile */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    div#page_container {
+        max-width: none;
+    }
+}
+
+/* tablet */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    div#page_container {
+        max-width: none;
+    }
 }
