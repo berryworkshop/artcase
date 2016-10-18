@@ -1,15 +1,16 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'artcase/base.css' %}" />
+{% endblock styles %}
+
 {% block main %}
     <main>
-        <h1>{% lorem 5 w %}</h1>
-        <p>{% lorem 1 p %}</p>
-
-        <div id="container"></div>
+        <h1>This is Artcase</h1>
     </main>
 {% endblock main %}
-
 
 {% block aside %}
     <aside>

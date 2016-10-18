@@ -1,11 +1,18 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+
 var config = {
+    context: __dirname + "/artcase_proj",
     entry: {
-        bundle: './artcase_proj/core/src/core/base.jsx'
+        // base css, not embedded in javascript
+        'core/static/core/base.css':        './core/src/base.scss',
+        'artcase/static/artcase/base.css':  './artcase/src/base.scss'
+
     },
     devtool: 'source-map',
     output: {
-        path: './artcase_proj/core/static/core/',
-        filename: '[name].js'
+        path: './artcase_proj/',
+        filename: '[name]'
     },
     module: {
         loaders: [
@@ -18,7 +25,7 @@ var config = {
             },
             {
                 test: /\.scss$/,
-                loaders: [ 'style', 'css?sourceMap', 'sass?sourceMap' ]
+                loader: ExtractTextPlugin.extract("style", "css!sass")
             }
         ]
     },
@@ -28,11 +35,12 @@ var config = {
         'react-dom': 'ReactDOM',
         'd3': 'd3'
     },
-    // plugins: {
+    plugins: [
     //     new webpack.ProvidePlugin({
     //         d3: 'd3'
     //     })
-    // }
+        new ExtractTextPlugin('[name]')
+    ],
     resolve: {
         // require('file') instead of require('file.js')
         extensions: ['', '.js', '.jsx', '.json', '.css', '.scss']
