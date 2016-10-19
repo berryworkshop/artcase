@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block main %}
+    <main>
+        <h1>Work List</h1>
+        <ul>
+        {% for work in object_list %}
+            <li><a href="{{ work.get_absolute_url }}">{{ work.title }}</a></li>
+        {% empty %}
+            <li>No works yet.</li>
+        {% endfor %}
+        </ul>
+    </main>
+{% endblock main %}
+
+{% block aside %}
+    <aside>
+        
+    </aside>
+{% endblock aside %}

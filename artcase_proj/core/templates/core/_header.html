@@ -1,9 +1,10 @@
 <header>
-    Artcase
+    <a href="{% url 'home' %}">Artcase</a>
 
     <nav>
         <ul>
-            <li><a href="{% url 'artcase:work_create' %}">Create a Work</a></li>
+            <li><a href="{% url 'artcase:work_create' %}">Work Create</a></li>
+            <li><a href="{% url 'artcase:work_list' %}">Work List</a></li>
         </ul>
     </nav>
 
