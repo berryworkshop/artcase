@@ -1,5 +1,6 @@
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.detail import DetailView
 from .models import Work
 
 class IndexView(TemplateView):
@@ -13,3 +14,7 @@ class WorkCreateView(CreateView):
         'condition', 'status', 'notes',
         'subjects', 'location', 'medium', 'creators', 'values', 'categories', 'images', 'collections'
         ]
+
+class WorkDetailView(DetailView):
+    model = Work
+    slug_field = 'sku'

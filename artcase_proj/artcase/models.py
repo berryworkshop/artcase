@@ -1,7 +1,10 @@
-from django.db import models
-from taggit.managers import TaggableManager
 from .fields import WhereWhenField
+from django.db import models
+from django.urls import reverse
 from django.utils.timezone import now
+from taggit.managers import TaggableManager
+
+
 
 class Base(models.Model):
     class Meta:
@@ -14,7 +17,7 @@ class Work(Base):
         max_length=100,
         blank=False,
         )
-    sku = models.CharField(
+    sku = models.SlugField(
         max_length=100,
         blank=False,
         )
@@ -110,6 +113,9 @@ class Work(Base):
         'collection',
         blank=True,
         )
+
+    def get_absolute_url(self):
+        return reverse('artcase:work_detail', args=[self.sku])
 
 
 class Creator(Base):
