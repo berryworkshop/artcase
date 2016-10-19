@@ -1,0 +1,7 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'artcase/base.css' %}" />
+{% endblock styles %}

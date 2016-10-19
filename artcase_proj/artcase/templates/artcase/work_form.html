@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block main %}
+    <main>
+        <h1>Create Work</h1>
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+        </form>
+    </main>
+{% endblock main %}
+
+{% block aside %}
+    <aside>
+        
+    </aside>
+{% endblock aside %}

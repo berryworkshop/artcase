@@ -29,16 +29,19 @@ class Work(Base):
         max_digits=6,
         decimal_places=3,
         blank=True,
+        null=True,
         )
     size_w = models.DecimalField(
         max_digits=6,
         decimal_places=3,
         blank=True,
+        null=True,
         )
     size_d = models.DecimalField(
         max_digits=6,
         decimal_places=3,
         blank=True,
+        null=True,
         )
     size_unit = models.CharField(
         max_length=2,
@@ -75,15 +78,17 @@ class Work(Base):
         blank=True,
         )
 
-    subjects = TaggableManager()
+    subjects = TaggableManager(blank=True)
 
     location = models.ForeignKey(
         'location',
         blank=True,
+        null=True,
         )
     medium = models.ForeignKey(
         'medium',
         blank=True,
+        null=True,
         )
     creators = models.ManyToManyField(
         'creator',
@@ -219,6 +224,7 @@ class Category(Base):
         'self',
         on_delete=models.CASCADE,
         blank=True,
+        null=True,
         )
 
 

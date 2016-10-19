@@ -6,9 +6,30 @@ html {
     background-color: $color_bg;
 }
 
-body {
-    margin: 0;
-    padding: 0;
+body {}
+
+/* print */
+@media only print {}
+
+/* desktop */
+@media only screen {
+    div#page_container {
+        max-width: 800px;
+    }
+}
+
+/* mobile */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    div#page_container {
+        max-width: none;
+    }
+}
+
+/* tablet */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    div#page_container {
+        max-width: none;
+    }
 }
 
 div#page_container {
@@ -32,29 +53,5 @@ div#page_container {
     footer {    
         color: white;
         background-color: black;
-    }
-}
-
-/* print */
-@media only print {}
-
-/* desktop */
-@media only screen {
-    div#page_container {
-        max-width: 800px;
-    }
-}
-
-/* mobile */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    div#page_container {
-        max-width: none;
-    }
-}
-
-/* tablet */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-    div#page_container {
-        max-width: none;
     }
 }
