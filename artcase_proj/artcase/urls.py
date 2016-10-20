@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import IndexView, WorkCreateView, WorkUpdateView, WorkListView, WorkDetailView
+from .views import IndexView, WorkCreateView, WorkUpdateView, WorkDeleteView, WorkListView, WorkDetailView
 
 urlpatterns = [
     url(r'^$',
@@ -12,4 +12,6 @@ urlpatterns = [
         WorkDetailView.as_view(), name='work_detail'),
     url(r'^work/(?P<slug>[-\w]+)/update$', 
         WorkUpdateView.as_view(), name='work_update'),
+    url(r'^work/(?P<slug>[-\w]+)/delete$', 
+        WorkDeleteView.as_view(), name='work_delete'),
 ]

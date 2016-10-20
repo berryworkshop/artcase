@@ -117,6 +117,9 @@ class Work(Base):
     def get_absolute_url(self):
         return reverse('artcase:work_detail', args=[self.sku])
 
+    def __str__(self):
+        return self.title
+
 
 class Creator(Base):
     name_first = models.CharField(

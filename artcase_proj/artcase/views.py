@@ -1,7 +1,8 @@
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.urls import reverse_lazy
 from .models import Work
 
 
@@ -31,6 +32,12 @@ class WorkDetailView(DetailView):
 class WorkUpdateView(WorkFormMixin, UpdateView):
     model = Work
     title = "Work Update"
+    slug_field = 'sku'
+
+
+class WorkDeleteView(DeleteView):
+    model = Work
+    success_url = reverse_lazy('artcase:work_list')
     slug_field = 'sku'
 
 
