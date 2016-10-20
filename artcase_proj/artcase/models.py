@@ -122,11 +122,11 @@ class Work(Base):
 
 
 class Creator(Base):
-    name_first = models.CharField(
+    first_name = models.CharField(
         max_length=50,
         blank=True,
         )
-    name_last = models.CharField(
+    last_name = models.CharField(
         max_length=50,
         blank=False,
         )
