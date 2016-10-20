@@ -9,5 +9,8 @@
 
 {% block aside %}
     <aside>
+        <ul>
+            <li><a href="{% url 'artcase:work_update' slug=object.sku %}">Edit</a></li>
+        </ul>
     </aside>
 {% endblock aside %}

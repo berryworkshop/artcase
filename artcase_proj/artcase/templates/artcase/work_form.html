@@ -3,16 +3,21 @@
 
 {% block main %}
     <main>
-        <h1>Work Create</h1>
+        <h1>{{ view.title }}</h1>
         <form action="" method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Save" />
+
+            {% if object %}
+            <a href="{{ object.get_absolute_url }}">Cancel</a>
+            {% else %}
+            <a href="{% url 'artcase:work_list' %}">Cancel</a>
+            {% endif %}
         </form>
     </main>
 {% endblock main %}
 
 {% block aside %}
     <aside>
-        
     </aside>
 {% endblock aside %}
