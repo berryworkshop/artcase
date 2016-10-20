@@ -10,8 +10,8 @@
 {% block aside %}
     <aside>
         <ul>
-            <li><a href="{% url 'artcase:work_update' pk=object.pk %}">Edit</a></li>
-            <li><a href="{% url 'artcase:work_delete' pk=object.pk %}">Delete</a></li>
+            <li><a href="{% url 'artcase:work_update' slug=object.sku %}">Edit</a></li>
+            <li><a href="{% url 'artcase:work_delete' slug=object.sku %}">Delete</a></li>
         </ul>
     </aside>
 {% endblock aside %}
