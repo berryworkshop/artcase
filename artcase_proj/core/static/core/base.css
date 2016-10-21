@@ -24,6 +24,8 @@ div#page_container {
   div#page_container header {
     color: white;
     background-color: black; }
+    div#page_container header a {
+      color: orange; }
   div#page_container main {
     padding: 1rem; }
   div#page_container aside {

@@ -5,12 +5,12 @@ from django.utils.timezone import now
 from taggit.managers import TaggableManager
 
 
-
 class Base(models.Model):
     class Meta:
         abstract = True
     created = models.DateTimeField(default=now)
     modified = models.DateTimeField(auto_now=True)
+
 
 class Work(Base):
     title = models.CharField(

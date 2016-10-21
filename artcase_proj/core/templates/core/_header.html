@@ -8,4 +8,14 @@
         </ul>
     </nav>
 
+    <section>
+        <ul>
+            {% if user.is_authenticated %}
+            <li>Welcome {{ user }}.  <a href="{% url 'auth:logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'auth:login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </section>
+
 </header>
