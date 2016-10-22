@@ -1,4 +1,6 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var autoprefixer = require('autoprefixer')
+
 
 
 var config = {
@@ -25,7 +27,7 @@ var config = {
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract("style", "css!sass")
+                loader: ExtractTextPlugin.extract("style", "css!postcss!sass")
             }
         ]
     },
@@ -40,6 +42,11 @@ var config = {
     //         d3: 'd3'
     //     })
         new ExtractTextPlugin('[name]')
+    ],
+    postcss: [
+        autoprefixer({
+            browsers: "last 2 versions"
+        })
     ],
     resolve: {
         // require('file') instead of require('file.js')

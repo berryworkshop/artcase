@@ -1,6 +1,7 @@
 header {
   color: white;
   background-color: black;
+  display: -ms-flexbox;
   display: flex; }
   header a {
     color: orange; }
