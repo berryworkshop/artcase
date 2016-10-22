@@ -1,3 +1,14 @@
+header {
+  color: white;
+  background-color: black;
+  display: flex; }
+  header a {
+    color: orange; }
+
+footer {
+  color: white;
+  background-color: black; }
+
 html {
   color: #444;
   background-color: silver; }
@@ -21,18 +32,10 @@ html {
 div#page_container {
   margin: 0 auto;
   background-color: white; }
-  div#page_container header {
-    color: white;
-    background-color: black; }
-    div#page_container header a {
-      color: orange; }
   div#page_container main {
     padding: 1rem; }
   div#page_container aside {
     background-color: #ddd;
     padding: 1rem; }
-  div#page_container footer {
-    color: white;
-    background-color: black; }
 
 /*# sourceMappingURL=base.css.map*/

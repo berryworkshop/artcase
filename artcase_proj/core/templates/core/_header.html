@@ -2,20 +2,26 @@
     <a href="{% url 'home' %}">Artcase</a>
 
     <section id="work_menu">
+        {% if user.is_authenticated %}
         <ul>
             <li><a href="{% url 'artcase:work_create' %}">Work Create</a></li>
             <li><a href="{% url 'artcase:work_list' %}">Work List</a></li>
         </ul>
+        {% else %}
+        <!-- pass -->
+        {% endif %}
     </section>
 
+
     <section id="user_menu">
+        {% if user.is_authenticated %}
         <ul>
-            {% if user.is_authenticated %}
-            <li>Welcome <a href="{% url 'user_profile' username=user.username %}">{{ user }}</a>.  <a href="{% url 'auth:logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'auth:login' %}">Login</a></li>
-            {% endif %}
+            <li>Welcome <a href="{% url 'user_profile' username=user.username %}">{{ user }}</a></li>
+            <li><a href="{% url 'auth:logout' %}">Logout</a></li>
         </ul>
+        {% else %}
+        <p><a href="{% url 'auth:login' %}">Login</a></p>
+        {% endif %}
     </section>
 
 </header>

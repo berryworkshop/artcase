@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.timezone import now
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
 
 
 class Base(models.Model):
@@ -13,6 +14,9 @@ class Base(models.Model):
 
 
 class Work(Base):
+    class Meta:
+        unique_together = ('sku', 'owner')
+
     title = models.CharField(
         max_length=100,
         blank=False,
@@ -21,6 +25,7 @@ class Work(Base):
         max_length=100,
         blank=False,
         )
+    owner = models.ForeignKey(User, default=1)
 
     # created = WhereWhenField(max_length=100)
 

@@ -5,8 +5,8 @@ var config = {
     context: __dirname + "/artcase_proj",
     entry: {
         // base css, not embedded in javascript
-        'core/static/core/base.css':        './core/src/base.scss',
-        'artcase/static/artcase/base.css':  './artcase/src/base.scss'
+        'core/static/core/base.css':        './core/templates/core/base.scss',
+        'artcase/static/artcase/base.css':  './artcase/templates/artcase/base.scss'
 
     },
     devtool: 'source-map',

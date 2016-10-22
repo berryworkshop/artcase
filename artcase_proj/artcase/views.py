@@ -4,15 +4,16 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from .models import Work
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class IndexView(TemplateView):
     template_name = "artcase/index.html"
 
 
-class WorkFormMixin(object):
+class WorkFormMixin(LoginRequiredMixin, object):
     fields = [
-        'title', 'sku',
+        'title', 'sku', 'owner',
         'size_h', 'size_w', 'size_d', 'size_unit',
         'condition', 'status', 'notes',
         'subjects', 'location', 'medium', 'creators', 'values', 'categories', 'images', 'collections'
