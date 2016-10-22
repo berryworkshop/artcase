@@ -4,10 +4,12 @@ from .views import IndexView, WorkCreateView, WorkUpdateView, WorkDeleteView, Wo
 urlpatterns = [
     url(r'^$',
         IndexView.as_view(), name='index'),
-    url(r'^work_create$', 
-        WorkCreateView.as_view(), name='work_create'),
+
     url(r'^work_list$',
         WorkListView.as_view(), name='work_list'),
+
+    url(r'^work_create$', 
+        WorkCreateView.as_view(), name='work_create'),
     url(r'^work/(?P<slug>[-\w]+)$',
         WorkDetailView.as_view(), name='work_detail'),
     url(r'^work/(?P<slug>[-\w]+)/update$', 
