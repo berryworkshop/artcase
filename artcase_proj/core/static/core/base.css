@@ -4,6 +4,8 @@ header {
   display: flex; }
   header a {
     color: orange; }
+  header ul, header p {
+    margin: 0 auto; }
 
 footer {
   color: white;

@@ -7,10 +7,13 @@ header {
         color: orange;
     }
 
-    div#brand {
+    ul, p {
+        margin: 0 auto;
     }
 
-    nav {}
+    div#brand {}
 
-    div#user_menu {}
+    section#work_menu {}
+
+    section#user_menu {}
 }

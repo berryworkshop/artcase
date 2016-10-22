@@ -1,5 +1,7 @@
 <header>
-    <a href="{% url 'home' %}">Artcase</a>
+    <div id="brand">
+        <a href="{% url 'home' %}">Artcase</a>
+    </div>
 
     <section id="work_menu">
         {% if user.is_authenticated %}
@@ -23,5 +25,4 @@
         <p><a href="{% url 'auth:login' %}">Login</a></p>
         {% endif %}
     </section>
-
 </header>

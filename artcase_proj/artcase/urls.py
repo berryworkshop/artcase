@@ -8,7 +8,7 @@ urlpatterns = [
         WorkCreateView.as_view(), name='work_create'),
     url(r'^work_list$',
         WorkListView.as_view(), name='work_list'),
-    url(r'^work/(?P<slug>[-\w]+)/detail$',
+    url(r'^work/(?P<slug>[-\w]+)$',
         WorkDetailView.as_view(), name='work_detail'),
     url(r'^work/(?P<slug>[-\w]+)/update$', 
         WorkUpdateView.as_view(), name='work_update'),
