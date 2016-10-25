@@ -7,7 +7,14 @@
         {% if user.is_authenticated %}
         <ul>
             <li><a href="{% url 'artcase:work_create' %}">Work Create</a></li>
+            <hr>
             <li><a href="{% url 'artcase:work_list' %}">Work List</a></li>
+            <li><a href="{% url 'artcase:creator_list' %}">Creator List</a></li>
+            <li><a href="{% url 'artcase:location_list' %}">Location List</a></li>
+            <li><a href="{% url 'artcase:image_list' %}">Image List</a></li>
+            <li><a href="{% url 'artcase:medium_list' %}">Medium List</a></li>
+            <li><a href="{% url 'artcase:category_list' %}">Category List</a></li>
+            <li><a href="{% url 'artcase:collection_list' %}">Collection List</a></li>
         </ul>
         {% else %}
         <!-- pass -->

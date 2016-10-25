@@ -139,6 +139,12 @@ class Creator(Base):
     #born = WhereWhenField(max_length=100, blank=True,)
     #died = WhereWhenField(max_length=100, blank=True,)
 
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return '{}, {}'.format(self.last_name, self.first_name)
+
 
 class Value(Base):
     CURRENCIES = (
@@ -173,6 +179,12 @@ class Value(Base):
         blank=True,
         )
 
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return '{} {} ({}: {})'.format(self.value, self.value_currency, self.value_type, self.date)
+
 
 class Location(Base):
     name = models.CharField(
@@ -186,6 +198,12 @@ class Location(Base):
         blank=True,
         )
 
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return self.name
+
 
 class Medium(Base):
     class Meta:
@@ -194,6 +212,12 @@ class Medium(Base):
         max_length=100,
         blank=False,
         )
+
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return self.name
 
 
 class Image(Base):
@@ -220,6 +244,12 @@ class Image(Base):
         blank=True,
         )
 
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return '{}, {} view'.format('Work Name', self.aspect)
+
 
 class Category(Base):
     class Meta:
@@ -241,6 +271,12 @@ class Category(Base):
         null=True,
         )
 
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return self.name
+
 
 class Collection(Base):
     name = models.CharField(
@@ -250,3 +286,9 @@ class Collection(Base):
     description = models.TextField(
         blank=True,
         )
+
+    def get_absolute_url(self):
+        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def __str__(self):
+        return self.name

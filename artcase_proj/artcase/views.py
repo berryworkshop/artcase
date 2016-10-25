@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
-from .models import Work
+from .models import Work, Creator, Location, Image, Medium, Category, Collection
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -44,3 +44,34 @@ class WorkDeleteView(DeleteView):
 
 class WorkListView(ListView):
     model = Work
+    template_name = 'artcase/object_list.html'
+
+
+class CreatorListView(ListView):
+    model = Creator
+    template_name = 'artcase/object_list.html'
+
+
+class LocationListView(ListView):
+    model = Location
+    template_name = 'artcase/object_list.html'
+
+
+class ImageListView(ListView):
+    model = Image
+    template_name = 'artcase/object_list.html'
+
+
+class MediumListView(ListView):
+    model = Medium
+    template_name = 'artcase/object_list.html'
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'artcase/object_list.html'
+
+
+class CollectionListView(ListView):
+    model = Collection
+    template_name = 'artcase/object_list.html'

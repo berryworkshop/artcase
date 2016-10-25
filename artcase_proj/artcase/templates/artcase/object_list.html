@@ -3,12 +3,12 @@
 
 {% block main %}
     <main>
-        <h1>Work List</h1>
+        <h1>Object List</h1>
         <ul>
-        {% for work in object_list %}
-            <li><a href="{{ work.get_absolute_url }}">{{ work.title }}</a></li>
+        {% for obj in object_list %}
+            <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a></li>
         {% empty %}
-            <li>No works yet.</li>
+            <li>No objects yet.</li>
         {% endfor %}
         </ul>
     </main>
