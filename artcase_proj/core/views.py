@@ -15,8 +15,10 @@ class UserProfileView(TemplateView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    template_name = 'core/base.html'
 
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    template_name = 'core/base.html'
