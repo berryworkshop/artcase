@@ -10,7 +10,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -20,7 +19,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'taggit',
     'core',
+    'api',
     'artcase',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = '%s/static/' % BASE_DIR
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
