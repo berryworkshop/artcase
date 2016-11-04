@@ -12,6 +12,9 @@ class Base(models.Model):
     created = models.DateTimeField(default=now)
     modified = models.DateTimeField(auto_now=True)
 
+    def get_create_url(self):
+        return reverse('artcase:%s_create' % self._meta.label_lower)
+
 
 class Work(Base):
     class Meta:
@@ -120,7 +123,20 @@ class Work(Base):
         )
 
     def get_absolute_url(self):
-        return reverse('artcase:work_detail', args=[self.sku])
+        return reverse('artcase:work_detail', args=[self.pk])
+
+    def get_create_url(self):
+        return reverse('artcase:work_create')
+
+    def get_update_url(self, pk=None):
+        if not pk:
+            pk = self.pk
+        return reverse('artcase:work_update', args=[pk])
+
+    def get_delete_url(self, pk=None):
+        if not pk:
+            pk = self.pk
+        return reverse('artcase:work_delete', args=[pk])
 
     def __str__(self):
         return self.title
@@ -140,7 +156,20 @@ class Creator(Base):
     #died = WhereWhenField(max_length=100, blank=True,)
 
     def get_absolute_url(self):
-        return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+        return reverse('artcase:creator_detail', args=[self.pk])
+
+    def get_create_url(self):
+        return reverse('artcase:creator_create')
+
+    def get_update_url(self, pk=None):
+        if not pk:
+            pk = self.pk
+        return reverse('artcase:creator_update', args=[pk])
+
+    def get_delete_url(self, pk=None):
+        if not pk:
+            pk = self.pk
+        return reverse('artcase:creator_delete', args=[pk])
 
     def __str__(self):
         return '{}, {}'.format(self.last_name, self.first_name)
@@ -182,6 +211,9 @@ class Value(Base):
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
 
+    def get_create_url(self):
+        return reverse('artcase:value_create')
+
     def __str__(self):
         return '{} {} ({}: {})'.format(self.value, self.value_currency, self.value_type, self.date)
 
@@ -201,6 +233,9 @@ class Location(Base):
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
 
+    def get_create_url(self):
+        return reverse('artcase:location_create')
+
     def __str__(self):
         return self.name
 
@@ -215,6 +250,9 @@ class Medium(Base):
 
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def get_create_url(self):
+        return reverse('artcase:medium_create')
 
     def __str__(self):
         return self.name
@@ -247,6 +285,9 @@ class Image(Base):
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
 
+    def get_create_url(self):
+        return reverse('artcase:image_create')
+
     def __str__(self):
         return '{}, {} view'.format('Work Name', self.aspect)
 
@@ -274,6 +315,9 @@ class Category(Base):
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
 
+    def get_create_url(self):
+        return reverse('artcase:category_create')
+
     def __str__(self):
         return self.name
 
@@ -289,6 +333,9 @@ class Collection(Base):
 
     def get_absolute_url(self):
         return 'http://example.com/ '#reverse('artcase:xxxx_detail', args=[])
+
+    def get_create_url(self):
+        return reverse('artcase:collection_create')
 
     def __str__(self):
         return self.name

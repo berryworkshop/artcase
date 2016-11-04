@@ -11,7 +11,7 @@
             {% if object %}
             <a href="{{ object.get_absolute_url }}">Cancel</a>
             {% else %}
-            <a href="{% url 'artcase:work_list' %}">Cancel</a>
+            <a href="{{ request.META.HTTP_REFERER }}">Cancel</a>
             {% endif %}
         </form>
     </main>
