@@ -14,6 +14,26 @@ class IndexView(TemplateView):
     template_name = "artcase/index.html"
 
 
+class ArtcaseDetailView(DetailView):
+    template_name = 'artcase/object_detail.html'
+
+
+class ArtcaseListView(ListView):    
+    template_name = 'artcase/object_list.html'
+
+
+class ArtcaseCreateView(CreateView):
+    template_name = "artcase/object_form.html"
+
+
+class ArtcaseUpdateView(UpdateView):
+    template_name = "artcase/object_form.html"
+
+
+class ArtcaseDeleteView(DeleteView):
+    template_name = "artcase/object_confirm_delete.html"
+
+
 # work views
 
 class WorkFormMixin(LoginRequiredMixin, object):
@@ -25,34 +45,29 @@ class WorkFormMixin(LoginRequiredMixin, object):
         ]
 
 
-class WorkDetailView(DetailView):
-    template_name = 'artcase/object_detail.html'
+class WorkDetailView(ArtcaseDetailView):
     title = 'Work'
     model = Work
 
 
-class WorkListView(ListView):    
-    template_name = 'artcase/object_list.html'
+class WorkListView(ArtcaseListView):    
     model = Work
     title = 'List Works'
 
 
-class WorkCreateView(WorkFormMixin, CreateView):
+class WorkCreateView(WorkFormMixin, ArtcaseCreateView):
     model = Work
-    template_name = "artcase/object_form.html"
     title = "Create Work"
 
 
-class WorkUpdateView(WorkFormMixin, UpdateView):
+class WorkUpdateView(WorkFormMixin, ArtcaseUpdateView):
     model = Work
-    template_name = "artcase/object_form.html"
     title = "Update Work"
 
 
-class WorkDeleteView(DeleteView):
+class WorkDeleteView(ArtcaseDeleteView):
     model = Work
     success_url = reverse_lazy('artcase:work_list')
-    template_name = "artcase/object_confirm_delete.html"
     title = "Delete Work"
 
 
@@ -62,8 +77,7 @@ class CreatorFormMixin(LoginRequiredMixin, object):
     fields = ['first_name', 'last_name']
 
 
-class CreatorDetailView(DetailView):
-    template_name = 'artcase/object_detail.html'
+class CreatorDetailView(ArtcaseDetailView):
     model = Creator
     title = "Creator"
 

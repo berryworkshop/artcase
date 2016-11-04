@@ -125,6 +125,9 @@ class Work(Base):
     def get_absolute_url(self):
         return reverse('artcase:work_detail', args=[self.pk])
 
+    def get_list_url(self):
+        return reverse('artcase:work_list')
+
     def get_create_url(self):
         return reverse('artcase:work_create')
 

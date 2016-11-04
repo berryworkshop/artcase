@@ -11,10 +11,11 @@
 {% block aside %}
     <aside>
         <ul>
+            <li><a href="{% get_list_url view.model %}">List of {% get_verbose_name_plural view.model %}</a></li>
             <li><a href="{% get_update_url view.model object.pk %}">Edit this {% get_verbose_name view.model %}</a></li>
             <li><a href="{% get_delete_url view.model object.pk %}">Delete this {% get_verbose_name view.model %}</a></li>
             <hr>
-            <li><a href="{{ view.model.get_create_url }}">Create a new {% get_verbose_name view.model %}</a></li>
+            <li><a href="{% get_create_url view.model %}">Create a new {% get_verbose_name view.model %}</a></li>
         </ul>
     </aside>
 {% endblock aside %}

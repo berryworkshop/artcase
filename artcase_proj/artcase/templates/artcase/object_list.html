@@ -1,6 +1,6 @@
 {% extends './base.html' %}
 {% load static %}
-{% load core_extras %}
+{% load artcase_extras %}
 
 {% block main %}
     <main>
@@ -17,6 +17,8 @@
 
 {% block aside %}
     <aside>
-        <p><a href="{{ view.model.get_create_url }}">Create {{ view.model_verbose_name }}</a></p>
+        <ul>
+            <li><a href="{% get_create_url view.model %}">Create a new {% get_verbose_name view.model %}</a></li>
+        </ul>
     </aside>
 {% endblock aside %}
