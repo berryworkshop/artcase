@@ -161,6 +161,9 @@ class Creator(Base):
     def get_absolute_url(self):
         return reverse('artcase:creator_detail', args=[self.pk])
 
+    def get_list_url(self):
+        return reverse('artcase:creator_list')
+
     def get_create_url(self):
         return reverse('artcase:creator_create')
 

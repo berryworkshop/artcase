@@ -17,6 +17,17 @@ def get_verbose_name_plural(model, case=False):
     return name
 
 @register.simple_tag
+def get_field_name(model, field, case=False):
+    name = 'bleert'
+    if case == 'title':
+        name = name.title()
+    return name
+
+@register.simple_tag
+def get_field_data(model, field, pk):
+    return 'blarm'
+
+@register.simple_tag
 def get_create_url(model):
     return model.get_create_url()
 

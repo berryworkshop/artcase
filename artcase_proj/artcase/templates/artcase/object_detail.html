@@ -5,6 +5,16 @@
 {% block main %}
     <main>
         <h1>{% get_verbose_name view.model 'title' %}: {{ object }}</h1>
+
+        {% if view.fields %}
+            <dl>
+            {% for field in view.fields %}
+                <dt>{% get_field_name view.model field 'title' %}</dt>
+                <dd>{% get_field_data view.model field object.pk %}</dd>
+            {% endfor %}
+            </dl>
+        {% endif %}
+
     </main>
 {% endblock main %}
 

@@ -36,7 +36,7 @@ class ArtcaseDeleteView(DeleteView):
 
 # work views
 
-class WorkFormMixin(LoginRequiredMixin, object):
+class WorkFieldsMixin(object):
     fields = [
         'title', 'sku', 'owner',
         'size_h', 'size_w', 'size_d', 'size_unit',
@@ -45,7 +45,7 @@ class WorkFormMixin(LoginRequiredMixin, object):
         ]
 
 
-class WorkDetailView(ArtcaseDetailView):
+class WorkDetailView(WorkFieldsMixin, ArtcaseDetailView):
     title = 'Work'
     model = Work
 
@@ -55,17 +55,17 @@ class WorkListView(ArtcaseListView):
     title = 'List Works'
 
 
-class WorkCreateView(WorkFormMixin, ArtcaseCreateView):
+class WorkCreateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseCreateView):
     model = Work
     title = "Create Work"
 
 
-class WorkUpdateView(WorkFormMixin, ArtcaseUpdateView):
+class WorkUpdateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseUpdateView):
     model = Work
     title = "Update Work"
 
 
-class WorkDeleteView(ArtcaseDeleteView):
+class WorkDeleteView(LoginRequiredMixin, ArtcaseDeleteView):
     model = Work
     success_url = reverse_lazy('artcase:work_list')
     title = "Delete Work"
@@ -73,11 +73,11 @@ class WorkDeleteView(ArtcaseDeleteView):
 
 # creator views
 
-class CreatorFormMixin(LoginRequiredMixin, object):
+class CreatorFieldsMixin(object):
     fields = ['first_name', 'last_name']
 
 
-class CreatorDetailView(ArtcaseDetailView):
+class CreatorDetailView(CreatorFieldsMixin, ArtcaseDetailView):
     model = Creator
     title = "Creator"
 
@@ -88,19 +88,19 @@ class CreatorListView(ListView):
     title = 'List Creators'
 
 
-class CreatorCreateView(CreatorFormMixin, CreateView):
+class CreatorCreateView(LoginRequiredMixin, CreatorFieldsMixin, CreateView):
     model = Creator
     template_name = "artcase/object_form.html"
     title = "Create Creator"
 
 
-class CreatorUpdateView(CreatorFormMixin, UpdateView):
+class CreatorUpdateView(LoginRequiredMixin, CreatorFieldsMixin, UpdateView):
     model = Creator
     template_name = "artcase/object_form.html"
     title = "Update Creator"
 
 
-class CreatorDeleteView(DeleteView):
+class CreatorDeleteView(LoginRequiredMixin, DeleteView):
     model = Creator
     success_url = reverse_lazy('artcase:work_list')
     template_name = "artcase/object_confirm_delete.html"
