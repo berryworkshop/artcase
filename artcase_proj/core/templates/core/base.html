@@ -23,6 +23,12 @@
         {% include "core/_header.html" %}
         {% endblock header %}
 
+        {% block messages %}
+        {% if messages %}            
+        {% include "core/_messages.html" %}
+        {% endif %}
+        {% endblock messages %}
+
         {% block main %}
             <main>
                 <p>Base template</p>

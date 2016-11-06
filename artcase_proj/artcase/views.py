@@ -2,11 +2,11 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from .models import (
     Work, Creator, Location, Image, Medium, Category, Collection)
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib import messages
 
 # base views
 
@@ -22,12 +22,31 @@ class ArtcaseListView(ListView):
     template_name = 'artcase/object_list.html'
 
 
-class ArtcaseCreateView(CreateView):
+class FormMixin(object):
     template_name = "artcase/object_form.html"
 
+    def form_valid(self, form):
+        # report back
+        messages.add_message(self.request, messages.SUCCESS,
+            '"{}" {}d successfully.'.format(form.instance, self.verb))
 
-class ArtcaseUpdateView(UpdateView):
-    template_name = "artcase/object_form.html"
+        # take note of who made it
+        form.instance.created_by = self.request.user
+        
+        if 'save_and_new' in form.data.keys():
+            # don't redirect to list: let user create another
+            reverse_string = 'artcase:{}_{}'.format(
+                self.model._meta.verbose_name, self.verb)
+            self.success_url = reverse(reverse_string)
+        return super().form_valid(form)
+
+
+class ArtcaseCreateView(FormMixin, CreateView):
+    verb = 'create'
+
+
+class ArtcaseUpdateView(FormMixin, UpdateView):
+    verb = 'update'
 
 
 class ArtcaseDeleteView(DeleteView):
@@ -52,12 +71,12 @@ class WorkDetailView(WorkFieldsMixin, ArtcaseDetailView):
 
 class WorkListView(ArtcaseListView):    
     model = Work
-    title = 'List Works'
+    title = 'List of Works'
 
 
 class WorkCreateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseCreateView):
     model = Work
-    title = "Create Work"
+    title = 'Create a Work'
 
 
 class WorkUpdateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseUpdateView):
@@ -85,13 +104,12 @@ class CreatorDetailView(CreatorFieldsMixin, ArtcaseDetailView):
 class CreatorListView(ListView):
     template_name = 'artcase/object_list.html'
     model = Creator
-    title = 'List Creators'
+    title = 'List of Creators'
 
 
-class CreatorCreateView(LoginRequiredMixin, CreatorFieldsMixin, CreateView):
+class CreatorCreateView(LoginRequiredMixin, CreatorFieldsMixin, ArtcaseCreateView):
     model = Creator
-    template_name = "artcase/object_form.html"
-    title = "Create Creator"
+    title = 'Create a Creator'
 
 
 class CreatorUpdateView(LoginRequiredMixin, CreatorFieldsMixin, UpdateView):
@@ -102,7 +120,7 @@ class CreatorUpdateView(LoginRequiredMixin, CreatorFieldsMixin, UpdateView):
 
 class CreatorDeleteView(LoginRequiredMixin, DeleteView):
     model = Creator
-    success_url = reverse_lazy('artcase:work_list')
+    success_url = reverse_lazy('artcase:creator_list')
     template_name = "artcase/object_confirm_delete.html"
     title = "Delete Creator"
 
@@ -128,7 +146,7 @@ class ImageListView(ListView):
 class MediumListView(ListView):
     template_name = 'artcase/object_list.html'
     model = Medium
-    title = 'Medium List'
+    title = 'List of Media'
 
 
 # category views
@@ -136,7 +154,7 @@ class MediumListView(ListView):
 class CategoryListView(ListView):
     template_name = 'artcase/object_list.html'
     model = Category
-    title = 'Category List'
+    title = 'List of Categories'
 
 
 # collection views
@@ -144,4 +162,4 @@ class CategoryListView(ListView):
 class CollectionListView(ListView):
     template_name = 'artcase/object_list.html'
     model = Collection
-    title = 'Collection List'
+    title = 'List of Collections'
