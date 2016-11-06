@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.urls import reverse, reverse_lazy
@@ -14,15 +14,15 @@ class IndexView(TemplateView):
     template_name = "artcase/index.html"
 
 
-class ArtcaseDetailView(DetailView):
+class ArtcaseDetailView(LoginRequiredMixin, DetailView):
     template_name = 'artcase/object_detail.html'
 
 
-class ArtcaseListView(ListView):    
+class ArtcaseListView(LoginRequiredMixin, ListView):    
     template_name = 'artcase/object_list.html'
 
 
-class FormMixin(object):
+class ArtcaseFormMixin(object):
     template_name = "artcase/object_form.html"
 
     def form_valid(self, form):
@@ -41,15 +41,15 @@ class FormMixin(object):
         return super().form_valid(form)
 
 
-class ArtcaseCreateView(FormMixin, CreateView):
+class ArtcaseCreateView(LoginRequiredMixin, ArtcaseFormMixin, CreateView):
     verb = 'create'
 
 
-class ArtcaseUpdateView(FormMixin, UpdateView):
+class ArtcaseUpdateView(LoginRequiredMixin, ArtcaseFormMixin, UpdateView):
     verb = 'update'
 
 
-class ArtcaseDeleteView(DeleteView):
+class ArtcaseDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "artcase/object_confirm_delete.html"
 
 
@@ -70,24 +70,24 @@ class WorkDetailView(WorkFieldsMixin, ArtcaseDetailView):
 
 
 class WorkListView(ArtcaseListView):    
-    model = Work
     title = 'List of Works'
-
-
-class WorkCreateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseCreateView):
     model = Work
+
+
+class WorkCreateView(WorkFieldsMixin, ArtcaseCreateView):
     title = 'Create a Work'
-
-
-class WorkUpdateView(LoginRequiredMixin, WorkFieldsMixin, ArtcaseUpdateView):
     model = Work
+
+
+class WorkUpdateView(WorkFieldsMixin, ArtcaseUpdateView):
     title = "Update Work"
+    model = Work
 
 
-class WorkDeleteView(LoginRequiredMixin, ArtcaseDeleteView):
+class WorkDeleteView(ArtcaseDeleteView):
+    title = "Delete Work"
     model = Work
     success_url = reverse_lazy('artcase:work_list')
-    title = "Delete Work"
 
 
 # creator views
@@ -97,69 +97,186 @@ class CreatorFieldsMixin(object):
 
 
 class CreatorDetailView(CreatorFieldsMixin, ArtcaseDetailView):
-    model = Creator
     title = "Creator"
-
-
-class CreatorListView(ListView):
-    template_name = 'artcase/object_list.html'
     model = Creator
+
+
+class CreatorListView(ArtcaseListView):
     title = 'List of Creators'
-
-
-class CreatorCreateView(LoginRequiredMixin, CreatorFieldsMixin, ArtcaseCreateView):
     model = Creator
+
+
+class CreatorCreateView(CreatorFieldsMixin, ArtcaseCreateView):
     title = 'Create a Creator'
-
-
-class CreatorUpdateView(LoginRequiredMixin, CreatorFieldsMixin, UpdateView):
     model = Creator
-    template_name = "artcase/object_form.html"
+
+
+class CreatorUpdateView(CreatorFieldsMixin, ArtcaseUpdateView):
     title = "Update Creator"
+    model = Creator
 
 
-class CreatorDeleteView(LoginRequiredMixin, DeleteView):
+class CreatorDeleteView(ArtcaseDeleteView):
+    title = "Delete Creator"
     model = Creator
     success_url = reverse_lazy('artcase:creator_list')
-    template_name = "artcase/object_confirm_delete.html"
-    title = "Delete Creator"
 
 
 # location views
 
-class LocationListView(ListView):
-    template_name = 'artcase/object_list.html'
+class LocationFieldsMixin(object):
+    fields = ['name', 'address', 'sublocation']
+
+
+class LocationDetailView(LocationFieldsMixin, ArtcaseDetailView):
+    title = "Location"
     model = Location
+
+
+class LocationListView(ArtcaseListView):
     title = 'Location List'
+    model = Location
+
+
+class LocationCreateView(LocationFieldsMixin, ArtcaseCreateView):
+    title = 'Create a Location'
+    model = Location
+
+
+class LocationUpdateView(LocationFieldsMixin, ArtcaseUpdateView):
+    title = "Update Location"
+    model = Location
+
+
+class LocationDeleteView(ArtcaseDeleteView):
+    title = "Delete Location"
+    model = Location
+    success_url = reverse_lazy('artcase:location_list')
 
 
 # image views
 
-class ImageListView(ListView):
-    template_name = 'artcase/object_list.html'
+class ImageFieldsMixin(object):
+    fields = ['image', 'image_h', 'image_w', 'aspect', 'caption']
+
+
+class ImageDetailView(ImageFieldsMixin, ArtcaseDetailView):
+    title = 'Image'
     model = Image
+
+
+class ImageListView(ArtcaseListView):
     title = 'Image List'
+    model = Image
+
+
+class ImageCreateView(ImageFieldsMixin, ArtcaseCreateView):
+    title = 'Create an Image'
+    model = Image
+
+
+class ImageUpdateView(ImageFieldsMixin, ArtcaseUpdateView):
+    title = "Update Image"
+    model = Image
+
+
+class ImageDeleteView(ArtcaseDeleteView):
+    title = "Delete Image"
+    model = Image
+    success_url = reverse_lazy('artcase:image_list')
 
 
 # medium views
 
-class MediumListView(ListView):
-    template_name = 'artcase/object_list.html'
+class MediumFieldsMixin(object):
+    fields = ['name']
+
+
+class MediumDetailView(MediumFieldsMixin, ArtcaseDetailView):
+    title = 'Medium'
     model = Medium
+
+
+class MediumListView(ArtcaseListView):
     title = 'List of Media'
+    model = Medium
+
+
+class MediumCreateView(MediumFieldsMixin, ArtcaseCreateView):
+    title = 'Create a Medium'
+    model = Medium
+
+
+class MediumUpdateView(MediumFieldsMixin, ArtcaseUpdateView):
+    title = "Update Medium"
+    model = Medium
+
+
+class MediumDeleteView(ArtcaseDeleteView):
+    title = "Delete Medium"
+    model = Medium
+    success_url = reverse_lazy('artcase:medium_list')
 
 
 # category views
 
-class CategoryListView(ListView):
-    template_name = 'artcase/object_list.html'
+class CategoryFieldsMixin(object):
+    fields = ['name', 'description', 'parent']
+
+
+class CategoryDetailView(CategoryFieldsMixin, ArtcaseDetailView):
+    title = 'Category'
     model = Category
+
+
+class CategoryListView(ArtcaseListView):
     title = 'List of Categories'
+    model = Category
+
+
+class CategoryCreateView(CategoryFieldsMixin, ArtcaseCreateView):
+    title = 'Create a Category'
+    model = Category
+
+
+class CategoryUpdateView(CategoryFieldsMixin, ArtcaseUpdateView):
+    title = "Update Category"
+    model = Category
+
+
+class CategoryDeleteView(ArtcaseDeleteView):
+    title = "Delete Category"
+    model = Category
+    success_url = reverse_lazy('artcase:category_list')
 
 
 # collection views
 
-class CollectionListView(ListView):
-    template_name = 'artcase/object_list.html'
+class CollectionFieldsMixin(object):
+    fields = ['name', 'description']
+
+
+class CollectionDetailView(CategoryFieldsMixin, ArtcaseDetailView):
+    title = 'Collection'
     model = Collection
+
+
+class CollectionListView(ArtcaseListView):
     title = 'List of Collections'
+    model = Collection
+
+
+class CollectionCreateView(CollectionFieldsMixin, ArtcaseCreateView):
+    title = 'Create a Collection'
+    model = Collection
+
+
+class CollectionUpdateView(CollectionFieldsMixin, ArtcaseUpdateView):
+    title = "Update Collection"
+    model = Collection
+
+
+class CollectionDeleteView(ArtcaseDeleteView):
+    title = "Delete Collection"
+    model = Collection
+    success_url = reverse_lazy('artcase:collection_list')
