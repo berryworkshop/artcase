@@ -8,13 +8,16 @@
         <form method="post">{% csrf_token %}
             {{ form.as_p }}
             <input type="submit" name="save" value="Save" />
-            <input type="submit" name="save_and_new" value="Save &amp; New" />
+            {% if not object %}
+            <input type="submit" name="save_and_new" value="Save &amp; create another" />
+            {% endif %}
 
             {% if object %}
             <a href="{{ object.get_absolute_url }}">Cancel</a>
             {% else %}
             <a href="{% get_list_url view.model %}">Cancel</a>
             {% endif %}
+
         </form>
     </main>
 {% endblock main %}

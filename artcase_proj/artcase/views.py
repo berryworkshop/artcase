@@ -14,80 +14,115 @@ class IndexView(TemplateView):
     template_name = "artcase/index.html"
 
 
-class ArtcaseDetailView(LoginRequiredMixin, DetailView):
+class FieldsMixin(object):
+    view_fields = {
+        'work': [
+            'title', 'sku', 'owner',
+            'size_h', 'size_w', 'size_d', 'size_unit',
+            'condition', 'status', 'notes',
+            'subjects', 'location', 'medium', 'creators', 'values', 'categories', 'images', 'collections'
+            ],
+        }
+
+    def dispatch(self, *args, **kwargs):
+        self.fields = self.view_fields[self.model._meta.verbose_name]
+        return super().dispatch(*args, **kwargs)
+
+
+
+class FormMixin(FieldsMixin):
+    template_name = "artcase/object_form.html"
+
+
+class ArtcaseDetailView(LoginRequiredMixin, FieldsMixin, DetailView):
     template_name = 'artcase/object_detail.html'
+    title = None
+    model = None
 
 
 class ArtcaseListView(LoginRequiredMixin, ListView):    
     template_name = 'artcase/object_list.html'
+    title = None
+    model = None
 
-
-class ArtcaseFormMixin(object):
+class ArtcaseCreateView(LoginRequiredMixin, FieldsMixin, CreateView):
     template_name = "artcase/object_form.html"
+    title = None
+    model = None
 
     def form_valid(self, form):
-        # report back
         messages.add_message(self.request, messages.SUCCESS,
-            '"{}" {}d successfully.'.format(form.instance, self.verb))
+            '"%s" created successfully.' % form.instance)
 
         # take note of who made it
         form.instance.created_by = self.request.user
         
         if 'save_and_new' in form.data.keys():
             # don't redirect to list: let user create another
-            reverse_string = 'artcase:{}_{}'.format(
-                self.model._meta.verbose_name, self.verb)
+            reverse_string = 'artcase:{}_create'.format(
+                self.model._meta.verbose_name)
             self.success_url = reverse(reverse_string)
         return super().form_valid(form)
 
 
-class ArtcaseCreateView(LoginRequiredMixin, ArtcaseFormMixin, CreateView):
-    verb = 'create'
+class ArtcaseUpdateView(LoginRequiredMixin, FieldsMixin, UpdateView):
+    template_name = "artcase/object_form.html"
+    title = None
+    model = None
 
-
-class ArtcaseUpdateView(LoginRequiredMixin, ArtcaseFormMixin, UpdateView):
-    verb = 'update'
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS,
+            '"%s" updated successfully.' % form.instance)
+        return super().form_valid(form)
 
 
 class ArtcaseDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "artcase/object_confirm_delete.html"
+    title = None
+    model = None
+    success_url = None
+
+    def dispatch(self, *args, **kwargs):
+        self.success_url = reverse_lazy(
+            'artcase:%s_list' % self.model._meta.verbose_name)
+        return super().dispatch(*args, **kwargs)
 
 
 # work views
 
-class WorkFieldsMixin(object):
-    fields = [
-        'title', 'sku', 'owner',
-        'size_h', 'size_w', 'size_d', 'size_unit',
-        'condition', 'status', 'notes',
-        'subjects', 'location', 'medium', 'creators', 'values', 'categories', 'images', 'collections'
-        ]
+# class WorkFieldsMixin(object):
+#     fields = [
+#         'title', 'sku', 'owner',
+#         'size_h', 'size_w', 'size_d', 'size_unit',
+#         'condition', 'status', 'notes',
+#         'subjects', 'location', 'medium', 'creators', 'values', 'categories', 'images', 'collections'
+#         ]
 
 
-class WorkDetailView(WorkFieldsMixin, ArtcaseDetailView):
-    title = 'Work'
-    model = Work
+# class WorkDetailView(WorkFieldsMixin, ArtcaseDetailView):
+#     title = 'Work'
+#     model = Work
 
 
-class WorkListView(ArtcaseListView):    
-    title = 'List of Works'
-    model = Work
+# class WorkListView(ArtcaseListView):    
+#     title = 'List of Works'
+#     model = Work
 
 
-class WorkCreateView(WorkFieldsMixin, ArtcaseCreateView):
-    title = 'Create a Work'
-    model = Work
+# class WorkCreateView(WorkFieldsMixin, ArtcaseCreateView):
+#     title = 'Create a Work'
+#     model = Work
 
 
-class WorkUpdateView(WorkFieldsMixin, ArtcaseUpdateView):
-    title = "Update Work"
-    model = Work
+# class WorkUpdateView(WorkFieldsMixin, ArtcaseUpdateView):
+#     title = "Update Work"
+#     model = Work
 
 
-class WorkDeleteView(ArtcaseDeleteView):
-    title = "Delete Work"
-    model = Work
-    success_url = reverse_lazy('artcase:work_list')
+# class WorkDeleteView(ArtcaseDeleteView):
+#     title = "Delete Work"
+#     model = Work
+#     success_url = reverse_lazy('artcase:work_list')
 
 
 # creator views

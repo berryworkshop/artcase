@@ -1,12 +1,20 @@
 from django.conf.urls import url
+from .models import (
+    Work, Creator, Location, Image, Medium, Category, Collection)
 from .views import (
     IndexView,
     
-    WorkDetailView,
-    WorkListView,
-    WorkCreateView,
-    WorkUpdateView,
-    WorkDeleteView,
+    ArtcaseDetailView,
+    ArtcaseListView,
+    ArtcaseCreateView,
+    ArtcaseUpdateView,
+    ArtcaseDeleteView,
+
+    # WorkDetailView,
+    # WorkListView,
+    # WorkCreateView,
+    # WorkUpdateView,
+    # WorkDeleteView,
     
     CreatorDetailView,
     CreatorListView,
@@ -51,15 +59,34 @@ urlpatterns = [
 
     # works
     url(r'^work/(?P<pk>\d+)$',
-        WorkDetailView.as_view(), name='work_detail'),
+        ArtcaseDetailView.as_view(
+            title = 'Work',
+            model = Work
+        ), name='work_detail'),
+
     url(r'^work_list$',
-        WorkListView.as_view(), name='work_list'),
+        ArtcaseListView.as_view(
+            title = 'List of Works',
+            model = Work
+        ), name='work_list'),
+    
     url(r'^work_create$', 
-        WorkCreateView.as_view(), name='work_create'),
+        ArtcaseCreateView.as_view(
+            title = 'Create a Work',
+            model = Work
+        ), name='work_create'),
+
     url(r'^work/(?P<pk>\d+)/update$', 
-        WorkUpdateView.as_view(), name='work_update'),
+        ArtcaseUpdateView.as_view(
+            title = 'Update Work',
+            model = Work
+        ), name='work_update'),
+
     url(r'^work/(?P<pk>\d+)/delete$', 
-        WorkDeleteView.as_view(), name='work_delete'),
+        ArtcaseDeleteView.as_view(
+            title = 'Delete Work',
+            model = Work
+        ), name='work_delete'),
 
     # creators
     url(r'^creator/(?P<pk>\d+)$',
