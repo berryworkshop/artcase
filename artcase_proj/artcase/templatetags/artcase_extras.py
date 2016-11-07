@@ -17,15 +17,12 @@ def get_verbose_name_plural(model, case=False):
     return name
 
 @register.simple_tag
-def get_field_name(model, field, case=False):
-    name = 'bleert'
-    if case == 'title':
-        name = name.title()
-    return name
+def get_field_verbose_name(obj, field_short_name):
+    return type(obj)._meta.get_field(field_short_name).verbose_name
 
 @register.simple_tag
-def get_field_data(model, field, pk):
-    return 'blarm'
+def get_field_data(obj, field_short_name):
+    return getattr(obj, field_short_name)
 
 @register.simple_tag
 def get_create_url(model):

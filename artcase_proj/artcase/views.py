@@ -20,7 +20,8 @@ class FieldsMixin(object):
             'title', 'sku', 'owner',
             'size_h', 'size_w', 'size_d', 'size_unit',
             'condition', 'status', 'notes',
-            'subjects', 'location', 'medium', 'creators', 'values',
+            # 'subjects',
+            'location', 'medium', 'creators', 'values',
             'categories', 'images', 'collections'
             ],
         'creator': [
@@ -48,7 +49,6 @@ class FormMixin(FieldsMixin):
 
 class ArtcaseDetailView(LoginRequiredMixin, FieldsMixin, DetailView):
     template_name = 'artcase/object_detail.html'
-    title = None
     model = None
 
     def dispatch(self, *args, **kwargs):
@@ -61,7 +61,6 @@ class ArtcaseDetailView(LoginRequiredMixin, FieldsMixin, DetailView):
 
 class ArtcaseListView(LoginRequiredMixin, ListView):    
     template_name = 'artcase/object_list.html'
-    title = None
     model = None
 
     def dispatch(self, *args, **kwargs):
@@ -72,7 +71,6 @@ class ArtcaseListView(LoginRequiredMixin, ListView):
 
 class ArtcaseCreateView(LoginRequiredMixin, FieldsMixin, CreateView):
     template_name = "artcase/object_form.html"
-    title = None
     model = None
 
     def dispatch(self, *args, **kwargs):
@@ -96,7 +94,6 @@ class ArtcaseCreateView(LoginRequiredMixin, FieldsMixin, CreateView):
 
 class ArtcaseUpdateView(LoginRequiredMixin, FieldsMixin, UpdateView):
     template_name = "artcase/object_form.html"
-    title = None
     model = None
 
     def dispatch(self, *args, **kwargs):
@@ -114,7 +111,6 @@ class ArtcaseUpdateView(LoginRequiredMixin, FieldsMixin, UpdateView):
 
 class ArtcaseDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "artcase/object_confirm_delete.html"
-    title = None
     model = None
     success_url = None
 
