@@ -9,8 +9,8 @@
         {% if view.fields %}
             <dl>
             {% for field in view.fields %}
-                {% get_field_verbose_name object field as field_name%}
-                {% get_field_data object field as field_contents%}
+                {% get_field_verbose_name object field as field_name %}
+                {% get_field_data object field as field_contents %}
                 <dt>{{ field_name | title}}</dt>
                 {% if field_contents %}
                 <dd>{{ field_contents }}</dd>

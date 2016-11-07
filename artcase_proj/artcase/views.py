@@ -20,7 +20,7 @@ class FieldsMixin(object):
             'title', 'sku', 'owner',
             'size_h', 'size_w', 'size_d', 'size_unit',
             'condition', 'status', 'notes',
-            # 'subjects',
+            # 'subjects', #taggit having trouble
             'location', 'medium', 'creators', 'values',
             'categories', 'images', 'collections'
             ],
