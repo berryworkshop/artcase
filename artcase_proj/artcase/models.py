@@ -175,8 +175,8 @@ class Value(Base):
         ('gbp', 'British Pound'),
     )
     TYPES = (
-        ('fmv', 'fair market value'),
-        ('rpv', 'replacement value'),
+        ('fmv', 'fair market'),
+        ('rpv', 'replacement'),
     )
     value = models.DecimalField(
         max_digits=12,
@@ -202,7 +202,9 @@ class Value(Base):
         )
 
     def __str__(self):
-        return '{} {} ({}: {})'.format(self.value, self.value_currency, self.value_type, self.date)
+        return '{} {} ({}: {})'.format(
+            self.value, self.value_currency.upper(),
+            self.get_value_type_display(), self.date)
 
 
 class Location(Base):
@@ -213,12 +215,9 @@ class Location(Base):
     address = models.TextField(
         blank=True,
         )
-    sublocation = models.TextField(
-        blank=True,
-        )
 
     def __str__(self):
-        return self.name
+        return "{}: {}".format(self.name, self.address)
 
 
 class Medium(Base):
