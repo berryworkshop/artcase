@@ -39,6 +39,15 @@ class WorkTestCase(TestCase):
             name='Work',
             address='1000 LaSalle Blvd, Suite 1234, Chicago, IL 60600',
             )
+        Medium.objects.create(name='Oil on canvas')
+        Medium.objects.create(name='Acrylic on paper')
+        # Image.objects.create()
+        # Image.objects.create()
+        Category.objects.create(name='Paintings')
+        Category.objects.create(name='Drawings')
+        Collection.objects.create(name='Public')
+        Collection.objects.create(name='Private')
+
         self.work_a = Work.objects.get(sku="abc-123")
         self.work_b = Work.objects.get(sku="AaBb01234")
         self.creator_a = Creator.objects.get(last_name="Smith")
@@ -47,6 +56,15 @@ class WorkTestCase(TestCase):
         self.value_b = Value.objects.get(value=45000000)
         self.location_a = Location.objects.get(name="Home")
         self.location_b = Location.objects.get(name="Work")
+        self.medium_a = Medium.objects.get(name="Oil on canvas")
+        self.medium_b = Medium.objects.get(name="Acrylic on paper")
+        # self.image_a = Image.objects.get()
+        # self.image_b = Image.objects.get()
+        self.category_a = Category.objects.get(name="Paintings")
+        self.category_b = Category.objects.get(name="Drawings")
+        self.collection_a = Collection.objects.get(name="Public")
+        self.collection_b = Collection.objects.get(name="Private")
+
 
     # base
 
@@ -89,10 +107,34 @@ class WorkTestCase(TestCase):
 
     def test_values_have_correct_str(self):
         '''Values return accurate string representation'''
-        self.assertEqual(str(self.value_a), '123.45 USD (fair market: 2016-11-10)')
-        self.assertEqual(str(self.value_b), '45000000.00 USD (replacement: 2016-11-10)')
+        self.assertEqual(str(self.value_a),
+            '123.45 USD (fair market: 2016-11-10)')
+        self.assertEqual(str(self.value_b),
+            '45000000.00 USD (replacement: 2016-11-10)')
 
     def test_locations_have_correct_str(self):
         '''Locations return accurate string representation'''
-        self.assertEqual(str(self.location_a), 'Home: 123 Anywhere Ln., Chicago, IL 60600')
-        self.assertEqual(str(self.location_b), 'Work: 1000 LaSalle Blvd, Suite 1234, Chicago, IL 60600')
+        self.assertEqual(str(self.location_a),
+            'Home: 123 Anywhere Ln., Chicago, IL 60600')
+        self.assertEqual(str(self.location_b),
+            'Work: 1000 LaSalle Blvd, Suite 1234, Chicago, IL 60600')
+
+    def test_media_have_correct_str(self):
+        '''Media return accurate string representation'''
+        self.assertEqual(str(self.medium_a), 'Oil on canvas')
+        self.assertEqual(str(self.medium_b), 'Acrylic on paper')
+
+    # def test_image_have_correct_str(self):
+    #     '''Image return accurate string representation'''
+    #     self.assertEqual(str(self.image_a), '')
+    #     self.assertEqual(str(self.image_b), '')
+
+    def test_category_have_correct_str(self):
+        '''Collection return accurate string representation'''
+        self.assertEqual(str(self.category_a), 'Paintings')
+        self.assertEqual(str(self.category_b), 'Drawings')
+
+    def test_collection_have_correct_str(self):
+        '''Collection return accurate string representation'''
+        self.assertEqual(str(self.collection_a), 'Public')
+        self.assertEqual(str(self.collection_b), 'Private')
