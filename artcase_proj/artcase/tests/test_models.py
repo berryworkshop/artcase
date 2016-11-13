@@ -4,50 +4,9 @@ from artcase.models import (
 
 
 class WorkTestCase(TestCase):
-    def setUp(self):
-        Work.objects.create(
-            title="Work A",
-            sku="abc-123",
-            )
-        Work.objects.create(
-            title="Work B",
-            sku="AaBb01234",
-            )
-        Creator.objects.create(
-            first_name="John",
-            last_name="Smith",
-            )
-        Creator.objects.create(
-            first_name="Jane",
-            last_name="Doe",
-            )
-        Value.objects.create(
-            value=123.45,
-            value_type="fmv",
-            date='2016-11-10',
-            )
-        Value.objects.create(
-            value=45000000,
-            value_type="rpv",
-            date='2016-11-10',
-            )
-        Location.objects.create(
-            name='Home',
-            address='123 Anywhere Ln., Chicago, IL 60600',
-            )
-        Location.objects.create(
-            name='Work',
-            address='1000 LaSalle Blvd, Suite 1234, Chicago, IL 60600',
-            )
-        Medium.objects.create(name='Oil on canvas')
-        Medium.objects.create(name='Acrylic on paper')
-        # Image.objects.create()
-        # Image.objects.create()
-        Category.objects.create(name='Paintings')
-        Category.objects.create(name='Drawings')
-        Collection.objects.create(name='Public')
-        Collection.objects.create(name='Private')
+    fixtures = ['fixture_basic.yaml']
 
+    def setUp(self):
         self.work_a = Work.objects.get(sku="abc-123")
         self.work_b = Work.objects.get(sku="AaBb01234")
         self.creator_a = Creator.objects.get(last_name="Smith")
@@ -108,9 +67,9 @@ class WorkTestCase(TestCase):
     def test_values_have_correct_str(self):
         '''Values return accurate string representation'''
         self.assertEqual(str(self.value_a),
-            '123.45 USD (fair market: 2016-11-10)')
+            '123.45 USD (fair market: 2016-01-01)')
         self.assertEqual(str(self.value_b),
-            '45000000.00 USD (replacement: 2016-11-10)')
+            '45000000.00 USD (replacement: 2016-01-01)')
 
     def test_locations_have_correct_str(self):
         '''Locations return accurate string representation'''

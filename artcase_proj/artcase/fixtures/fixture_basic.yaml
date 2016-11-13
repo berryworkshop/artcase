@@ -1,0 +1,147 @@
+-   model: auth.group
+    pk: 1
+    fields:
+        name: administrators
+        permissions: []
+-   model: auth.group
+    pk: 2
+    fields:
+        name: owners
+        permissions: []
+-   model: auth.group
+    pk: 3
+    fields:
+        name: managers
+        permissions: []
+-   model: auth.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$30000$yAPaFgojhESl$8+eA5q8m8l0n8JcxcKtU/4rRqLsqbMzPaTClDDPkJLs=
+        last_login: 2016-01-01 00:00+00:00
+        is_superuser: true
+        username: admin
+        first_name: ''
+        last_name: ''
+        email: allan.berry@gmail.com
+        is_staff: true
+        is_active: true
+        date_joined: 2016-01-01 00:00+00:00
+        groups: []
+        user_permissions: []
+-   model: auth.user
+    pk: 2
+    fields:
+        password: pbkdf2_sha256$30000$FrIvmE1cy3IV$aVh/Iq3m1Y7xUiDbTzFPhuhymFLAo/h8FB+gIUpDBV4=
+        last_login: 2016-01-01 00:00+00:00
+        is_superuser: false
+        username: allan
+        first_name: Allan J.
+        last_name: Berry
+        email: allan.berry@gmail.com
+        is_staff: false
+        is_active: true
+        date_joined: 2016-01-01 00:00+00:00
+        groups: []
+        user_permissions: []
+- model: artcase.work
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    title: Work A
+    sku: abc-123
+    owner: 1
+- model: artcase.work
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    title: Work B
+    sku: AaBb01234
+    owner: 1
+- model: artcase.creator
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    first_name: John
+    last_name: Smith
+- model: artcase.creator
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    first_name: Jane
+    last_name: Doe
+- model: artcase.value
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    value: 123.45
+    value_type: fmv
+    date: 2016-01-01
+- model: artcase.value
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    value: 45000000
+    value_type: rpv
+    date: 2016-01-01
+- model: artcase.location
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Home
+    address: 123 Anywhere Ln., Chicago, IL 60600
+- model: artcase.location
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Work
+    address: 1000 LaSalle Blvd, Suite 1234, Chicago, IL 60600
+- model: artcase.medium
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Oil on canvas
+- model: artcase.medium
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Acrylic on paper
+# - model: artcase.image
+#   pk: 1
+#   fields:
+# - model: artcase.image
+#   pk: 2
+#   fields:
+- model: artcase.category
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Paintings
+- model: artcase.category
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Drawings
+- model: artcase.collection
+  pk: 1
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-01 00:00+00:00
+    name: Public
+- model: artcase.collection
+  pk: 2
+  fields:
+    created: 2016-01-01 00:00+00:00
+    modified: 2016-01-17 01:01+01:01
+    name: Private
