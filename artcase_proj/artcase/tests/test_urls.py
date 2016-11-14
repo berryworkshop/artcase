@@ -47,7 +47,7 @@ class BaseUrlTestCase(TestCase):
         self.assertEqual(url, '/artcase/creator/1/delete')
 
     def test_location_urls_reverse_correctly(self):
-        '''Make sure location urls work ok.'''
+        '''Make sure Location urls work ok.'''
         url = reverse('artcase:location_detail', args=[1])
         self.assertEqual(url, '/artcase/location/1')
         url = reverse('artcase:location_list')
@@ -60,7 +60,7 @@ class BaseUrlTestCase(TestCase):
         self.assertEqual(url, '/artcase/location/1/delete')
 
     def test_image_urls_reverse_correctly(self):
-        '''Make sure image urls work ok.'''
+        '''Make sure Image urls work ok.'''
         url = reverse('artcase:image_detail', args=[1])
         self.assertEqual(url, '/artcase/image/1')
         url = reverse('artcase:image_list')
@@ -73,7 +73,7 @@ class BaseUrlTestCase(TestCase):
         self.assertEqual(url, '/artcase/image/1/delete')
 
     def test_medium_urls_reverse_correctly(self):
-        '''Make sure medium urls work ok.'''
+        '''Make sure Medium urls work ok.'''
         url = reverse('artcase:medium_detail', args=[1])
         self.assertEqual(url, '/artcase/medium/1')
         url = reverse('artcase:medium_list')
@@ -86,7 +86,7 @@ class BaseUrlTestCase(TestCase):
         self.assertEqual(url, '/artcase/medium/1/delete')
 
     def test_category_urls_reverse_correctly(self):
-        '''Make sure category urls work ok.'''
+        '''Make sure Category urls work ok.'''
         url = reverse('artcase:category_detail', args=[1])
         self.assertEqual(url, '/artcase/category/1')
         url = reverse('artcase:category_list')
@@ -99,7 +99,7 @@ class BaseUrlTestCase(TestCase):
         self.assertEqual(url, '/artcase/category/1/delete')
 
     def test_collection_urls_reverse_correctly(self):
-        '''Make sure collection urls work ok.'''
+        '''Make sure Collection urls work ok.'''
         url = reverse('artcase:collection_detail', args=[1])
         self.assertEqual(url, '/artcase/collection/1')
         url = reverse('artcase:collection_list')
