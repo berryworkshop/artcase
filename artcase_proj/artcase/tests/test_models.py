@@ -1,6 +1,14 @@
 from django.test import TestCase
 from artcase.models import (
-    Work, Creator, Value, Location, Medium, Image, Category, Collection)
+    Work,
+    Creator,
+    Value,
+    Location,
+    Medium,
+    Image,
+    Category,
+    Collection
+)
 
 
 class WorkTestCase(TestCase):

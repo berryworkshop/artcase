@@ -1,6 +1,13 @@
 from django.conf.urls import url
 from .models import (
-    Work, Creator, Location, Image, Medium, Category, Collection)
+    Work,
+    Creator,
+    Location,
+    Image,
+    Medium,
+    Category,
+    Collection,
+)
 from .views import (
     IndexView,
     ArtcaseDetailView,

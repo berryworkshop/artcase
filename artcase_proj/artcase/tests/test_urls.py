@@ -1,5 +1,4 @@
 from django.core.urlresolvers import reverse, resolve
-# from django.contrib.auth.models import User
 
 from django.test import TestCase, Client
 from artcase.models import (
@@ -9,21 +8,14 @@ class BaseUrlTestCase(TestCase):
     fixtures = ['fixture_basic.yaml']
 
     def setUp(self):
-        # user = User.objects.create(username='testuser')
-        # user.set_password('12345')
-        # user.save()
-        # self.c = Client()
-        # self.c.login(username='testuser', password='12345')
         pass
 
     # base
 
-    def test_work_urls_reverse_correctly(self):
+    def test_work_urls(self):
         '''Make sure Work urls work ok.'''
         url = reverse('artcase:work_detail', args=[1])
         self.assertEqual(url, '/artcase/work/1')
-        # response = self.c.get(url)
-        # self.assertEqual(response.status_code, 200)
         url = reverse('artcase:work_list')
         self.assertEqual(url, '/artcase/work_list')
         url = reverse('artcase:work_create')
@@ -33,7 +25,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:work_delete', args=[1])
         self.assertEqual(url, '/artcase/work/1/delete')
 
-    def test_creator_urls_reverse_correctly(self):
+    def test_creator_urls(self):
         '''Make sure Creator urls work ok.'''
         url = reverse('artcase:creator_detail', args=[1])
         self.assertEqual(url, '/artcase/creator/1')
@@ -46,7 +38,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:creator_delete', args=[1])
         self.assertEqual(url, '/artcase/creator/1/delete')
 
-    def test_location_urls_reverse_correctly(self):
+    def test_location_urls(self):
         '''Make sure Location urls work ok.'''
         url = reverse('artcase:location_detail', args=[1])
         self.assertEqual(url, '/artcase/location/1')
@@ -59,7 +51,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:location_delete', args=[1])
         self.assertEqual(url, '/artcase/location/1/delete')
 
-    def test_image_urls_reverse_correctly(self):
+    def test_image_urls(self):
         '''Make sure Image urls work ok.'''
         url = reverse('artcase:image_detail', args=[1])
         self.assertEqual(url, '/artcase/image/1')
@@ -72,7 +64,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:image_delete', args=[1])
         self.assertEqual(url, '/artcase/image/1/delete')
 
-    def test_medium_urls_reverse_correctly(self):
+    def test_medium_urls(self):
         '''Make sure Medium urls work ok.'''
         url = reverse('artcase:medium_detail', args=[1])
         self.assertEqual(url, '/artcase/medium/1')
@@ -85,7 +77,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:medium_delete', args=[1])
         self.assertEqual(url, '/artcase/medium/1/delete')
 
-    def test_category_urls_reverse_correctly(self):
+    def test_category_urls(self):
         '''Make sure Category urls work ok.'''
         url = reverse('artcase:category_detail', args=[1])
         self.assertEqual(url, '/artcase/category/1')
@@ -98,7 +90,7 @@ class BaseUrlTestCase(TestCase):
         url = reverse('artcase:category_delete', args=[1])
         self.assertEqual(url, '/artcase/category/1/delete')
 
-    def test_collection_urls_reverse_correctly(self):
+    def test_collection_urls(self):
         '''Make sure Collection urls work ok.'''
         url = reverse('artcase:collection_detail', args=[1])
         self.assertEqual(url, '/artcase/collection/1')
