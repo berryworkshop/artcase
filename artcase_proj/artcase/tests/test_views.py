@@ -5,6 +5,7 @@ from artcase.views import (
     IndexView, ArtcaseDetailView, ArtcaseListView,
     ArtcaseCreateView, ArtcaseUpdateView, ArtcaseDeleteView)
 
+
 class TestViewMixin(object):
     fixtures = ['fixture_basic.yaml']
 
@@ -16,13 +17,8 @@ class TestViewMixin(object):
 
 
 class IndexViewTestCase(TestViewMixin, TestCase):
-    def setUp(self):
-        super().setUp()
-
-
     def test_loads(self):
         '''test'''
-        self.c.login(username='testuser', password='12345')
         url = reverse('artcase:index')
         response = self.c.get(url)
         self.assertEqual(response.status_code, 200)
@@ -31,6 +27,12 @@ class IndexViewTestCase(TestViewMixin, TestCase):
 class ArtcaseDetailViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
         super().setUp()
+        self.url = reverse('artcase:work_detail', args=[1])
+
+    def test_denies_anonymous(self):
+        '''test'''
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
     def test_denies_non_owner(self):
         '''test'''
@@ -39,22 +41,25 @@ class ArtcaseDetailViewTestCase(TestViewMixin, TestCase):
     def test_loads(self):
         '''test'''
         self.c.login(username='testuser', password='12345')
-        url = reverse('artcase:work_detail', args=[1])
-        response = self.c.get(url)
+        response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
 
 class ArtcaseListViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
-        pass
+        super().setUp()
+        self.url = reverse('artcase:work_list')
 
-    def test_denies_non_owner(self):
+    def test_denies_anonymous(self):
         '''test'''
-        pass
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
     def test_loads(self):
         '''test'''
-        pass
+        self.c.login(username='testuser', password='12345')
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 200)
 
     def test_only_owner_items(self):
         '''test'''
@@ -63,15 +68,19 @@ class ArtcaseListViewTestCase(TestViewMixin, TestCase):
 
 class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
-        pass
+        super().setUp()
+        self.url = reverse('artcase:work_create')
 
-    def test_denies_non_owner(self):
+    def test_denies_anonymous(self):
         '''test'''
-        pass
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
     def test_loads(self):
         '''test'''
-        pass
+        self.c.login(username='testuser', password='12345')
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 200)
 
     def test_form_blank(self):
         '''test'''
@@ -96,7 +105,13 @@ class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
 
 class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
-        pass
+        super().setUp()
+        self.url = reverse('artcase:work_update', args=[1])
+
+    def test_denies_anonymous(self):
+        '''test'''
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
     def test_denies_non_owner(self):
         '''test'''
@@ -104,7 +119,9 @@ class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''test'''
-        pass
+        self.c.login(username='testuser', password='12345')
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 200)
 
     def test_form_blank(self):
         '''test'''
@@ -125,8 +142,14 @@ class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
 
 class ArtcaseDeleteViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
-        pass
+        super().setUp()
+        self.url = reverse('artcase:work_delete', args=[1])
 
+    def test_denies_anonymous(self):
+        '''test'''
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
+    
     def test_denies_non_owner(self):
         '''test'''
         pass
