@@ -7,6 +7,7 @@ from .models import (
     Work, Creator, Location, Image, Medium, Category, Collection)
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 # base views
 
@@ -47,7 +48,7 @@ class FormMixin(FieldsMixin):
     template_name = "artcase/object_form.html"
 
 
-class ArtcaseDetailView(LoginRequiredMixin, FieldsMixin, DetailView):
+class ArtcaseDetailView(LoginRequiredMixin, UserPassesTestMixin, FieldsMixin, DetailView):
     template_name = 'artcase/object_detail.html'
     model = None
 
@@ -57,6 +58,14 @@ class ArtcaseDetailView(LoginRequiredMixin, FieldsMixin, DetailView):
             self.get_object()
         ).title()
         return super().dispatch(*args, **kwargs)
+
+    def test_func(self):
+        '''depending on content type, only allow access to owner'''
+        if self.model == Work:
+            obj = self.get_object()
+            return obj.owner == self.request.user
+        else:
+            return True
 
 
 class ArtcaseListView(LoginRequiredMixin, ListView):    

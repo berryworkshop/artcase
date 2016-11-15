@@ -17,8 +17,8 @@ class WorkTestCase(TestCase):
     def setUp(self):
         self.work_a = Work.objects.get(sku="abc-123")
         self.work_b = Work.objects.get(sku="AaBb01234")
-        self.creator_a = Creator.objects.get(last_name="Smith")
-        self.creator_b = Creator.objects.get(last_name="Doe")
+        self.creator_a = Creator.objects.get(last_name="Picasso")
+        self.creator_b = Creator.objects.get(last_name="Cassatt")
         self.value_a = Value.objects.get(value=123.45)
         self.value_b = Value.objects.get(value=45000000)
         self.location_a = Location.objects.get(name="Home")
@@ -69,8 +69,8 @@ class WorkTestCase(TestCase):
 
     def test_creators_have_correct_str(self):
         '''Creators return accurate string representation'''
-        self.assertEqual(str(self.creator_a), 'Smith, John')
-        self.assertEqual(str(self.creator_b), 'Doe, Jane')
+        self.assertEqual(str(self.creator_a), 'Picasso, Pablo')
+        self.assertEqual(str(self.creator_b), 'Cassatt, Mary')
 
     def test_values_have_correct_str(self):
         '''Values return accurate string representation'''

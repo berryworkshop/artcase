@@ -1,48 +1,57 @@
--   model: auth.group
-    pk: 1
-    fields:
-        name: administrators
-        permissions: []
--   model: auth.group
-    pk: 2
-    fields:
-        name: owners
-        permissions: []
--   model: auth.group
-    pk: 3
-    fields:
-        name: managers
-        permissions: []
--   model: auth.user
-    pk: 1
-    fields:
-        password: pbkdf2_sha256$30000$yAPaFgojhESl$8+eA5q8m8l0n8JcxcKtU/4rRqLsqbMzPaTClDDPkJLs=
-        last_login: 2016-01-01 00:00+00:00
-        is_superuser: true
-        username: admin
-        first_name: ''
-        last_name: ''
-        email: allan.berry@gmail.com
-        is_staff: true
-        is_active: true
-        date_joined: 2016-01-01 00:00+00:00
-        groups: []
-        user_permissions: []
--   model: auth.user
-    pk: 2
-    fields:
-        password: pbkdf2_sha256$30000$FrIvmE1cy3IV$aVh/Iq3m1Y7xUiDbTzFPhuhymFLAo/h8FB+gIUpDBV4=
-        last_login: 2016-01-01 00:00+00:00
-        is_superuser: false
-        username: allan
-        first_name: Allan J.
-        last_name: Berry
-        email: allan.berry@gmail.com
-        is_staff: false
-        is_active: true
-        date_joined: 2016-01-01 00:00+00:00
-        groups: []
-        user_permissions: []
+# For use in testing only.
+# # #
+- model: auth.group
+  pk: 1
+  fields:
+      name: administrators
+      permissions: []
+- model: auth.group
+  pk: 2
+  fields:
+      name: owners
+      permissions: []
+- model: auth.group
+  pk: 3
+  fields:
+      name: managers
+      permissions: []
+- model: auth.user
+  pk: 1
+  fields:
+      # actual password is: 12345
+      password: pbkdf2_sha256$30000$MnbCtkMksMIg$K+c69b1hzrHgL48VgRFfeHDuygXROQ9zY4HB1UWiY1g=
+      last_login: 2016-01-01 00:00+00:00
+      is_superuser: true
+      username: admin
+      first_name: ''
+      last_name: ''
+      email: allan.berry@gmail.com
+      is_staff: true
+      is_active: true
+      date_joined: 2016-01-01 00:00+00:00
+      groups: []
+      user_permissions: []
+- model: auth.user
+  pk: 2
+  fields:
+      # actual password is: 12345
+      password: pbkdf2_sha256$30000$MnbCtkMksMIg$K+c69b1hzrHgL48VgRFfeHDuygXROQ9zY4HB1UWiY1g=
+      last_login: 2016-01-01 00:00+00:00
+      is_superuser: false
+      username: testuser_A
+      first_name: Test
+      last_name: User
+      email: allan.berry@gmail.com
+      is_staff: false
+      is_active: true
+      date_joined: 2016-01-01 00:00+00:00
+      groups: []
+      user_permissions: []
+# The following user is left to create at test runtime
+# - model: auth.user
+#   pk: 2
+#   fields:
+#       username: testuser_A
 - model: artcase.work
   pk: 1
   fields:
@@ -50,7 +59,7 @@
     modified: 2016-01-01 00:00+00:00
     title: Work A
     sku: abc-123
-    owner: 1
+    owner: 2
 - model: artcase.work
   pk: 2
   fields:
@@ -58,21 +67,21 @@
     modified: 2016-01-01 00:00+00:00
     title: Work B
     sku: AaBb01234
-    owner: 1
+    owner: 2
 - model: artcase.creator
   pk: 1
   fields:
     created: 2016-01-01 00:00+00:00
     modified: 2016-01-01 00:00+00:00
-    first_name: John
-    last_name: Smith
+    first_name: Pablo
+    last_name: Picasso
 - model: artcase.creator
   pk: 2
   fields:
     created: 2016-01-01 00:00+00:00
     modified: 2016-01-01 00:00+00:00
-    first_name: Jane
-    last_name: Doe
+    first_name: Mary
+    last_name: Cassatt
 - model: artcase.value
   pk: 1
   fields:

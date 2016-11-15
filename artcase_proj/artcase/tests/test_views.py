@@ -4,21 +4,31 @@ from django.urls import reverse
 from artcase.views import (
     IndexView, ArtcaseDetailView, ArtcaseListView,
     ArtcaseCreateView, ArtcaseUpdateView, ArtcaseDeleteView)
+from artcase.models import (
+    Work,
+    # Creator,
+    # Location,
+    # Image,
+    # Medium,
+    # Category,
+    # Collection,
+)
 
 
 class TestViewMixin(object):
     fixtures = ['fixture_basic.yaml']
 
     def setUp(self):
-        user = User.objects.create(username='testuser')
-        user.set_password('12345')
-        user.save()
+        # user_A is created in the fixture (pk=2)
+        user_B = User.objects.create(username='testuser_B')
+        user_B.set_password('12345')
+        user_B.save()
         self.c = Client()
 
 
 class IndexViewTestCase(TestViewMixin, TestCase):
     def test_loads(self):
-        '''test'''
+        '''Index page should load for everybody.'''
         url = reverse('artcase:index')
         response = self.c.get(url)
         self.assertEqual(response.status_code, 200)
@@ -27,20 +37,27 @@ class IndexViewTestCase(TestViewMixin, TestCase):
 class ArtcaseDetailViewTestCase(TestViewMixin, TestCase):
     def setUp(self):
         super().setUp()
-        self.url = reverse('artcase:work_detail', args=[1])
+        self.work = Work.objects.get(pk=1)
+        self.url = reverse(
+            'artcase:work_detail', args=[self.work.pk])
 
     def test_denies_anonymous(self):
-        '''test'''
+        '''Work should not load if user not logged in.'''
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 302)
 
     def test_denies_non_owner(self):
-        '''test'''
-        pass
+        '''Work should not load if user is not the owner.'''
+        owner = User.objects.get(username='testuser_A')
+        self.assertEqual(self.work.owner, owner)
+        self.c.login(
+            username='testuser_B', password='12345')
+        response = self.c.get(self.url)
+        self.assertEqual(response.status_code, 302)
 
     def test_loads(self):
-        '''test'''
-        self.c.login(username='testuser', password='12345')
+        '''Work should load just fine for owner.'''
+        self.c.login(username='testuser_A', password='12345')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
@@ -51,18 +68,18 @@ class ArtcaseListViewTestCase(TestViewMixin, TestCase):
         self.url = reverse('artcase:work_list')
 
     def test_denies_anonymous(self):
-        '''test'''
+        '''Work list should not load if user not logged in.'''
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 302)
 
     def test_loads(self):
-        '''test'''
-        self.c.login(username='testuser', password='12345')
+        '''Work list should load fine for logged-in user.'''
+        self.c.login(username='testuser_A', password='12345')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
     def test_only_owner_items(self):
-        '''test'''
+        '''Only items owned by the user should be available.'''
         pass
 
 
@@ -78,7 +95,7 @@ class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''test'''
-        self.c.login(username='testuser', password='12345')
+        self.c.login(username='testuser_A', password='12345')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
@@ -119,7 +136,7 @@ class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''test'''
-        self.c.login(username='testuser', password='12345')
+        self.c.login(username='testuser_A', password='12345')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
