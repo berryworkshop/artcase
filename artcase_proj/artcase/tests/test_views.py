@@ -14,6 +14,8 @@ from artcase.models import (
     # Collection,
 )
 
+# implement: self.assertTemplateUsed(response, 'template.html')
+
 
 class TestViewMixin(object):
     fixtures = ['fixture_basic.yaml']
@@ -32,6 +34,7 @@ class IndexViewTestCase(TestViewMixin, TestCase):
         url = reverse('artcase:index')
         response = self.c.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'artcase/index.html')
 
 
 class ArtcaseDetailViewTestCase(TestViewMixin, TestCase):
@@ -80,7 +83,17 @@ class ArtcaseListViewTestCase(TestViewMixin, TestCase):
 
     def test_only_owner_items(self):
         '''Only items owned by the user should be available.'''
-        pass
+        testuser_B = User.objects.get(username="testuser_B")
+        work_owned_by_B = Work.objects.create(
+            title="test",
+            sku="abc123",
+            owner=testuser_B,
+            )
+        self.c.login(username='testuser_A', password='12345')
+        response = self.c.get(self.url)
+        objs_qs = response.context['object_list']
+        self.assertTrue(objs_qs.filter(pk=2).exists())
+        self.assertFalse(objs_qs.filter(pk=work_owned_by_B.pk).exists())
 
 
 class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
@@ -149,6 +162,10 @@ class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
         pass
 
     def test_form_valid(self):
+        '''test'''
+        pass
+
+    def test_form_valid_next(self):
         '''test'''
         pass
 

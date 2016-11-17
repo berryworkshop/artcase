@@ -18,10 +18,11 @@ class IndexView(TemplateView):
 class FieldsMixin(object):
     view_fields = {
         'work': [
-            'title', 'sku', 'owner',
+            'title', 'sku',
+            'owner', # owner is not user editable (yet)
             'size_h', 'size_w', 'size_d', 'size_unit',
             'condition', 'status', 'notes',
-            # 'subjects', #taggit having trouble
+            # 'subjects', # taggit having trouble
             'location', 'medium', 'creators', 'values',
             'categories', 'images', 'collections'
             ],
@@ -76,7 +77,14 @@ class ArtcaseListView(LoginRequiredMixin, ListView):
         self.title = "{} list".format(
             self.model._meta.verbose_name
         ).title()
+
+        # define objects in list
+        if self.model == Work:
+            user = self.request.user
+            self.queryset = self.model.objects.filter(owner=user.pk)
+
         return super().dispatch(*args, **kwargs)
+
 
 class ArtcaseCreateView(LoginRequiredMixin, FieldsMixin, CreateView):
     template_name = "artcase/object_form.html"

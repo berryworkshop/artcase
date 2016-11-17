@@ -47,7 +47,7 @@
       date_joined: 2016-01-01 00:00+00:00
       groups: []
       user_permissions: []
-# The following user is left to create at test runtime
+# The following user is left to be created at test runtime
 # - model: auth.user
 #   pk: 2
 #   fields:
