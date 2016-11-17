@@ -11,7 +11,7 @@ from artcase.models import (
 )
 
 
-class WorkTestCase(TestCase):
+class ModelTestCase(TestCase):
     fixtures = ['fixture_basic.yaml']
 
     def setUp(self):
@@ -91,8 +91,9 @@ class WorkTestCase(TestCase):
         self.assertEqual(str(self.medium_a), 'Oil on canvas')
         self.assertEqual(str(self.medium_b), 'Acrylic on paper')
 
-    # def test_image_have_correct_str(self):
-    #     '''Image return accurate string representation'''
+    def test_image_have_correct_str(self):
+        '''Image return accurate string representation'''
+        pass
     #     self.assertEqual(str(self.image_a), '')
     #     self.assertEqual(str(self.image_b), '')
 

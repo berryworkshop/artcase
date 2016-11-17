@@ -19,7 +19,6 @@ class FieldsMixin(object):
     view_fields = {
         'work': [
             'title', 'sku',
-            # 'owner', # owner is not user editable (yet)
             'size_h', 'size_w', 'size_d', 'size_unit',
             'condition', 'status', 'notes',
             # 'subjects', # taggit having trouble
@@ -57,15 +56,19 @@ class ArtcaseDetailView(
     model = None
 
     def dispatch(self, *args, **kwargs):
+        # titles
         self.title = "{} detail: {}".format(
             self.model._meta.verbose_name,
             self.get_object()
         ).title()
+
         return super().dispatch(*args, **kwargs)
 
     def test_func(self):
-        '''depending on content type,
-            only allow access to owner'''
+        '''
+        Depending on content type,
+        only allow access to owner.
+        '''
         if self.model == Work:
             obj = self.get_object()
             return obj.owner == self.request.user
@@ -78,6 +81,7 @@ class ArtcaseListView(LoginRequiredMixin, ListView):
     model = None
 
     def dispatch(self, *args, **kwargs):
+        # titles
         self.title = "{} list".format(
             self.model._meta.verbose_name
         ).title()
@@ -97,9 +101,11 @@ class ArtcaseCreateView(
     model = None
 
     def dispatch(self, *args, **kwargs):
+        # titles
         self.title = "create new {}".format(
             self.model._meta.verbose_name
         ).title()
+
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
@@ -126,28 +132,47 @@ class ArtcaseUpdateView(
     model = None
 
     def dispatch(self, *args, **kwargs):
+        # titles
         self.title = "update {}: {}".format(
             self.model._meta.verbose_name,
             self.get_object()
         ).title()
+
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
+        # msgs
         messages.add_message(self.request, messages.SUCCESS,
             '"%s" updated successfully.' % form.instance)
+
         return super().form_valid(form)
 
 
-class ArtcaseDeleteView(LoginRequiredMixin, DeleteView):
+class ArtcaseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "artcase/object_confirm_delete.html"
     model = None
     success_url = None
 
     def dispatch(self, *args, **kwargs):
+        # titles
         self.title = "delete {}: ".format(
             self.model._meta.verbose_name,
             self.get_object()
         ).title()
+
+        # next
         self.success_url = reverse_lazy(
             'artcase:%s_list' % self.model._meta.verbose_name)
+
         return super().dispatch(*args, **kwargs)
+
+    def test_func(self):
+        '''
+        Depending on content type,
+        only allow access to owner.
+        '''
+        if self.model == Work:
+            obj = self.get_object()
+            return obj.owner == self.request.user
+        else:
+            return True
