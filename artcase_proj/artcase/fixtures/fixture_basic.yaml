@@ -18,8 +18,8 @@
 - model: auth.user
   pk: 1
   fields:
-      # actual password is: 12345
-      password: pbkdf2_sha256$30000$MnbCtkMksMIg$K+c69b1hzrHgL48VgRFfeHDuygXROQ9zY4HB1UWiY1g=
+      # actual password is: testpass
+      password: pbkdf2_sha256$30000$QsEt3Z2bzbyt$JgTzmGEbBonbZ1N4+a7pCrWRxfxWeYN/6YbLGA5M0sE=
       last_login: 2016-01-01 00:00+00:00
       is_superuser: true
       username: admin
@@ -34,8 +34,8 @@
 - model: auth.user
   pk: 2
   fields:
-      # actual password is: 12345
-      password: pbkdf2_sha256$30000$MnbCtkMksMIg$K+c69b1hzrHgL48VgRFfeHDuygXROQ9zY4HB1UWiY1g=
+      # actual password is: testpass
+      password: pbkdf2_sha256$30000$QsEt3Z2bzbyt$JgTzmGEbBonbZ1N4+a7pCrWRxfxWeYN/6YbLGA5M0sE=
       last_login: 2016-01-01 00:00+00:00
       is_superuser: false
       username: testuser_A

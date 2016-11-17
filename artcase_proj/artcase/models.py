@@ -53,7 +53,8 @@ class Work(Base):
         max_length=100,
         blank=False,
         )
-    owner = models.ForeignKey(User, default=1)
+    owner = models.ForeignKey(User,
+        on_delete=models.CASCADE)
 
     # created = WhereWhenField(max_length=100)
 

@@ -23,7 +23,7 @@ class TestViewMixin(object):
     def setUp(self):
         # user_A is created in the fixture (pk=2)
         user_B = User.objects.create(username='testuser_B')
-        user_B.set_password('12345')
+        user_B.set_password('testpass')
         user_B.save()
         self.c = Client()
 
@@ -54,13 +54,14 @@ class ArtcaseDetailViewTestCase(TestViewMixin, TestCase):
         owner = User.objects.get(username='testuser_A')
         self.assertEqual(self.work.owner, owner)
         self.c.login(
-            username='testuser_B', password='12345')
+            username='testuser_B', password='testpass')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 302)
 
     def test_loads(self):
         '''Work should load just fine for owner.'''
-        self.c.login(username='testuser_A', password='12345')
+        self.c.login(
+            username='testuser_A', password='testpass')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
@@ -77,7 +78,8 @@ class ArtcaseListViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''Work list should load fine for logged-in user.'''
-        self.c.login(username='testuser_A', password='12345')
+        self.c.login(
+            username='testuser_A', password='testpass')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
@@ -89,11 +91,14 @@ class ArtcaseListViewTestCase(TestViewMixin, TestCase):
             sku="abc123",
             owner=testuser_B,
             )
-        self.c.login(username='testuser_A', password='12345')
+        self.c.login(
+            username='testuser_A', password='testpass')
         response = self.c.get(self.url)
         objs_qs = response.context['object_list']
-        self.assertTrue(objs_qs.filter(pk=2).exists())
-        self.assertFalse(objs_qs.filter(pk=work_owned_by_B.pk).exists())
+        self.assertTrue(
+            objs_qs.filter(pk=2).exists())
+        self.assertFalse(
+            objs_qs.filter(pk=work_owned_by_B.pk).exists())
 
 
 class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
@@ -108,7 +113,8 @@ class ArtcaseCreateViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''test'''
-        self.c.login(username='testuser_A', password='12345')
+        self.c.login(
+            username='testuser_A', password='testpass')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
@@ -149,7 +155,7 @@ class ArtcaseUpdateViewTestCase(TestViewMixin, TestCase):
 
     def test_loads(self):
         '''test'''
-        self.c.login(username='testuser_A', password='12345')
+        self.c.login(username='testuser_A', password='testpass')
         response = self.c.get(self.url)
         self.assertEqual(response.status_code, 200)
 
