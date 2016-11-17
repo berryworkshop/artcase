@@ -1,13 +1,18 @@
 import os
+from os.path import dirname, join, abspath
+from dotenv import load_dotenv
 
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.dirname(PROJECT_DIR)
+# /artcase/artcase_proj
+PROJECT_DIR = dirname(dirname(dirname(abspath(__file__))))
 
-SECRET_KEY = 'i0i%@j5tmd##r+thmdg_t-o!a4j5gj3-b#v_rk7_$guxswb95c'
+# /artcase
+BASE_DIR = dirname(PROJECT_DIR)
 
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# secret vars
+dotenv_path = join(BASE_DIR, '.env')
+load_dotenv(dotenv_path)
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD")
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -54,13 +59,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_DIR, 'db.sqlite3'),
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -78,20 +76,19 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+USE_I18N = False
+USE_L10N = False
 TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
 USE_TZ = True
 
+MONTH_DAY_FORMAT = 'F j'
+DATE_FORMAT = 'N j, Y'
+DATETIME_FORMAT = 'N j, Y, P'
+SHORT_DATE_FORMAT = 'm/d/Y'
+SHORT_DATETIME_FORMAT = 'm/d/Y P'
+YEAR_MONTH_FORMAT = 'F Y'
+
 STATIC_URL = '/static/'
-
-STATIC_ROOT = '%s/static/' % BASE_DIR
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
