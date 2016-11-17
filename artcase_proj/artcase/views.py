@@ -10,12 +10,15 @@ from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 # base views
+# model for these views is specified in urls.py
 
 class IndexView(TemplateView):
+    '''The home page.'''
     template_name = "artcase/index.html"
 
 
 class FieldsMixin(object):
+    '''Mixin providing model abstraction to views.'''
     view_fields = {
         'work': [
             'title', 'sku',
@@ -46,12 +49,27 @@ class FieldsMixin(object):
 
 
 class FormMixin(FieldsMixin):
+    '''Mixin providing abstraction for form template.'''
     template_name = "artcase/object_form.html"
 
 
+class OwnershipMixin(UserPassesTestMixin):
+    '''Mixin restricting access to owners depending on content type.'''
+    def test_func(self):
+        '''Only allow access to owner.'''
+        if self.model == Work:
+            obj = self.get_object()
+            return obj.owner == self.request.user
+        else:
+            return True
+
+
 class ArtcaseDetailView(
-    LoginRequiredMixin, UserPassesTestMixin,
-    FieldsMixin, DetailView):
+    LoginRequiredMixin,
+    OwnershipMixin,
+    FieldsMixin,
+    DetailView):
+    '''View a single item.'''
     template_name = 'artcase/object_detail.html'
     model = None
 
@@ -64,19 +82,9 @@ class ArtcaseDetailView(
 
         return super().dispatch(*args, **kwargs)
 
-    def test_func(self):
-        '''
-        Depending on content type,
-        only allow access to owner.
-        '''
-        if self.model == Work:
-            obj = self.get_object()
-            return obj.owner == self.request.user
-        else:
-            return True
-
 
 class ArtcaseListView(LoginRequiredMixin, ListView):    
+    '''View several items at once.'''
     template_name = 'artcase/object_list.html'
     model = None
 
@@ -96,7 +104,10 @@ class ArtcaseListView(LoginRequiredMixin, ListView):
 
 
 class ArtcaseCreateView(
-    LoginRequiredMixin, FieldsMixin, CreateView):
+    LoginRequiredMixin,
+    FieldsMixin,
+    CreateView):
+    '''View a new item.'''
     template_name = "artcase/object_form.html"
     model = None
 
@@ -127,7 +138,11 @@ class ArtcaseCreateView(
 
 
 class ArtcaseUpdateView(
-    LoginRequiredMixin, FieldsMixin, UpdateView):
+    LoginRequiredMixin,
+    OwnershipMixin,
+    FieldsMixin,
+    UpdateView):
+    '''Update an existing item.'''
     template_name = "artcase/object_form.html"
     model = None
 
@@ -148,17 +163,24 @@ class ArtcaseUpdateView(
         return super().form_valid(form)
 
 
-class ArtcaseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class ArtcaseDeleteView(
+    LoginRequiredMixin,
+    OwnershipMixin,
+    DeleteView):
+    '''Delete an existing item.'''
     template_name = "artcase/object_confirm_delete.html"
     model = None
     success_url = None
 
     def dispatch(self, *args, **kwargs):
         # titles
-        self.title = "delete {}: ".format(
-            self.model._meta.verbose_name,
-            self.get_object()
-        ).title()
+        self.title = 'Delete {}: "{}"'.format(
+            self.model._meta.verbose_name.title(),
+            self.get_object())
+
+        # success msg
+        self.success_message = '"{}" deleted successfully.'.format(
+            self.get_object())
 
         # next
         self.success_url = reverse_lazy(
@@ -166,13 +188,8 @@ class ArtcaseDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         return super().dispatch(*args, **kwargs)
 
-    def test_func(self):
-        '''
-        Depending on content type,
-        only allow access to owner.
-        '''
-        if self.model == Work:
-            obj = self.get_object()
-            return obj.owner == self.request.user
-        else:
-            return True
+
+    def delete(self, request, *args, **kwargs):
+        messages.add_message(self.request, messages.SUCCESS,
+            self.success_message)
+        return super().delete(request, *args, **kwargs)
